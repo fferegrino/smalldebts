@@ -7,7 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Smalldebts.Core;
+using Smalldebts.Core.UI;
 
 namespace Smalldebts.Droid
 {

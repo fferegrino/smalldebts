@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
-using Smalldebts.Core;
+using Smalldebts.Core.UI;
 using UIKit;
 
 namespace Smalldebts.iOS

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+	xmlns="http://xamarin.com/schemas/2014/forms" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	x:Class="Smalldebts.Core.UI.Views.DebtDetailPage">
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+
+
+		<Label FontSize="Large" Text="1566.48" Grid.ColumnSpan="2" x:Name="BalanceLabel" HorizontalTextAlignment="Center"></Label>
+		<Button Grid.Row="1" Grid.Column="0" Text="+"></Button>
+		<Button Grid.Row="1" Grid.Column="1" Text="-"></Button>
+		<ListView Grid.Row="2" Grid.ColumnSpan="2" x:Name="DetailList">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<TextCell Text="{Binding Amount}" Detail="{Binding Amount}" />
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</Grid>
+</ContentPage>

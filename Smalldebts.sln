@@ -1,7 +1,7 @@
 
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smalldebts.Core", "Core\Smalldebts.Core.csproj", "{765ADD53-31DD-4530-B0BA-10E718F66D7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smalldebts.Core.UI", "Core\Smalldebts.Core.UI.csproj", "{765ADD53-31DD-4530-B0BA-10E718F66D7D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smalldebts.iOS", "iOS\Smalldebts.iOS.csproj", "{306D7612-FDF7-490B-97D1-B93B47085349}"
 EndProject
@@ -53,5 +53,11 @@ Global
 		{4BB4B858-2D29-4413-9B15-C665C78F8855}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{4BB4B858-2D29-4413-9B15-C665C78F8855}.Debug|iPhone.ActiveCfg = Debug|Any CPU
 		{4BB4B858-2D29-4413-9B15-C665C78F8855}.Debug|iPhone.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+		$1.ResourceNamePolicy = FileFormatDefault
 	EndGlobalSection
 EndGlobal

@@ -1,6 +1,7 @@
-﻿using Xamarin.Forms;
+﻿using Smalldebts.Core.UI.Views;
+using Xamarin.Forms;
 
-namespace Smalldebts.Core
+namespace Smalldebts.Core.UI
 {
 	public partial class App : Application
 	{
@@ -8,7 +9,7 @@ namespace Smalldebts.Core
 		{
 			InitializeComponent();
 
-			// MainPage = new MainPage();
+			MainPage = new NavigationPage(new HomePage());
 		}
 
 		protected override void OnStart()

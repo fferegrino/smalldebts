@@ -18,8 +18,8 @@
       HasBackgroundAnimation="True"/>
   </pages:PopupPage.Animation>
   <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
-    <Frame Margin="30" Padding="20">
-      <Grid>
+    <Frame Margin="30" >
+      <Grid RowSpacing="0" ColumnSpacing="0">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto" />
           <RowDefinition Height="Auto" />
@@ -30,11 +30,14 @@
           <ColumnDefinition Width="*"></ColumnDefinition>
           <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Grid.Row="0" Grid.ColumnSpan="2" x:Name="DebtTitleLabel" Text="Modify debt"></Label>
-        <Entry  Grid.Row="1" Grid.ColumnSpan="2" Keyboard="Numeric"></Entry>
-        <Button Grid.Row="2" Grid.Column="0" Text="Paid"></Button>
-        <Button Grid.Row="2" Grid.Column="1" Text="Borrowed"></Button>
-        <Button Grid.Row="3" Grid.ColumnSpan="2" Text="Modify"></Button>
+        <Label Margin="5" FontSize="Large" HorizontalTextAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" x:Name="DebtTitleLabel" Text="Modify debt"></Label>
+        <Entry Margin="5"  Grid.Row="1" Grid.ColumnSpan="2" Keyboard="Numeric"></Entry>
+        <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource PositiveColor}"
+                x:Name="PaidButton" Clicked="Button_OnClicked" Text="Paid"></Button>
+        <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource NegativeColor}"
+                x:Name="BorrowedButton" Clicked="Button_OnClicked" Text="Borrowed"></Button>
+        <Button Margin="5" Grid.Row="3" Grid.ColumnSpan="2" Text="Cancel"
+                x:Name="CancelButton" Clicked="Button_OnClicked"></Button>
       </Grid>
     </Frame>
   </StackLayout>

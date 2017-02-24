@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI.Views
@@ -21,7 +21,7 @@ namespace Smalldebts.Core.UI.Views
 
         protected override void OnAppearing()
         {
-            DebtTitleLabel.Text = "Modify " + DebtManipulation.Name +"'s debt";
+            DebtTitleLabel.Text = "Modify " + DebtManipulation.Name + "'s debt";
             base.OnAppearing();
         }
 
@@ -55,6 +55,14 @@ namespace Smalldebts.Core.UI.Views
         protected override bool OnBackgroundClicked()
         {
             return false;
+        }
+
+        private async void Button_OnClicked(object sender, EventArgs e)
+        {
+            if (sender == CancelButton)
+            {
+                await PopupNavigation.PopAsync();
+            }
         }
     }
 }

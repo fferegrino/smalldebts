@@ -10,6 +10,12 @@
 			<Color x:Key="NeutralColor">#1F1A1A</Color>
 
 			<converters:ColorConverter x:Key="ColorConverter" />
+
+
+      <Style x:Key="RectangleButton" TargetType="Button">
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="Margin" Value="0"></Setter>
+      </Style>
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>

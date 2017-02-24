@@ -8,6 +8,8 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Smalldebts.Core.UI;
+using Acr.UserDialogs;
+using Xamarin.Forms;
 
 namespace Smalldebts.Droid
 {
@@ -22,8 +24,9 @@ namespace Smalldebts.Droid
 			base.OnCreate(bundle);
 
 			global::Xamarin.Forms.Forms.Init(this, bundle);
+            UserDialogs.Init(() => (Activity)Forms.Context);
 
-			LoadApplication(new App());
+            LoadApplication(new App());
 		}
 	}
 }

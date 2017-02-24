@@ -1,4 +1,5 @@
-﻿using Smalldebts.Core.UI.Controls.Cells;
+﻿using Acr.UserDialogs;
+using Smalldebts.Core.UI.Controls.Cells;
 using Smalldebts.Core.UI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -20,16 +21,20 @@ namespace Smalldebts.Core.UI.Views
 
             DebtList.ItemSelected += DebtList_ItemSelected;
 
-            MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "update", (sender, arg) =>
-            {
-                System.Diagnostics.Debug.WriteLine(arg.Id);
-            });
+            MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "update", Edit);
 
-            MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "deleted", (sender, arg) =>
-            {
-                System.Diagnostics.Debug.WriteLine(arg.Id);
-            });
+            MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "deleted", Delete);
 
+        }
+
+        async void Edit(DebtCell cell, DebtManipulationViewModel vm)
+        {
+            await UserDialogs.Instance.PromptAsync("Cantidad");
+        }
+
+        async void Delete(DebtCell cell, DebtManipulationViewModel vm)
+        {
+            var result = await UserDialogs.Instance.ConfirmAsync("Seguro");
         }
 
         async void DebtList_ItemSelected(object sender, SelectedItemChangedEventArgs e)

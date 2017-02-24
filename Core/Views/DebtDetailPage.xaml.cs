@@ -27,5 +27,10 @@ namespace Smalldebts.Core.UI.Views
 				DetailList.SelectedItem = null;
 			}
 		}
+
+		void ButtonClicked(object sender, System.EventArgs e)
+		{
+			AmountEntry.Text = "";
+		}
 	}
 }

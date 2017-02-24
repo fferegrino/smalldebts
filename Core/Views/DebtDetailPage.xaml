@@ -17,20 +17,23 @@
 		</Label>
 		<Entry HorizontalTextAlignment="Center" Placeholder="New amount"
 		FontSize="Large" Margin="10" HeightRequest="50" x:Name="AmountEntry" Grid.Row="1" Grid.ColumnSpan="2"></Entry>
-		<Button Grid.Row="2" Grid.Column="0" Text="+" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource NegativeColor}">
+		<Button Grid.Row="2" Grid.Column="0" x:Name="SubstractToDebtButton" 
+			Text="She paid " Style="{StaticResource RectangleButton}" 
+			BackgroundColor="{StaticResource NegativeColor}" Clicked="ButtonClicked">
 			<Button.Effects>
 				<effects:RectButtonEffect />
 			</Button.Effects>
 		</Button>
-		<Button Grid.Row="2" Grid.Column="1" Text="-" 
+		<Button Grid.Row="2" Grid.Column="1" x:Name="AddToDebtButton" Text="I lend" 
 			Style="{StaticResource RectangleButton}" 
-			BackgroundColor="{StaticResource PositiveColor}">
+			BackgroundColor="{StaticResource PositiveColor}" Clicked="ButtonClicked">
 			<Button.Effects>
 				<effects:RectButtonEffect />
 			</Button.Effects>
 		</Button>
-		<ContentView Grid.Row="3" Grid.ColumnSpan="2">
-		<Label Margin="5" FontAttributes="Bold" Text="Movimientos" FontSize="Large" HorizontalTextAlignment="Center"></Label></ContentView>
+		<ContentView Grid.Row="3" Padding="5"  BackgroundColor="Silver" Grid.ColumnSpan="2">
+		<Label  FontAttributes="Bold"
+		Text="Movimientos" FontSize="Large" HorizontalTextAlignment="Center"></Label></ContentView>
 		<ListView Grid.Row="4" Grid.ColumnSpan="2" x:Name="DetailList">
 			<ListView.ItemTemplate>
 				<DataTemplate>

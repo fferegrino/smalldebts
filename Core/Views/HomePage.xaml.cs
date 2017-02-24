@@ -15,6 +15,7 @@ namespace Smalldebts.Core.UI.Views
         public HomePage()
         {
             InitializeComponent();
+			NavigationPage.SetBackButtonTitle(this, "Debts");
             DebtModificationPage = new ModifyDebtPage();
             BindingContext = this;
 

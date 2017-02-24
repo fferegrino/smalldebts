@@ -2,13 +2,12 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	x:Class="Smalldebts.Core.UI.Views.HomePage"
+	xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
 	Title="Smalldebts">
 	<ListView x:Name="DebtList">
 		<ListView.ItemTemplate>
 			<DataTemplate>
-				<TextCell Text="{Binding Name}" 
-					Detail="{Binding Balance}"
-					DetailColor="{Binding Balance, Converter={StaticResource ColorConverter}}"/>
+				<cells:DebtCell />
 			</DataTemplate>
 		</ListView.ItemTemplate>
 	</ListView>

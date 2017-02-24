@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Smalldebts.Core.UI.Converters;
 using Smalldebts.Core.UI.Views;
 using Xamarin.Forms;
 
@@ -19,5 +20,7 @@ namespace Smalldebts.Core.UI
 		public Color NegativeColor => (Color)Resources["NegativeColor"];
 		public Color PositiveColor => (Color)Resources["PositiveColor"];
 		public Color NeutralColor => (Color)Resources["NeutralColor"];
+
+		public ColorConverter ColorConverter => (ColorConverter)Resources["ColorConverter"];
 	}
 }

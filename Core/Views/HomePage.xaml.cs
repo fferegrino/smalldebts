@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace Smalldebts.Core.UI.Views
 {
@@ -72,6 +73,8 @@ namespace Smalldebts.Core.UI.Views
                 await Navigation.PushAsync(new DebtDetailPage());
                 DebtList.SelectedItem = null;
             }
+
+            MobileServiceClient client = new MobileServiceClient()
         }
 
         public Command DoSomethingCommand { get; set; }

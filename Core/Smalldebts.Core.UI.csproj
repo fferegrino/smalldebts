@@ -35,6 +35,9 @@
     <EmbeddedResource Include="Views\DebtDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\MovementDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -51,6 +54,10 @@
     <Compile Include="Models\Debt.cs" />
     <Compile Include="Models\DetailedDebt.cs" />
     <Compile Include="Models\Movement.cs" />
+    <Compile Include="Views\MovementDetailPage.xaml.cs">
+      <DependentUpon>MovementDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetailedMovement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core">

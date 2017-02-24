@@ -15,12 +15,17 @@ namespace Smalldebts.Core.UI.Views
 			Title = debt.Name;
 			BalanceLabel.Text = $"{debt.Balance:0,000.00}";
 			DetailList.ItemsSource = debt.Movements;
+			DetailList.ItemSelected += DetailList_ItemSelected;
 		}
 
 
-		void A()
+		async void DetailList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
 		{
-			
+			if (DetailList.SelectedItem != null)
+			{
+				await Navigation.PushAsync(new MovementDetailPage());
+				DetailList.SelectedItem = null;
+			}
 		}
 	}
 }

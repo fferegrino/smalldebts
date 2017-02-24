@@ -15,7 +15,7 @@
 		</Grid.ColumnDefinitions>
 
 
-		<Label FontSize="Large" Text="1566.48" Grid.ColumnSpan="2" x:Name="BalanceLabel" HorizontalTextAlignment="Center"></Label>
+		<Label Style="{StaticResource YugeLabel}" Text="1566.48" Grid.ColumnSpan="2" x:Name="BalanceLabel" HorizontalTextAlignment="Center"></Label>
 		<Button Grid.Row="1" Grid.Column="0" Text="+"></Button>
 		<Button Grid.Row="1" Grid.Column="1" Text="-"></Button>
 		<ListView Grid.Row="2" Grid.ColumnSpan="2" x:Name="DetailList">

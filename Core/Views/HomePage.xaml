@@ -6,7 +6,9 @@
 	<ListView x:Name="DebtList">
 		<ListView.ItemTemplate>
 			<DataTemplate>
-				<TextCell Text="{Binding Name}" Detail="{Binding Balance}" />
+				<TextCell Text="{Binding Name}" 
+					Detail="{Binding Balance}"
+					DetailColor="{Binding Balance, Converter={StaticResource ColorConverter}}"/>
 			</DataTemplate>
 		</ListView.ItemTemplate>
 	</ListView>

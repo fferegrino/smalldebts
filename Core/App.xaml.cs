@@ -1,4 +1,6 @@
-﻿using Smalldebts.Core.UI.Views;
+﻿using System;
+using System.Collections.Generic;
+using Smalldebts.Core.UI.Views;
 using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI
@@ -8,9 +10,13 @@ namespace Smalldebts.Core.UI
 		public App()
 		{
 			InitializeComponent();
+			SetupCodedStyles();
 
 			MainPage = new NavigationPage(new HomePage());
 		}
+
+		public static App RealCurrent => App.Current as App;
+
 
 		protected override void OnStart()
 		{

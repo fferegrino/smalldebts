@@ -18,6 +18,7 @@ namespace Smalldebts.Core.UI.Controls.Cells
             {
                 var argument = new DebtManipulationViewModel();
                 argument.Id = Debt?.Id;
+                argument.Name = Debt?.Name;
                 argument.Amount = -20;
                 MessagingCenter.Send<DebtCell, DebtManipulationViewModel>(this, "update", argument);
             };

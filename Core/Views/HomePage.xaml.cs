@@ -3,19 +3,18 @@ using Smalldebts.Core.UI.Controls.Cells;
 using Smalldebts.Core.UI.ViewModels;
 using System;
 using System.Collections.Generic;
-
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI.Views
 {
     public partial class HomePage : ContentPage
     {
-
-
+        private ModifyDebtPage DebtModificationPage;
         public HomePage()
         {
             InitializeComponent();
-
+            DebtModificationPage = new ModifyDebtPage();
             BindingContext = this;
             DebtList.ItemsSource = DataAccess.Data.Debts;
 
@@ -29,7 +28,8 @@ namespace Smalldebts.Core.UI.Views
 
         async void Edit(DebtCell cell, DebtManipulationViewModel vm)
         {
-            await UserDialogs.Instance.PromptAsync("Cantidad");
+            DebtModificationPage.DebtManipulation = vm;
+            await  PopupNavigation.PushAsync(DebtModificationPage);
         }
 
         async void Delete(DebtCell cell, DebtManipulationViewModel vm)

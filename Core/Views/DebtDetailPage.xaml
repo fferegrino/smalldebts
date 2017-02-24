@@ -1,30 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage
-	xmlns="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
-	x:Class="Smalldebts.Core.UI.Views.DebtDetailPage">
-  <Grid RowSpacing="0" ColumnSpacing="0">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
-
-
-    <Label Style="{StaticResource YugeLabel}" Text="1566.48" Grid.ColumnSpan="2" x:Name="BalanceLabel" HorizontalTextAlignment="Center"></Label>
-    <Button Grid.Row="1" Grid.Column="0" Text="+" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource NegativeColor}"></Button>
-    <Button Grid.Row="1" Grid.Column="1" Text="-"  Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource PositiveColor}"></Button>
-    <ListView Grid.Row="2" Grid.ColumnSpan="2" x:Name="DetailList">
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <cells:MovementCell />
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
-  </Grid>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells" xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects" x:Class="Smalldebts.Core.UI.Views.DebtDetailPage">
+	<Grid RowSpacing="0" ColumnSpacing="0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Label Style="{StaticResource YugeLabel}" Text="1566.48" 
+			Grid.ColumnSpan="2" x:Name="BalanceLabel" >
+		</Label>
+		<Entry HorizontalTextAlignment="Center" Placeholder="New amount"
+		FontSize="Large" Margin="10" HeightRequest="50" x:Name="AmountEntry" Grid.Row="1" Grid.ColumnSpan="2"></Entry>
+		<Button Grid.Row="2" Grid.Column="0" Text="+" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource NegativeColor}">
+			<Button.Effects>
+				<effects:RectButtonEffect />
+			</Button.Effects>
+		</Button>
+		<Button Grid.Row="2" Grid.Column="1" Text="-" 
+			Style="{StaticResource RectangleButton}" 
+			BackgroundColor="{StaticResource PositiveColor}">
+			<Button.Effects>
+				<effects:RectButtonEffect />
+			</Button.Effects>
+		</Button>
+		<ContentView Grid.Row="3" Grid.ColumnSpan="2">
+		<Label Margin="5" FontAttributes="Bold" Text="Movimientos" FontSize="Large" HorizontalTextAlignment="Center"></Label></ContentView>
+		<ListView Grid.Row="4" Grid.ColumnSpan="2" x:Name="DetailList">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<cells:MovementCell />
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</Grid>
 </ContentPage>

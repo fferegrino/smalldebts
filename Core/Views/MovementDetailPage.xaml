@@ -4,8 +4,9 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
 	x:Class="Smalldebts.Core.UI.Views.MovementDetailPage">
 	<StackLayout x:Name="Stack">
-		<Label x:Name="MovementAmountLabel"></Label>
-		<Label x:Name="MovementReasonLabel"></Label>
+		<Label x:Name="MovementAmountLabel"  Style="{StaticResource YugeLabel}"></Label>
+		<Label x:Name="MovementDateLabel"  Style="{StaticResource NotSoYugeLabel}"></Label>
+		<Label x:Name="MovementReasonLabel" Margin="20" HorizontalTextAlignment="Center"></Label>
 
 	</StackLayout>
 </ContentPage>

@@ -12,8 +12,9 @@
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
-    <StackLayout x:Name="AddNewDebtOptionPanel" VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
-      <Image HorizontalOptions="Center" ></Image>
+    <StackLayout Margin="10" Padding="10" x:Name="AddNewDebtOptionPanel" VerticalOptions="Center" 
+			HorizontalOptions="Center" >
+      <Image HorizontalOptions="Center" Source="add_debt_big"></Image>
       <Label HorizontalTextAlignment="Center" Text="No one owes you money, tap here to add someone"></Label>
     </StackLayout>
   </Grid>

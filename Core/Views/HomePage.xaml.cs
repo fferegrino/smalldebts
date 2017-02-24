@@ -34,7 +34,7 @@ namespace Smalldebts.Core.UI.Views
 
             DebtList.ItemSelected += DebtList_ItemSelected;
 
-            var item = new ToolbarItem() { Text = "Add" };
+			var item = new ToolbarItem() { Text = "Add", Icon="add" };
             item.Clicked += ItemOnClicked;
             ToolbarItems.Add(item);
 

@@ -13,7 +13,7 @@ namespace Smalldebts.Core.UI.Controls.Cells
         public DebtCell()
         {
             InitializeComponent();
-            var moreAction = new MenuItem { Text = "Modify" };
+            var moreAction = new MenuItem { Text = "Modify", Icon ="add" };
             moreAction.Clicked += (s, a) =>
             {
                 var argument = new DebtManipulationViewModel();
@@ -24,7 +24,7 @@ namespace Smalldebts.Core.UI.Controls.Cells
             };
 
 
-            var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true };
+			var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true, Icon="substract" };
             deleteAction.Clicked += (s, a) =>
             {
                 var argument = new DebtManipulationViewModel();

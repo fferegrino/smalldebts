@@ -31,7 +31,10 @@
           <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Margin="5" FontSize="Large" HorizontalTextAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" x:Name="DebtTitleLabel" Text="Modify debt"></Label>
-        <Entry Margin="5"  Grid.Row="1" Grid.ColumnSpan="2" Keyboard="Numeric"></Entry>
+        <Entry Margin="5" x:Name="DebtNameEntry" Placeholder="Name" Grid.ColumnSpan="2" Keyboard="Numeric"></Entry>
+        
+        <Entry Margin="5" Placeholder="Amount"  Grid.Row="1" Grid.ColumnSpan="2" Keyboard="Numeric"></Entry>
+        
         <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource PositiveColor}"
                 x:Name="PaidButton" Clicked="Button_OnClicked" Text="Paid"></Button>
         <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource NegativeColor}"

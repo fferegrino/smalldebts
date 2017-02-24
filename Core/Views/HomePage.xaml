@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	x:Class="Smalldebts.Core.UI.Views.HomePage"
 	xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
 	Title="Smalldebts">
-	<ListView x:Name="DebtList">
-		<ListView.ItemTemplate>
-			<DataTemplate>
-				<cells:DebtCell />
-			</DataTemplate>
-		</ListView.ItemTemplate>
-	</ListView>
+  <Grid>
+    <ListView x:Name="DebtList">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <cells:DebtCell />
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+    <StackLayout x:Name="AddNewDebtOptionPanel" VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
+      <Image HorizontalOptions="Center" ></Image>
+      <Label HorizontalTextAlignment="Center" Text="No one owes you money, tap here to add someone"></Label>
+    </StackLayout>
+  </Grid>
 </ContentPage>

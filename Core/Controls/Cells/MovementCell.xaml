@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+          x:Class="Smalldebts.Core.UI.Controls.Cells.MovementCell">
+  <Grid Padding="10">
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="3*" />
+      <ColumnDefinition Width="2*" />
+    </Grid.ColumnDefinitions>
+
+    <Label FontSize="Large" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Grid.Column="0" x:Name="DateLabel"></Label>
+    <Label FontSize="Large" HorizontalTextAlignment="End" VerticalTextAlignment="Center" Grid.Column="1" x:Name="AmountLabel"></Label>
+  </Grid>
+  
+</ViewCell>

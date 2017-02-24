@@ -16,14 +16,42 @@ namespace Smalldebts.Core.UI.Views
             InitializeComponent();
             DebtModificationPage = new ModifyDebtPage();
             BindingContext = this;
-            DebtList.ItemsSource = DataAccess.Data.Debts;
+
+
+            if (DataAccess.Data.Debts.Count > 0)
+            {
+                DebtList.ItemsSource = DataAccess.Data.Debts;
+                AddNewDebtOptionPanel.IsVisible = false;
+            }
+            else
+            {
+                DebtList.IsVisible = false;
+                AddNewDebtOptionPanel.IsVisible = true;
+                var tap = new TapGestureRecognizer();
+                tap.Tapped += Tap_Tapped;
+                AddNewDebtOptionPanel.GestureRecognizers.Add(tap);
+            }
 
             DebtList.ItemSelected += DebtList_ItemSelected;
+
+            var item = new ToolbarItem() { Text = "Add" };
+            item.Clicked += ItemOnClicked;
+            ToolbarItems.Add(item);
 
             MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "update", Edit);
 
             MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "deleted", Delete);
 
+        }
+
+        private async void Tap_Tapped(object sender, EventArgs e)
+        {
+            await PopupNavigation.PushAsync(DebtModificationPage);
+        }
+
+        private async void ItemOnClicked(object sender, EventArgs eventArgs)
+        {
+            await PopupNavigation.PushAsync(DebtModificationPage);
         }
 
         async void Edit(DebtCell cell, DebtManipulationViewModel vm)

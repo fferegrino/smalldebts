@@ -2,6 +2,7 @@
 <ContentPage
 	xmlns="http://xamarin.com/schemas/2014/forms"
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
 	x:Class="Smalldebts.Core.UI.Views.DebtDetailPage">
   <Grid RowSpacing="0" ColumnSpacing="0">
     <Grid.RowDefinitions>
@@ -21,7 +22,7 @@
     <ListView Grid.Row="2" Grid.ColumnSpan="2" x:Name="DetailList">
       <ListView.ItemTemplate>
         <DataTemplate>
-          <TextCell Text="{Binding Amount}" Detail="{Binding Amount}" />
+          <cells:MovementCell />
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>

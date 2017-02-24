@@ -21,7 +21,17 @@ namespace Smalldebts.Core.UI.Views
 
         protected override void OnAppearing()
         {
-            DebtTitleLabel.Text = "Modify " + DebtManipulation.Name + "'s debt";
+            if (DebtManipulation?.Name != null)
+            {
+                DebtTitleLabel.Text = "Modify " + DebtManipulation.Name + "'s debt";
+                DebtTitleLabel.IsVisible = true;
+                DebtNameEntry.IsVisible = false;
+            }
+            else
+            {
+                DebtTitleLabel.IsVisible = false;
+                DebtNameEntry.IsVisible = true;
+            }
             base.OnAppearing();
         }
 

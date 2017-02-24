@@ -46,6 +46,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Cells\MovementCell.xaml.cs">
+      <DependentUpon>MovementCell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ModifyDebtPage.xaml.cs">
       <DependentUpon>ModifyDebtPage.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\ModifyDebtPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\Cells\MovementCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

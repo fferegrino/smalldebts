@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Smalldebts.Core.Models;
 using Xamarin.Forms;
 using System.Threading.Tasks;
+using Smalldebts.Core.UI.ViewModels;
 
 namespace Smalldebts.Core.UI.Controls.Cells
 {
@@ -12,23 +13,39 @@ namespace Smalldebts.Core.UI.Controls.Cells
 		public DebtCell()
 		{
 			InitializeComponent();
-			var moreAction = new MenuItem { Text = "Modify", };
+			var moreAction = new MenuItem { Text = "Modify" };
+            moreAction.Clicked += (s, a) =>
+            {
+                var argument = new DebtManipulationViewModel();
+                argument.Id = Debt?.Id;
+                argument.Amount = -20;
+                MessagingCenter.Send<DebtCell, DebtManipulationViewModel>(this, "update", argument);
+            };
 
-			var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true };
 
-			ContextActions.Add(moreAction);
+            var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true };
+            deleteAction.Clicked += (s, a) =>
+            {
+                var argument = new DebtManipulationViewModel();
+                argument.Id = Debt?.Id;
+                MessagingCenter.Send<DebtCell, DebtManipulationViewModel>(this, "deleted", argument);
+            };
+
+
+            ContextActions.Add(moreAction);
 			ContextActions.Add(deleteAction);
 		}
 
-		protected override void OnBindingContextChanged()
+        Debt Debt => BindingContext as Debt;
+
+        protected override void OnBindingContextChanged()
 		{
 			base.OnBindingContextChanged();
-			var debt = BindingContext as Debt;
-			if (debt != null)
+			if (Debt != null)
 			{
-				NameLabel.Text = debt.Name;
-				AmountLabel.Text = $"{debt.Balance:0,000.00}";
-				AmountLabel.TextColor = (Color)App.RealCurrent.ColorConverter.Convert(debt.Balance, null, null, null);
+				NameLabel.Text = Debt.Name;
+				AmountLabel.Text = $"{Debt.Balance:0,000.00}";
+				AmountLabel.TextColor = (Color)App.RealCurrent.ColorConverter.Convert(Debt.Balance, null, null, null);
 			}
 		}
 	}

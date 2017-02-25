@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
+using Smalldebts.Core.UI.Models;
+using System.Linq;
 
 namespace Smalldebts.Core.UI.Views
 {
@@ -46,6 +48,14 @@ namespace Smalldebts.Core.UI.Views
 
         }
 
+		protected override async void OnAppearing()
+		{
+			MobileServiceClient client = new MobileServiceClient("http://192.168.7.64/smalldebts");
+			var items = await client.GetTable<TodoItem>().ReadAsync();
+			var listItem = items.ToList();
+			base.OnAppearing();
+		}
+
         private async void Tap_Tapped(object sender, EventArgs e)
         {
             await PopupNavigation.PushAsync(DebtModificationPage);
@@ -75,7 +85,7 @@ namespace Smalldebts.Core.UI.Views
                 DebtList.SelectedItem = null;
             }
 
-            MobileServiceClient client = new MobileServiceClient()
+
         }
 
         public Command DoSomethingCommand { get; set; }

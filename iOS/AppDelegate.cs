@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Microsoft.WindowsAzure.MobileServices;
 using Smalldebts.Core.UI;
 using UIKit;
 
@@ -14,7 +15,7 @@ namespace Smalldebts.iOS
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
 			global::Xamarin.Forms.Forms.Init();
-
+			CurrentPlatform.Init();
 			LoadApplication(new App());
 
 			return base.FinishedLaunching(app, options);

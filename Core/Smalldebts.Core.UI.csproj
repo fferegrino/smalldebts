@@ -78,6 +78,7 @@
       <DependentUpon>DebtCell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Effects\RectButtonEffect.cs" />
+    <Compile Include="Models\TodoItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

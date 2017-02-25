@@ -12,10 +12,15 @@
 			<converters:ColorConverter x:Key="ColorConverter" />
 
 
-      <Style x:Key="RectangleButton" TargetType="Button">
-        <Setter Property="TextColor" Value="White" />
-        <Setter Property="Margin" Value="0"></Setter>
-      </Style>
+			<Style x:Key="RectangleButton" TargetType="Button">
+				<Setter Property="TextColor" Value="White" />
+				<Setter Property="Margin" Value="0"></Setter>
+			</Style>
+			<Style x:Key="DialogTitle" TargetType="Label">
+				<Setter Property="Margin" Value="3"></Setter>
+				<Setter Property="FontSize" Value="Large"></Setter>
+				<Setter Property="HorizontalTextAlignment" Value="Center" ></Setter>
+			</Style>
 		</ResourceDictionary>
 	</Application.Resources>
 </Application>

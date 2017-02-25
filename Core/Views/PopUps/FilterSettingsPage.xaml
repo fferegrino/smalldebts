@@ -21,8 +21,8 @@
   <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
     <Frame Margin="30" WidthRequest="300">
 
-			<StackLayout Orientation="Horizontal">
-				<Label VerticalTextAlignment="Center" Text="Show"></Label>
+			<StackLayout Orientation="Vertical">
+				<Label Style="{StaticResource DialogTitle}" Text="Show"></Label>
 				<Picker x:Name="FilterPicker"
 						HorizontalOptions="FillAndExpand" Grid.Column="1" 
 						SelectedIndexChanged="Handle_SelectedIndexChanged">

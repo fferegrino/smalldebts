@@ -10,6 +10,14 @@ using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI.Views.PopUps
 {
+	public enum ActionPerformed
+	{
+		Deleted,
+		Updated,
+		Created,
+		Nope
+	}
+
     public partial class ModifyDebtPage : PopupPage
     {
         public ModifyDebtPage()
@@ -18,6 +26,7 @@ namespace Smalldebts.Core.UI.Views.PopUps
         }
 
         public DebtManipulationViewModel DebtManipulation { get; set; }
+		public event EventHandler<ActionPerformed> ActionPerformed;
 
         protected override void OnAppearing()
         {

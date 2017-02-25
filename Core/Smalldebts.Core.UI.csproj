@@ -43,14 +43,13 @@
     <EmbeddedResource Include="Controls\Cells\DebtCell.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SearchOptions\FilterSettingsPage.xaml">
+    <EmbeddedResource Include="Views\PopUps\FilterSettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SearchOptions\ModifyDebtPage.xaml">
+    <EmbeddedResource Include="Views\PopUps\SortingSettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\SearchOptions\SortingSettingsPage.xaml">
+    <EmbeddedResource Include="Views\PopUps\ModifyDebtPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -86,15 +85,13 @@
     </Compile>
     <Compile Include="Effects\RectButtonEffect.cs" />
     <Compile Include="Models\TodoItem.cs" />
-    <Compile Include="Views\SearchOptions\FilterSettingsPage.xaml.cs">
+    <Compile Include="Views\PopUps\FilterSettingsPage.xaml.cs">
       <DependentUpon>FilterSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SearchOptions\ModifyDebtPage.xaml.cs">
-      <DependentUpon>ModifyDebtPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SearchOptions\SortingSettingsPage.xaml.cs">
+    <Compile Include="Views\PopUps\SortingSettingsPage.xaml.cs">
       <DependentUpon>SortingSettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PopUps\ModifyDebtPage.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -148,7 +145,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Folder Include="Views\SearchOptions\" />
+    <Folder Include="Views\PopUps\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

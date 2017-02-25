@@ -11,12 +11,13 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using Smalldebts.Core.Models;
 using Smalldebts.Core.UI.Views.PopUps;
+using System.Threading.Tasks;
 
 namespace Smalldebts.Core.UI.Views
 {
     public partial class HomePage : ContentPage
     {
-        private ModifyDebtPage DebtModificationPage;
+		private ModifyDebtPage DebtModificationPage;
 		private FilterSettingsPage FilterSettingsPage;
 		private SortingSettingsPage SortingSettingsPage;
 
@@ -27,7 +28,8 @@ namespace Smalldebts.Core.UI.Views
         {
             InitializeComponent();
 			NavigationPage.SetBackButtonTitle(this, "Debts");
-            DebtModificationPage = new ModifyDebtPage();
+
+			DebtModificationPage = new ModifyDebtPage();
 
 			FilterSettingsPage = new FilterSettingsPage();
 			FilterSettingsPage.FilterChanged += FilterChanged;
@@ -49,14 +51,14 @@ namespace Smalldebts.Core.UI.Views
             DebtList.ItemSelected += DebtList_ItemSelected;
 
 			var item = new ToolbarItem() { Text = "Add", Icon="add" };
-            item.Clicked += ItemOnClicked;
+			item.Clicked += async (s,a) => await OpenDebtModificationPage();
             ToolbarItems.Add(item);
 
 
-            MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "update", Edit);
+			MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "update", async (sender, debtManipulation) => 
+			                                                               await OpenDebtModificationPage(debtManipulation));
 
 			MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "deleted", Delete);
-
 
         }
 
@@ -75,22 +77,18 @@ namespace Smalldebts.Core.UI.Views
 				DebtList.IsVisible = false;
 				AddNewDebtOptionPanel.IsVisible = true;
 				var tap = new TapGestureRecognizer();
-				tap.Tapped += Tap_Tapped;
+				tap.Tapped += async (s, a) => await OpenDebtModificationPage();
 				AddNewDebtOptionPanel.GestureRecognizers.Add(tap);
 			}
 
 			base.OnAppearing();
 		}
 
-        private async void Tap_Tapped(object sender, EventArgs e)
-        {
-            await PopupNavigation.PushAsync(DebtModificationPage);
-        }
-
-        private async void ItemOnClicked(object sender, EventArgs eventArgs)
-        {
-            await PopupNavigation.PushAsync(DebtModificationPage);
-        }
+		async Task OpenDebtModificationPage(DebtManipulationViewModel debtModification = null)
+		{
+			DebtModificationPage.DebtManipulation = debtModification;
+			await PopupNavigation.PushAsync(DebtModificationPage);
+		}
 
 		void SortingChanged(object sender, PopUps.SortingKind e)
 		{
@@ -131,11 +129,6 @@ namespace Smalldebts.Core.UI.Views
 			}
 		}
 
-		async void Edit(DebtCell cell, DebtManipulationViewModel vm)
-        {
-            //DebtModificationPage.DebtManipulation = vm;
-            await  PopupNavigation.PushAsync(DebtModificationPage);
-        }
 
 		async void Delete(DebtCell cell, DebtManipulationViewModel vm)
         {
@@ -149,8 +142,6 @@ namespace Smalldebts.Core.UI.Views
                 await Navigation.PushAsync(new DebtDetailPage());
                 DebtList.SelectedItem = null;
             }
-
-
         }
 
 		void SearchTextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)

@@ -19,9 +19,10 @@
       HasBackgroundAnimation="True"/>
   </pages:PopupPage.Animation>
   <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
-    <Frame Margin="30" >
-      <Grid RowSpacing="0" ColumnSpacing="0">
+    <Frame Margin="30" Padding="0" >
+      <Grid Padding="0" RowSpacing="0" ColumnSpacing="0">
         <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
           <RowDefinition Height="Auto" />
           <RowDefinition Height="Auto" />
           <RowDefinition Height="Auto" />
@@ -31,26 +32,32 @@
           <ColumnDefinition Width="*"></ColumnDefinition>
           <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label Margin="5" FontSize="Large" HorizontalTextAlignment="Center" Grid.Row="0" Grid.ColumnSpan="2" x:Name="DebtTitleLabel" Text="Modify debt"></Label>
-        <Entry Margin="5" x:Name="DebtNameEntry" Placeholder="Name" Grid.ColumnSpan="2" Keyboard="Numeric"></Entry>
+        <Label Margin="10,20,10,5" FontSize="Large" HorizontalTextAlignment="Center" 
+				Grid.Row="0" Grid.ColumnSpan="2" x:Name="DebtTitleLabel" Text="Modify debt"></Label>
+        <Entry Margin="10,20,10,5" FontSize="Large" HeightRequest="50" 
+				x:Name="DebtNameEntry" Placeholder="Name" Grid.ColumnSpan="2" Keyboard="Default"></Entry>
+        <Entry Margin="10,5" FontSize="Large" HeightRequest="50" Placeholder="Amount"  
+				x:Name="DebtAmountEntry" Grid.Row="1" Grid.ColumnSpan="2" Keyboard="Numeric"></Entry>
+		<Entry Margin="10,5,10,20" Placeholder="Reason"  Grid.Row="2" 
+				x:Name="DebtReasonEntry" Grid.ColumnSpan="2" Keyboard="Chat"></Entry>
         
-        <Entry Margin="5" Placeholder="Amount"  Grid.Row="1" Grid.ColumnSpan="2" Keyboard="Numeric"></Entry>
-        
-        <Button Grid.Row="2" Grid.Column="0" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource PositiveColor}"
+        <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource PositiveColor}"
                 x:Name="PaidButton" Clicked="Button_OnClicked" Text="Paid">
 					<Button.Effects>
 						<effects:RectButtonEffect />
 					</Button.Effects>
 				</Button>
-        <Button Grid.Row="2" Grid.Column="1" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource NegativeColor}"
+        <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource NegativeColor}"
                 x:Name="BorrowedButton" Clicked="Button_OnClicked" Text="Borrowed">
-
 				<Button.Effects>
 					<effects:RectButtonEffect />
 				</Button.Effects>
 				</Button>
-        <Button Margin="5" Grid.Row="3" Grid.ColumnSpan="2" Text="Cancel"
-                x:Name="CancelButton" Clicked="Button_OnClicked">
+        <Button Grid.Row="4" Style="{StaticResource RectangleButton}" Grid.ColumnSpan="2" Text="Cancel" BackgroundColor="Black"
+                x:Name="CancelButton" Clicked="Button_OnClicked" Margin="0,0,0,5">
+				<Button.Effects>
+					<effects:RectButtonEffect />
+				</Button.Effects>
 			</Button>
       </Grid>
     </Frame>

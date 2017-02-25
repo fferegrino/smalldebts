@@ -21,7 +21,7 @@
   <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
     <Frame Margin="30" WidthRequest="300">
 			<StackLayout Orientation="Vertical">
-				<Label Text="Sort"></Label>
+				<Label Style="{StaticResource DialogTitle}" Text="Sort"></Label>
 				<Button Clicked="SortingClicked" x:Name="SortByAmount" Text="By amount"></Button>
 				<Button Clicked="SortingClicked" x:Name="SortByName" Text="By name"></Button>
 				<Button Clicked="SortingClicked" x:Name="SortByDate" Text="By updated date"></Button>

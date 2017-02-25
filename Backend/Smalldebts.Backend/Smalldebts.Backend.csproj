@@ -157,6 +157,7 @@
     <Compile Include="DataObjects\Debt.cs" />
     <Compile Include="DataObjects\Movement.cs" />
     <Compile Include="DataObjects\TodoItem.cs" />
+    <Compile Include="ExposedModels\NewDebt.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

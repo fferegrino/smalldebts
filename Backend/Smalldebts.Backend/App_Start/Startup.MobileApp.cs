@@ -18,6 +18,9 @@ namespace Smalldebts.Backend
         {
             HttpConfiguration config = new HttpConfiguration();
 
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
+= Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()
                 .ApplyTo(config);

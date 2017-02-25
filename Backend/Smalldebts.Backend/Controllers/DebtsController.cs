@@ -1,52 +1,48 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.OData;
-using Microsoft.Azure.Mobile.Server;
+﻿using Microsoft.Azure.Mobile.Server;
+using Microsoft.Azure.Mobile.Server.Config;
 using Smalldebts.Backend.DataObjects;
+using Smalldebts.Backend.ExposedModels;
 using Smalldebts.Backend.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Http;
 
 namespace Smalldebts.Backend.Controllers
 {
-    public class DebtsController : TableController<Debt>
+    [MobileAppController]
+    public class DebtsController : ApiController
     {
-        protected override void Initialize(HttpControllerContext controllerContext)
+
+        MobileServiceContext Context;
+        public DebtsController()
         {
-            base.Initialize(controllerContext);
-            MobileServiceContext context = new MobileServiceContext();
-            DomainManager = new EntityDomainManager<Debt>(context, Request);
+            Context = new MobileServiceContext();
+        }
+        // GET api/values
+        public Debt Get()
+        {
+            return Context.Debts.FirstOrDefault();
         }
 
-        // GET tables/TodoItem
-        public IQueryable<Debt> GetAllDebts()
+        // GET api/values
+        public Debt Post(NewDebt newDebt)
         {
-            return Query();
-        }
+            var debt = Context.Debts.Create();
+            debt.Id = Guid.NewGuid().ToString();
+            debt.Name = newDebt.Name;
+            debt.Balance = newDebt.Amount;
 
-        // GET tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public SingleResult<Debt> GetDebt(string id)
-        {
-            return Lookup(id);
-        }
+            var newMovement = Context.Movements.Create();
+            newMovement.Id = Guid.NewGuid().ToString();
+            newMovement.Amount = newDebt.Amount;
+            newMovement.Date = DateTimeOffset.UtcNow;
+            debt.Movements.Add(newMovement);
+            Context.Debts.Add(debt);
+            Context.SaveChanges();
 
-        // PATCH tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task<Debt> PatchDebt(string id, Delta<Debt> patch)
-        {
-            return UpdateAsync(id, patch);
-        }
-
-        // POST tables/TodoItem
-        public async Task<IHttpActionResult> PostDebt(Debt item)
-        {
-            Debt current = await InsertAsync(item);
-            return CreatedAtRoute("Tables", new { id = current.Id }, current);
-        }
-
-        // DELETE tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
-        public Task DeleteDebt(string id)
-        {
-            return DeleteAsync(id);
+            return debt;
         }
     }
 }

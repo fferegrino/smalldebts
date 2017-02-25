@@ -156,6 +156,12 @@
     <AndroidResource Include="Resources\drawable-xhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\ic_launcher.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\ic_launcher.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\filter_small.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\sort_small.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\filter_small.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\sort_small.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\filter_small.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\sort_small.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Smalldebts.Core.UI.csproj">

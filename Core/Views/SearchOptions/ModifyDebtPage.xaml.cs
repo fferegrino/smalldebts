@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
-namespace Smalldebts.Core.UI.Views
+namespace Smalldebts.Core.UI.Views.PopUps
 {
     public partial class ModifyDebtPage : PopupPage
     {

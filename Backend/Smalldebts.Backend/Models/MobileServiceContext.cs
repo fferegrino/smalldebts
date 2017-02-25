@@ -27,6 +27,7 @@ namespace Smalldebts.Backend.Models
         }
 
         public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Debt> Debts { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

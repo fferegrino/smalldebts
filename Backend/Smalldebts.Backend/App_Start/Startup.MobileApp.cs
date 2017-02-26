@@ -10,7 +10,6 @@ using Smalldebts.Backend.DataObjects;
 using Smalldebts.Backend.Models;
 using Owin;
 using AutoMapper;
-using Smalldebts.Backend.ExposedModels;
 
 namespace Smalldebts.Backend
 {
@@ -25,8 +24,8 @@ namespace Smalldebts.Backend
 = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
             Mapper.Initialize(cfg => {
-                cfg.CreateMap<Debt, SimpleDebt>();
-                cfg.CreateMap<DataObjects.Movement, ExposedModels.Movement>();
+                cfg.CreateMap<DataObjects.Debt, ItermediateObjects.Debt>();
+                cfg.CreateMap<DataObjects.Movement, ItermediateObjects.Movement>();
             });
 
             new MobileAppConfiguration()

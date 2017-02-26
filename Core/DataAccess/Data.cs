@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Smalldebts.Core.Models;
+using Smalldebts.ItermediateObjects;
 using System.Globalization;
 using System.Threading.Tasks;
 
@@ -9,28 +9,28 @@ namespace Smalldebts.Core.DataAccess
     public class Data
     {
         static CultureInfo ci = new CultureInfo("en");
-        public static DetailedDebt Detail = new DetailedDebt
+        public static Debt Detail = new Debt
         {
             Id = "9ec96add-f03f-4a2f-aafb-7d942aa3cdaf",
             Name = "Aaron",
-            Movements = new List<Movement>
-            {
-                new Movement { Amount = -7480.61m, Date = DateTimeOffset.ParseExact("12/22/2016","MM/dd/yyyy", ci) },
-                new Movement { Amount = 491.29m, Date = DateTimeOffset.ParseExact("08/26/2016"  ,"MM/dd/yyyy", ci) },
-                new Movement { Amount = 3034.67m, Date = DateTimeOffset.ParseExact("10/22/2016" ,"MM/dd/yyyy", ci) },
-                new Movement { Amount = 8673.48m, Date = DateTimeOffset.ParseExact("02/10/2017" ,"MM/dd/yyyy", ci) },
-                new Movement { Amount = -1650.55m, Date = DateTimeOffset.ParseExact("03/30/2016","MM/dd/yyyy", ci) },
-                new Movement { Amount = -5664.99m, Date = DateTimeOffset.ParseExact("04/28/2016","MM/dd/yyyy", ci) },
-                new Movement { Amount = 9029.06m, Date = DateTimeOffset.ParseExact("03/30/2016" ,"MM/dd/yyyy", ci) },
-                new Movement { Amount = 1370.26m, Date = DateTimeOffset.ParseExact("06/04/2016" ,"MM/dd/yyyy", ci) },
-                new Movement { Amount = -8707.55m, Date = DateTimeOffset.ParseExact("03/13/2016","MM/dd/yyyy", ci) },
-                new Movement { Amount = -1849.52m, Date = DateTimeOffset.ParseExact("05/15/2016","MM/dd/yyyy", ci) },
-                new Movement { Amount = 9144.73m, Date = DateTimeOffset.ParseExact("07/19/2016" ,"MM/dd/yyyy", ci) },
-                new Movement { Amount = -8450.14m, Date = DateTimeOffset.ParseExact("05/30/2016","MM/dd/yyyy", ci) },
-                new Movement { Amount = -2651.97m, Date = DateTimeOffset.ParseExact("09/06/2016","MM/dd/yyyy", ci) },
-                new Movement { Amount = -5496.81m, Date = DateTimeOffset.ParseExact("02/04/2017","MM/dd/yyyy", ci) },
-                new Movement { Amount = -3254.46m, Date = DateTimeOffset.ParseExact("02/27/2016","MM/dd/yyyy", ci) },
-            }
+            //Movements = new List<Movement>
+            //{
+            //    new Movement { Amount = -7480.61m, Date = DateTimeOffset.ParseExact("12/22/2016","MM/dd/yyyy", ci) },
+            //    new Movement { Amount = 491.29m, Date = DateTimeOffset.ParseExact("08/26/2016"  ,"MM/dd/yyyy", ci) },
+            //    new Movement { Amount = 3034.67m, Date = DateTimeOffset.ParseExact("10/22/2016" ,"MM/dd/yyyy", ci) },
+            //    new Movement { Amount = 8673.48m, Date = DateTimeOffset.ParseExact("02/10/2017" ,"MM/dd/yyyy", ci) },
+            //    new Movement { Amount = -1650.55m, Date = DateTimeOffset.ParseExact("03/30/2016","MM/dd/yyyy", ci) },
+            //    new Movement { Amount = -5664.99m, Date = DateTimeOffset.ParseExact("04/28/2016","MM/dd/yyyy", ci) },
+            //    new Movement { Amount = 9029.06m, Date = DateTimeOffset.ParseExact("03/30/2016" ,"MM/dd/yyyy", ci) },
+            //    new Movement { Amount = 1370.26m, Date = DateTimeOffset.ParseExact("06/04/2016" ,"MM/dd/yyyy", ci) },
+            //    new Movement { Amount = -8707.55m, Date = DateTimeOffset.ParseExact("03/13/2016","MM/dd/yyyy", ci) },
+            //    new Movement { Amount = -1849.52m, Date = DateTimeOffset.ParseExact("05/15/2016","MM/dd/yyyy", ci) },
+            //    new Movement { Amount = 9144.73m, Date = DateTimeOffset.ParseExact("07/19/2016" ,"MM/dd/yyyy", ci) },
+            //    new Movement { Amount = -8450.14m, Date = DateTimeOffset.ParseExact("05/30/2016","MM/dd/yyyy", ci) },
+            //    new Movement { Amount = -2651.97m, Date = DateTimeOffset.ParseExact("09/06/2016","MM/dd/yyyy", ci) },
+            //    new Movement { Amount = -5496.81m, Date = DateTimeOffset.ParseExact("02/04/2017","MM/dd/yyyy", ci) },
+            //    new Movement { Amount = -3254.46m, Date = DateTimeOffset.ParseExact("02/27/2016","MM/dd/yyyy", ci) },
+            //}
         };
 
         public static List<Debt> Debts = new List<Debt>()

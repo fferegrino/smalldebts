@@ -1,7 +1,7 @@
 ﻿using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Config;
 using Smalldebts.Backend.DataObjects;
-using Smalldebts.Backend.ExposedModels;
+using Smalldebts.ItermediateObjects;
 using Smalldebts.Backend.Models;
 using System;
 using System.Collections.Generic;
@@ -22,17 +22,17 @@ namespace Smalldebts.Backend.Controllers
         }
 
         [Route("{id}")]
-        public List<ExposedModels.Movement> GetMovements(string id)
+        public List<ItermediateObjects.Movement> GetMovements(string id)
         {
             var debt = Context.Movements.Where(m => m.DebtId == id);
-            return AutoMapper.Mapper.Map<List<ExposedModels.Movement>>(debt);
+            return AutoMapper.Mapper.Map<List<ItermediateObjects.Movement>>(debt);
         }
 
         [Route("{debtId}/{movementId}")]
-        public ExposedModels.Movement GetMovement(string debtId, string movementId)
+        public ItermediateObjects.Movement GetMovement(string debtId, string movementId)
         {
             var debt = Context.Movements.FirstOrDefault(m => m.DebtId == debtId && m.Id == movementId);
-            return AutoMapper.Mapper.Map<ExposedModels.Movement>(debt);
+            return AutoMapper.Mapper.Map<ItermediateObjects.Movement>(debt);
         }
     }
 }

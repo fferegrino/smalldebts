@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Smalldebts.Core.Models;
+using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI.Controls.Cells
@@ -14,9 +14,7 @@ namespace Smalldebts.Core.UI.Controls.Cells
         {
             InitializeComponent();
         }
-
-
-
+        
         Movement Movement => BindingContext as Movement;
 
         protected override void OnBindingContextChanged()

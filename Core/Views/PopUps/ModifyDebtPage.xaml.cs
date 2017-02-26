@@ -7,29 +7,33 @@ using System.Text;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
-using Smalldebts.Core.Models;
+using Smalldebts.ItermediateObjects;
 using Acr.UserDialogs;
+using Microsoft.WindowsAzure.MobileServices;
+using System.Net.Http;
 
 namespace Smalldebts.Core.UI.Views.PopUps
 {
-	public enum ActionPerformed
-	{
-		Deleted,
-		Updated,
-		Created,
-		Nope
-	}
+    public enum ActionPerformed
+    {
+        Deleted,
+        Updated,
+        Created,
+        Nope
+    }
 
     public partial class ModifyDebtPage : PopupPage
     {
-        public ModifyDebtPage()
+        MobileServiceClient _serviceClient;
+        public ModifyDebtPage(MobileServiceClient serviceClient)
         {
+            _serviceClient = serviceClient;
             InitializeComponent();
         }
 
         public DebtManipulationViewModel DebtManipulation { get; set; }
-		public event EventHandler<Debt> DebtCreated;
-		public event EventHandler<Debt> DebtUpdated;
+        public event EventHandler<Debt> DebtCreated;
+        public event EventHandler<Debt> DebtUpdated;
 
         protected override void OnAppearing()
         {
@@ -84,41 +88,44 @@ namespace Smalldebts.Core.UI.Views.PopUps
             if (sender == CancelButton)
             {
                 await PopupNavigation.PopAsync();
-				return;
+                return;
             }
 
-			var id = DebtManipulation?.Id;
-			decimal amount;
-			if (decimal.TryParse(DebtAmountEntry.Text, out amount))
-			{
-				amount *= (sender == PaidButton ? -1 : 1);
-			}
-			else
-			{
-				return;
-			}
-			UserDialogs.Instance.ShowLoading();
-			if (id != null) // modify debt
-			{
-				var result = await DataAccess.Data.ModifyDebt(new Core.Models.Debt
-				{
-					Id =DebtManipulation.Id,
-					Balance = amount
-				});
-				DebtUpdated?.Invoke(sender, result);
-			}
-			else
-			{
-				var result = await DataAccess.Data.CreateNewDebt(new Core.Models.Debt
-				{
-					Name = DebtNameEntry.Text,
-					Balance = amount
-				});
-				DebtCreated?.Invoke(sender, result);
+            var id = DebtManipulation?.Id;
+            decimal amount;
+            if (decimal.TryParse(DebtAmountEntry.Text, out amount))
+            {
+                amount *= (sender == PaidButton ? -1 : 1);
+            }
+            else
+            {
+                return;
+            }
+            UserDialogs.Instance.ShowLoading();
+            if (id != null) // modify debt
+            {
+                var updated = new Debt
+                {
+                    Id = DebtManipulation.Id,
+                    Reason = DebtReasonEntry.Text,
+                    Balance = amount
+                };
+                var result = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", updated, HttpMethod.Put, null);
+                DebtUpdated?.Invoke(sender, result);
+            }
+            else
+            {
+                var created = new Debt
+                {
+                    Name = DebtNameEntry.Text,
+                    Reason = DebtReasonEntry.Text,
+                    Balance = amount
+                };
 
-			}
-			UserDialogs.Instance.HideLoading();
-			await PopupNavigation.PopAsync();
+                var result = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", created);
+                DebtCreated?.Invoke(sender, result);
+            }
+            await PopupNavigation.PopAsync();
         }
     }
 }

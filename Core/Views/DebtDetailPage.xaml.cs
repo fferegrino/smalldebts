@@ -14,7 +14,7 @@ namespace Smalldebts.Core.UI.Views
 
 			Title = debt.Name;
 			BalanceLabel.Text = $"{debt.Balance:0,000.00}";
-			DetailList.ItemsSource = debt.Movements;
+			//DetailList.ItemsSource = debt;
 			DetailList.ItemSelected += DetailList_ItemSelected;
 		}
 

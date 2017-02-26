@@ -6,151 +6,161 @@ using System.Collections.Generic;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using Microsoft.WindowsAzure.MobileServices;
-using Smalldebts.Core.UI.Models;
+using Smalldebts.ItermediateObjects;
 using System.Linq;
 using System.Collections.ObjectModel;
-using Smalldebts.Core.Models;
 using Smalldebts.Core.UI.Views.PopUps;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using System.Net.Http;
 
 namespace Smalldebts.Core.UI.Views
 {
     public partial class HomePage : ContentPage
     {
-		private ModifyDebtPage DebtModificationPage;
-		private FilterSettingsPage FilterSettingsPage;
-		private SortingSettingsPage SortingSettingsPage;
+        private ModifyDebtPage DebtModificationPage;
+        private FilterSettingsPage FilterSettingsPage;
+        private SortingSettingsPage SortingSettingsPage;
 
-		private FilterKind Filter = FilterKind.All;
-		private SortingKind Sorting = SortingKind.ByAmount;
+        private FilterKind Filter = FilterKind.All;
+        private SortingKind Sorting = SortingKind.ByAmount;
 
-		List<Debt> OriginalDebts;
-		ObservableCollection<Debt> ShownDebts;
+        MobileServiceClient _serviceClient;
+
+        List<Debt> OriginalDebts;
+        IEnumerable<Debt> ShownDebts;
 
         public HomePage()
         {
             InitializeComponent();
-			NavigationPage.SetBackButtonTitle(this, "Debts");
-
-			DebtModificationPage = new ModifyDebtPage();
-			DebtModificationPage.DebtUpdated += DebtModificationPage_DebtUpdated;
-			DebtModificationPage.DebtCreated += DebtModificationPage_DebtCreated;
+            NavigationPage.SetBackButtonTitle(this, "Debts");
 
 
-			FilterSettingsPage = new FilterSettingsPage();
-			FilterSettingsPage.FilterChanged += FilterChanged;
+            _serviceClient = new MobileServiceClient("http://192.168.0.11/smalldebts");
 
-			SortingSettingsPage = new SortingSettingsPage();
-			SortingSettingsPage.SortingChanged += SortingChanged;
+            DebtModificationPage = new ModifyDebtPage(_serviceClient);
+            DebtModificationPage.DebtUpdated += DebtModificationPage_DebtUpdated;
+            DebtModificationPage.DebtCreated += DebtModificationPage_DebtCreated;
 
-            var tapFilter  = new TapGestureRecognizer();
-			tapFilter.Tapped += async (sender, e) => await PopupNavigation.PushAsync(FilterSettingsPage);
-			FilterImage.GestureRecognizers.Add(tapFilter);
 
-			var tapSort = new TapGestureRecognizer();
-			tapSort.Tapped += async (sender, e) => await PopupNavigation.PushAsync(SortingSettingsPage);
-			SortImage.GestureRecognizers.Add(tapSort);
+            FilterSettingsPage = new FilterSettingsPage();
+            FilterSettingsPage.FilterChanged += FilterChanged;
+
+            SortingSettingsPage = new SortingSettingsPage();
+            SortingSettingsPage.SortingChanged += SortingChanged;
+
+            var tapFilter = new TapGestureRecognizer();
+            tapFilter.Tapped += async (sender, e) => await PopupNavigation.PushAsync(FilterSettingsPage);
+            FilterImage.GestureRecognizers.Add(tapFilter);
+
+            var tapSort = new TapGestureRecognizer();
+            tapSort.Tapped += async (sender, e) => await PopupNavigation.PushAsync(SortingSettingsPage);
+            SortImage.GestureRecognizers.Add(tapSort);
 
 
 
 
             DebtList.ItemSelected += DebtList_ItemSelected;
 
-			var item = new ToolbarItem() { Text = "Add", Icon="add" };
-			item.Clicked += async (s,a) => await OpenDebtModificationPage();
+            var item = new ToolbarItem() { Text = "Add", Icon = "add" };
+            item.Clicked += async (s, a) => await OpenDebtModificationPage();
             ToolbarItems.Add(item);
 
 
-			MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "update", async (sender, debtManipulation) => 
-			                                                               await OpenDebtModificationPage(debtManipulation));
+            MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "update", async (sender, debtManipulation) =>
+                                                                           await OpenDebtModificationPage(debtManipulation));
 
-			MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "deleted", Delete);
+            MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "deleted", Delete);
 
         }
 
-		protected override void OnAppearing()
-		{
+        protected override async void OnAppearing()
+        {
+            // 
+            var debtList = await _serviceClient.InvokeApiAsync<List<Debt>>("debts", HttpMethod.Get, null);
 
-			OriginalDebts = new List<Debt>(DataAccess.Data.Debts);
-			ShownDebts = new ObservableCollection<Debt>(DataAccess.Data.Debts);
-			if (OriginalDebts.Count > 0)
-			{
-				//DebtList.ItemsSource = ShownDebts;
-				ApplyFilter();
-				ApplySorting();
-				AddNewDebtOptionPanel.IsVisible = false;
-			}
-			else
-			{
-				DebtList.IsVisible = false;
-				AddNewDebtOptionPanel.IsVisible = true;
-				var tap = new TapGestureRecognizer();
-				tap.Tapped += async (s, a) => await OpenDebtModificationPage();
-				AddNewDebtOptionPanel.GestureRecognizers.Add(tap);
-			}
+            OriginalDebts = debtList;
+            ShownDebts = OriginalDebts;
+            SetNewItemSource();
+            if (OriginalDebts.Count > 0)
+            {
+                ApplyFilter();
+                ApplySorting();
+                AddNewDebtOptionPanel.IsVisible = false;
+            }
+            else
+            {
+                DebtList.IsVisible = false;
+                AddNewDebtOptionPanel.IsVisible = true;
+                var tap = new TapGestureRecognizer();
+                tap.Tapped += async (s, a) => await OpenDebtModificationPage();
+                AddNewDebtOptionPanel.GestureRecognizers.Add(tap);
+            }
 
-			base.OnAppearing();
-		}
+            base.OnAppearing();
+        }
 
-		async Task OpenDebtModificationPage(DebtManipulationViewModel debtModification = null)
-		{
-			DebtModificationPage.DebtManipulation = debtModification;
-			await PopupNavigation.PushAsync(DebtModificationPage);
-		}
+        async Task OpenDebtModificationPage(DebtManipulationViewModel debtModification = null)
+        {
+            DebtModificationPage.DebtManipulation = debtModification;
+            await PopupNavigation.PushAsync(DebtModificationPage);
+        }
 
-		void SortingChanged(object sender, PopUps.SortingKind e)
-		{
-			Sorting = e;
-			ApplySorting();
-		}
+        void SortingChanged(object sender, PopUps.SortingKind e)
+        {
+            Sorting = e;
+            ApplySorting();
+            SetNewItemSource();
+        }
 
-		void ApplySorting()
-		{
-			switch(Sorting)
-			{
-				case SortingKind.ByDate:
-					DebtList.ItemsSource = ShownDebts.OrderBy(d => d.Id);
-					break;
-				case SortingKind.ByName:
-					DebtList.ItemsSource = ShownDebts.OrderBy(d => d.Name);
-					break;
-				case SortingKind.ByAmount:
-					DebtList.ItemsSource = ShownDebts.OrderBy(d => d.Balance);
-					break;
-			}
-		}
+        void ApplySorting()
+        {
+            switch (Sorting)
+            {
+                case SortingKind.ByDate:
+                    ShownDebts = ShownDebts.OrderBy(d => d.Id);
+                    break;
+                case SortingKind.ByName:
+                    ShownDebts = ShownDebts.OrderBy(d => d.Name);
+                    break;
+                case SortingKind.ByAmount:
+                    ShownDebts = ShownDebts.OrderBy(d => d.Balance);
+                    break;
+            }
+        }
 
-		void FilterChanged(object sender, PopUps.FilterKind filterKind)
-		{
-			Filter = filterKind;
-			ApplyFilter();
-		}
+        void FilterChanged(object sender, PopUps.FilterKind filterKind)
+        {
+            Filter = filterKind;
+            ApplyFilter();
+            SetNewItemSource();
+        }
 
-		void ApplyFilter()
-		{
+        void ApplyFilter()
+        {
 
-			switch (Filter)
-			{
-				case FilterKind.ImEven:
-					DebtList.ItemsSource = ShownDebts.Where(d => d.Balance == 0);
-					break;
-				case FilterKind.IOweToTheyOweMe:
-					DebtList.ItemsSource = ShownDebts.Where(d => d.Balance != 0);
-					break;
-				case FilterKind.TheyOweMe:
-					DebtList.ItemsSource = ShownDebts.Where(d => d.Balance > 0);
-					break;
-				case FilterKind.IOweTo:
-					DebtList.ItemsSource = ShownDebts.Where(d => d.Balance > 0);
-					break;
-				default:
-					DebtList.ItemsSource = ShownDebts;
-					break;
-			}
-		}
+            switch (Filter)
+            {
+                case FilterKind.ImEven:
+                    ShownDebts = ShownDebts.Where(d => d.Balance == 0);
+                    break;
+                case FilterKind.IOweToTheyOweMe:
+                    ShownDebts = ShownDebts.Where(d => d.Balance != 0);
+                    break;
+                case FilterKind.TheyOweMe:
+                    ShownDebts = ShownDebts.Where(d => d.Balance > 0);
+                    break;
+                case FilterKind.IOweTo:
+                    ShownDebts = ShownDebts.Where(d => d.Balance > 0);
+                    break;
+                default:
+
+                    break;
+            }
+        }
 
 
-		async void Delete(DebtCell cell, DebtManipulationViewModel vm)
+        async void Delete(DebtCell cell, DebtManipulationViewModel vm)
         {
             var result = await UserDialogs.Instance.ConfirmAsync("Seguro");
         }
@@ -164,26 +174,37 @@ namespace Smalldebts.Core.UI.Views
             }
         }
 
-		void SearchTextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
-		{
-			ShownDebts = new ObservableCollection<Debt>( OriginalDebts.Where(debt => debt.Name.Contains(e.NewTextValue)));
-			DebtList.ItemsSource = ShownDebts;
-		}
+        void SearchTextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
+        {
+            ShownDebts = ShownDebts.Where(debt => debt.Name.Contains(e.NewTextValue));
+            SetNewItemSource();
+        }
 
-		void DebtModificationPage_DebtUpdated(object sender, Debt e)
-		{
-			var updated = ShownDebts.FirstOrDefault(d => d.Id == e.Id);
-			updated.Balance = e.Balance;
-			ApplyFilter();
-			ApplySorting();
-		}
+        async void DebtModificationPage_DebtUpdated(object sender, Debt e)
+        {
+            var updated = ShownDebts.FirstOrDefault(d => d.Id == e.Id);
+            updated.Balance = e.Balance;
+            UserDialogs.Instance.HideLoading();
+            ApplyFilter();
+            ApplySorting();
+            SetNewItemSource();
+        }
 
-		void DebtModificationPage_DebtCreated(object sender, Debt e)
-		{
-			OriginalDebts.Add(e);
-			ShownDebts.Insert(0, e);
-			ApplyFilter();
-			ApplySorting();
-		}
-	}
+        async void DebtModificationPage_DebtCreated(object sender, Debt result)
+        {
+            OriginalDebts.Add(result);
+            (DebtList.ItemsSource as ObservableCollection<Debt>).Insert(0, result);
+            if (!DebtList.IsVisible)
+            {
+                AddNewDebtOptionPanel.IsVisible = false;
+                DebtList.IsVisible = true;
+            }
+            UserDialogs.Instance.HideLoading();
+        }
+
+        void SetNewItemSource()
+        {
+            DebtList.ItemsSource = new ObservableCollection<Debt>(ShownDebts);
+        }
+    }
 }

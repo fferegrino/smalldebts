@@ -69,13 +69,9 @@
       <DependentUpon>DebtDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataAccess\Data.cs" />
-    <Compile Include="Models\Debt.cs" />
-    <Compile Include="Models\DetailedDebt.cs" />
-    <Compile Include="Models\Movement.cs" />
     <Compile Include="Views\MovementDetailPage.xaml.cs">
       <DependentUpon>MovementDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\DetailedMovement.cs" />
     <Compile Include="Converters\ColorConverter.cs" />
     <Compile Include="App.Resources.xaml..cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -84,7 +80,6 @@
       <DependentUpon>DebtCell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Effects\RectButtonEffect.cs" />
-    <Compile Include="Models\TodoItem.cs" />
     <Compile Include="Views\PopUps\FilterSettingsPage.xaml.cs">
       <DependentUpon>FilterSettingsPage.xaml</DependentUpon>
     </Compile>
@@ -144,9 +139,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="Views\PopUps\" />
-  </ItemGroup>
+  <Import Project="..\Smalldebts.IntermediateObjects\Smalldebts.IntermediateObjects.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

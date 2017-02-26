@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Collections.Generic;
-using Smalldebts.Core.Models;
+using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 using Smalldebts.Core.UI.ViewModels;

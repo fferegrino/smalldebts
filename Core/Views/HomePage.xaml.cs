@@ -19,6 +19,7 @@ namespace Smalldebts.Core.UI.Views
     public partial class HomePage : ContentPage
     {
         private ModifyDebtPage DebtModificationPage;
+        private DebtDetailPage DebtDetailPage;
         private FilterSettingsPage FilterSettingsPage;
         private SortingSettingsPage SortingSettingsPage;
 
@@ -41,6 +42,9 @@ namespace Smalldebts.Core.UI.Views
             DebtModificationPage = new ModifyDebtPage(_serviceClient);
             DebtModificationPage.DebtUpdated += DebtModificationPage_DebtUpdated;
             DebtModificationPage.DebtCreated += DebtModificationPage_DebtCreated;
+
+            DebtDetailPage = new DebtDetailPage(_serviceClient);
+            DebtDetailPage.DebtUpdated += DebtModificationPage_DebtUpdated;
 
 
             FilterSettingsPage = new FilterSettingsPage();
@@ -169,7 +173,9 @@ namespace Smalldebts.Core.UI.Views
         {
             if (DebtList.SelectedItem != null)
             {
-                await Navigation.PushAsync(new DebtDetailPage());
+                var debt = DebtList.SelectedItem as Debt;
+                DebtDetailPage.Debt = debt;
+                await Navigation.PushAsync(DebtDetailPage);
                 DebtList.SelectedItem = null;
             }
         }
@@ -180,17 +186,16 @@ namespace Smalldebts.Core.UI.Views
             SetNewItemSource();
         }
 
-        async void DebtModificationPage_DebtUpdated(object sender, Debt e)
+        void DebtModificationPage_DebtUpdated(object sender, Debt e)
         {
             var updated = ShownDebts.FirstOrDefault(d => d.Id == e.Id);
             updated.Balance = e.Balance;
-            UserDialogs.Instance.HideLoading();
             ApplyFilter();
             ApplySorting();
             SetNewItemSource();
         }
 
-        async void DebtModificationPage_DebtCreated(object sender, Debt result)
+        void DebtModificationPage_DebtCreated(object sender, Debt result)
         {
             OriginalDebts.Add(result);
             (DebtList.ItemsSource as ObservableCollection<Debt>).Insert(0, result);
@@ -199,7 +204,6 @@ namespace Smalldebts.Core.UI.Views
                 AddNewDebtOptionPanel.IsVisible = false;
                 DebtList.IsVisible = true;
             }
-            UserDialogs.Instance.HideLoading();
         }
 
         void SetNewItemSource()

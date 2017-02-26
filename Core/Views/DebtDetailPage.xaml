@@ -17,16 +17,16 @@
 		</Label>
 		<Entry HorizontalTextAlignment="Center" Placeholder="New amount"
 		FontSize="Large" Margin="10" HeightRequest="50" x:Name="AmountEntry" Grid.Row="1" Grid.ColumnSpan="2"></Entry>
-		<Button Grid.Row="2" Grid.Column="0" x:Name="SubstractToDebtButton" 
-			Text="She paid " Style="{StaticResource RectangleButton}" 
-			BackgroundColor="{StaticResource NegativeColor}" Clicked="ButtonClicked">
-			<Button.Effects>
-				<effects:RectButtonEffect />
-			</Button.Effects>
-		</Button>
-		<Button Grid.Row="2" Grid.Column="1" x:Name="AddToDebtButton" Text="I lend" 
+        <Button Grid.Row="2" Grid.Column="0" x:Name="PlusButton" Text="Le presté" 
 			Style="{StaticResource RectangleButton}" 
 			BackgroundColor="{StaticResource PositiveColor}" Clicked="ButtonClicked">
+            <Button.Effects>
+                <effects:RectButtonEffect />
+            </Button.Effects>
+        </Button>
+        <Button Grid.Row="2" Grid.Column="1" x:Name="MinusButton" 
+			Text="Me pagó" Style="{StaticResource RectangleButton}" 
+			BackgroundColor="{StaticResource NegativeColor}" Clicked="ButtonClicked">
 			<Button.Effects>
 				<effects:RectButtonEffect />
 			</Button.Effects>

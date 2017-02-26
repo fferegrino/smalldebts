@@ -95,7 +95,7 @@ namespace Smalldebts.Core.UI.Views.PopUps
             decimal amount;
             if (decimal.TryParse(DebtAmountEntry.Text, out amount))
             {
-                amount *= (sender == PaidButton ? -1 : 1);
+                amount *= (sender == PlusButton ? 1 : -1);
             }
             else
             {
@@ -125,6 +125,7 @@ namespace Smalldebts.Core.UI.Views.PopUps
                 var result = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", created);
                 DebtCreated?.Invoke(sender, result);
             }
+            UserDialogs.Instance.HideLoading();
             await PopupNavigation.PopAsync();
         }
     }

@@ -191,6 +191,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Effects\RectButtonEffect.cs" />
+    <Compile Include="Services\LocalizationImplementation.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Smalldebts.Core.UI.csproj">

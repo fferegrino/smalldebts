@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Smalldebts.Core.UI.Views;
 using Xamarin.Forms;
+using Smalldebts.Core.UI.Services;
 
 namespace Smalldebts.Core.UI
 {
@@ -12,7 +13,14 @@ namespace Smalldebts.Core.UI
 			InitializeComponent();
 			SetupCodedStyles();
 
-			MainPage = new NavigationPage(new HomePage());
+            if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
+            {
+                var ci = DependencyService.Get<ILocalization>().GetCurrentCultureInfo();
+                //Resx.AppResources.Culture = ci; // set the RESX for resource localization
+                DependencyService.Get<ILocalization>().SetLocale(ci); // set the Thread for locale-aware methods
+            }
+
+            MainPage = new NavigationPage(new HomePage());
 		}
 
 		public static App RealCurrent => App.Current as App;

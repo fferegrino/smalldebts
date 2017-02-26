@@ -61,6 +61,7 @@
       <DependentUpon>MovementCell.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ILocalization.cs" />
     <Compile Include="ViewModels\DebtManipulationViewModel.cs" />
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>

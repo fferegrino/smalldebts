@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Smalldebts.Core.Models;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace Smalldebts.Core.DataAccess
 {
@@ -95,5 +96,18 @@ namespace Smalldebts.Core.DataAccess
             new Debt { Id = "0fb110a7-2929-4578-97b4-c61b70b83328", Name = "Diana", Balance = 940.44m },
             new Debt { Id = "4228e1e4-19d5-4785-90c2-a92f2ed5849f", Name = "Stephen", Balance = 2926.59m }
         };
+
+
+		public static async Task<Debt> CreateNewDebt(Debt d)
+		{
+			await Task.Delay(2000);
+			return new Debt { Id = Guid.NewGuid().ToString(), Balance = d.Balance, Name = d.Name };
+		}
+
+		public static async Task<Debt> ModifyDebt(Debt d)
+		{
+			await Task.Delay(2000);
+			return new Debt { Id = d.Id, Balance = d.Balance, Name = d.Name };
+		}
     }
 }

@@ -21,7 +21,10 @@ namespace Smalldebts.Core.UI.Views
 		private FilterSettingsPage FilterSettingsPage;
 		private SortingSettingsPage SortingSettingsPage;
 
-		ObservableCollection<Debt> OriginalDebts;
+		private FilterKind Filter = FilterKind.All;
+		private SortingKind Sorting = SortingKind.ByAmount;
+
+		List<Debt> OriginalDebts;
 		ObservableCollection<Debt> ShownDebts;
 
         public HomePage()
@@ -30,6 +33,9 @@ namespace Smalldebts.Core.UI.Views
 			NavigationPage.SetBackButtonTitle(this, "Debts");
 
 			DebtModificationPage = new ModifyDebtPage();
+			DebtModificationPage.DebtUpdated += DebtModificationPage_DebtUpdated;
+			DebtModificationPage.DebtCreated += DebtModificationPage_DebtCreated;
+
 
 			FilterSettingsPage = new FilterSettingsPage();
 			FilterSettingsPage.FilterChanged += FilterChanged;
@@ -65,11 +71,13 @@ namespace Smalldebts.Core.UI.Views
 		protected override void OnAppearing()
 		{
 
-			OriginalDebts = new ObservableCollection<Debt>(DataAccess.Data.Debts);
+			OriginalDebts = new List<Debt>(DataAccess.Data.Debts);
 			ShownDebts = new ObservableCollection<Debt>(DataAccess.Data.Debts);
 			if (OriginalDebts.Count > 0)
 			{
-				DebtList.ItemsSource = ShownDebts;
+				//DebtList.ItemsSource = ShownDebts;
+				ApplyFilter();
+				ApplySorting();
 				AddNewDebtOptionPanel.IsVisible = false;
 			}
 			else
@@ -92,8 +100,13 @@ namespace Smalldebts.Core.UI.Views
 
 		void SortingChanged(object sender, PopUps.SortingKind e)
 		{
-			
-			switch (e)
+			Sorting = e;
+			ApplySorting();
+		}
+
+		void ApplySorting()
+		{
+			switch(Sorting)
 			{
 				case SortingKind.ByDate:
 					DebtList.ItemsSource = ShownDebts.OrderBy(d => d.Id);
@@ -109,7 +122,14 @@ namespace Smalldebts.Core.UI.Views
 
 		void FilterChanged(object sender, PopUps.FilterKind filterKind)
 		{
-			switch (filterKind)
+			Filter = filterKind;
+			ApplyFilter();
+		}
+
+		void ApplyFilter()
+		{
+
+			switch (Filter)
 			{
 				case FilterKind.ImEven:
 					DebtList.ItemsSource = ShownDebts.Where(d => d.Balance == 0);
@@ -150,5 +170,16 @@ namespace Smalldebts.Core.UI.Views
 			DebtList.ItemsSource = ShownDebts;
 		}
 
-    }
+		void DebtModificationPage_DebtUpdated(object sender, Debt e)
+		{
+			var updated = ShownDebts.FirstOrDefault(d => d.Id == e.Id);
+			updated.Balance = e.Balance;
+		}
+
+		void DebtModificationPage_DebtCreated(object sender, Debt e)
+		{
+			OriginalDebts.Add(e);
+			ShownDebts.Insert(0, e);
+		}
+	}
 }

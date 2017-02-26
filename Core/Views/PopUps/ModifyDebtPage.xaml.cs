@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
+using Smalldebts.Core.Models;
+using Acr.UserDialogs;
 
 namespace Smalldebts.Core.UI.Views.PopUps
 {
@@ -26,7 +28,8 @@ namespace Smalldebts.Core.UI.Views.PopUps
         }
 
         public DebtManipulationViewModel DebtManipulation { get; set; }
-		public event EventHandler<ActionPerformed> ActionPerformed;
+		public event EventHandler<Debt> DebtCreated;
+		public event EventHandler<Debt> DebtUpdated;
 
         protected override void OnAppearing()
         {
@@ -81,7 +84,41 @@ namespace Smalldebts.Core.UI.Views.PopUps
             if (sender == CancelButton)
             {
                 await PopupNavigation.PopAsync();
+				return;
             }
+
+			var id = DebtManipulation?.Id;
+			decimal amount;
+			if (decimal.TryParse(DebtAmountEntry.Text, out amount))
+			{
+				amount *= (sender == PaidButton ? -1 : 1);
+			}
+			else
+			{
+				return;
+			}
+			UserDialogs.Instance.ShowLoading();
+			if (id != null) // modify debt
+			{
+				var result = await DataAccess.Data.ModifyDebt(new Core.Models.Debt
+				{
+					Id =DebtManipulation.Id,
+					Balance = amount
+				});
+				DebtUpdated?.Invoke(sender, result);
+			}
+			else
+			{
+				var result = await DataAccess.Data.CreateNewDebt(new Core.Models.Debt
+				{
+					Name = DebtNameEntry.Text,
+					Balance = amount
+				});
+				DebtCreated?.Invoke(sender, result);
+
+			}
+			UserDialogs.Instance.HideLoading();
+			await PopupNavigation.PopAsync();
         }
     }
 }

@@ -20,29 +20,66 @@ namespace Smalldebts.Backend.Controllers
         {
             Context = new MobileServiceContext();
         }
-        // GET api/values
-        public Debt Get()
+
+        [Route("{id}")]
+        public SimpleDebt Get(string id)
         {
-            return Context.Debts.FirstOrDefault();
+            var debt = Context.Debts.FirstOrDefault(d => d.Id == id);
+            return AutoMapper.Mapper.Map<SimpleDebt>(debt);
         }
 
         // GET api/values
-        public Debt Post(NewDebt newDebt)
+        public SimpleDebt Post(IncomingDebt newDebt)
         {
             var debt = Context.Debts.Create();
             debt.Id = Guid.NewGuid().ToString();
             debt.Name = newDebt.Name;
-            debt.Balance = newDebt.Amount;
+            debt.Balance = newDebt.Balance;
 
             var newMovement = Context.Movements.Create();
             newMovement.Id = Guid.NewGuid().ToString();
-            newMovement.Amount = newDebt.Amount;
+            newMovement.Amount = newDebt.Balance;
             newMovement.Date = DateTimeOffset.UtcNow;
+            newMovement.Reason = newDebt.Reason;
+
             debt.Movements.Add(newMovement);
             Context.Debts.Add(debt);
             Context.SaveChanges();
+            return AutoMapper.Mapper.Map<SimpleDebt>(debt);
+        }
 
-            return debt;
+        public SimpleDebt Put(IncomingDebt newDebt)
+        {
+            var debt = Context.Debts.FirstOrDefault(d => d.Id == newDebt.Id);
+            debt.Balance += newDebt.Balance;
+
+            var newMovement = Context.Movements.Create();
+            newMovement.Id = Guid.NewGuid().ToString();
+            newMovement.Amount = newDebt.Balance;
+            newMovement.Reason = newDebt.Reason;
+            newMovement.Date = DateTimeOffset.UtcNow;
+            debt.Movements.Add(newMovement);
+
+            Context.SaveChanges();
+            return AutoMapper.Mapper.Map<SimpleDebt>(debt);
+        }
+        
+        public SimpleDebt Delete(IncomingDebt newDebt)
+        {
+            var debt = Context.Debts.FirstOrDefault(d => d.Id == newDebt.Id);
+            var amount = debt.Balance;
+            debt.Balance = 0;
+
+            var newMovement = Context.Movements.Create();
+            newMovement.Id = Guid.NewGuid().ToString();
+            newMovement.Amount = -amount;
+            newMovement.Date = DateTimeOffset.UtcNow;
+
+            debt.Movements.Add(newMovement);
+            Context.Debts.Remove(debt);
+            Context.SaveChanges();
+
+            return AutoMapper.Mapper.Map<SimpleDebt>(debt);
         }
     }
 }

@@ -9,6 +9,8 @@ using Microsoft.Azure.Mobile.Server.Config;
 using Smalldebts.Backend.DataObjects;
 using Smalldebts.Backend.Models;
 using Owin;
+using AutoMapper;
+using Smalldebts.Backend.ExposedModels;
 
 namespace Smalldebts.Backend
 {
@@ -18,8 +20,14 @@ namespace Smalldebts.Backend
         {
             HttpConfiguration config = new HttpConfiguration();
 
+
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
 = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
+            Mapper.Initialize(cfg => {
+                cfg.CreateMap<Debt, SimpleDebt>();
+                cfg.CreateMap<DataObjects.Movement, ExposedModels.Movement>();
+            });
 
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()
@@ -44,6 +52,8 @@ namespace Smalldebts.Backend
             }
 
             app.UseWebApi(config);
+            //config.MapHttpAttributeRoutes();
+           
         }
     }
 

@@ -174,12 +174,16 @@ namespace Smalldebts.Core.UI.Views
 		{
 			var updated = ShownDebts.FirstOrDefault(d => d.Id == e.Id);
 			updated.Balance = e.Balance;
+			ApplyFilter();
+			ApplySorting();
 		}
 
 		void DebtModificationPage_DebtCreated(object sender, Debt e)
 		{
 			OriginalDebts.Add(e);
 			ShownDebts.Insert(0, e);
+			ApplyFilter();
+			ApplySorting();
 		}
 	}
 }

@@ -189,4 +189,10 @@
   <data name="FilterAll" xml:space="preserve">
     <value>all</value>
   </data>
+  <data name="NewAmount" xml:space="preserve">
+    <value>New amount</value>
+  </data>
+  <data name="LastTransactions" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
 </root>

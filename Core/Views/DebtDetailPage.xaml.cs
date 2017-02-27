@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using Acr.UserDialogs;
 using Microsoft.WindowsAzure.MobileServices;
@@ -16,17 +17,20 @@ namespace Smalldebts.Core.UI.Views
         {
             InitializeComponent();
             _serviceClient = serviceClient;
-            DetailList.ItemSelected += DetailList_ItemSelected;
+            MovementDetailList.ItemSelected += DetailList_ItemSelected;
         }
 
         public Debt Debt { get; internal set; }
         public event EventHandler<Debt> DebtUpdated;
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             Title = Debt.Name;
             UpdateAmounts();
+
+            var movements = await _serviceClient.InvokeApiAsync<List<Movement>>("movements/"+Debt.Id, HttpMethod.Get, null);
+            MovementDetailList.ItemsSource = movements;
         }
 
         void UpdateAmounts()
@@ -61,10 +65,10 @@ namespace Smalldebts.Core.UI.Views
 
         private async void DetailList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (DetailList.SelectedItem != null)
+            if (MovementDetailList.SelectedItem != null)
             {
                 await Navigation.PushAsync(new MovementDetailPage());
-                DetailList.SelectedItem = null;
+                MovementDetailList.SelectedItem = null;
             }
         }
 

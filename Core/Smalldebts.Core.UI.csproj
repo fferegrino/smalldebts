@@ -109,7 +109,10 @@
     <Compile Include="Views\PopUps\SortingSettingsPage.xaml.cs">
       <DependentUpon>SortingSettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PopUps\ModifyDebtPage.xaml.cs" />
+    <Compile Include="Views\PopUps\ModifyDebtPage.xaml.cs" >
+    
+      <DependentUpon>ModifyDebtPage.xaml</DependentUpon>
+      </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

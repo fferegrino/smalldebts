@@ -16,12 +16,12 @@
       <ColumnDefinition Width="*" />
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
-    <Label Style="{StaticResource NotSoYugeLabel}" Text="0" Grid.Row="0"
+    <Label FontSize="Large" HorizontalTextAlignment="Center" Text="0" Grid.Row="0"
            Grid.ColumnSpan="2" x:Name="BalanceDescriptionLabel" />
     <Label Style="{StaticResource YugeLabel}" Text="0" Grid.Row="1"
            Grid.ColumnSpan="2" x:Name="BalanceLabel" />
     <Entry HorizontalTextAlignment="Center" Placeholder="New amount" Keyboard="Numeric"
-           FontSize="Large" Margin="10" HeightRequest="50" x:Name="AmountEntry" Grid.Row="2" Grid.ColumnSpan="2" />
+           FontSize="Large" Margin="10" HeightRequest="45" x:Name="AmountEntry" Grid.Row="2" Grid.ColumnSpan="2" />
     <Button Grid.Row="3" Grid.Column="0" x:Name="PlusButton" Text="Le presté"
             Style="{StaticResource RectangleButton}"
             BackgroundColor="{StaticResource PositiveColor}" Clicked="ButtonClicked">

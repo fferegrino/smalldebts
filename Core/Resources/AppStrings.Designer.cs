@@ -62,7 +62,16 @@ namespace Smalldebts.Core.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Accept.
+        /// </summary>
+        internal static string Accept {
+            get {
+                return ResourceManager.GetString("Accept", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are even with .
         /// </summary>
         internal static string AMano {
             get {
@@ -71,7 +80,25 @@ namespace Smalldebts.Core.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to You are even.
+        /// </summary>
+        internal static string AManoDetail {
+            get {
+                return ResourceManager.GetString("AManoDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You owe to .
         /// </summary>
         internal static string LeDebes {
             get {
@@ -80,7 +107,16 @@ namespace Smalldebts.Core.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to You owe.
+        /// </summary>
+        internal static string LeDebesDetail {
+            get {
+                return ResourceManager.GetString("LeDebesDetail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I paid her/him.
         /// </summary>
         internal static string LePague {
             get {
@@ -89,7 +125,7 @@ namespace Smalldebts.Core.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to I lent him/her.
         /// </summary>
         internal static string LePreste {
             get {
@@ -98,7 +134,7 @@ namespace Smalldebts.Core.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to (s)he paid me.
         /// </summary>
         internal static string MePago {
             get {
@@ -107,7 +143,7 @@ namespace Smalldebts.Core.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to (s)he lent me.
         /// </summary>
         internal static string MePresto {
             get {
@@ -116,11 +152,38 @@ namespace Smalldebts.Core.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Modify {0}&apos;s debt.
+        /// </summary>
+        internal static string ModificaLaDeudaDe {
+            get {
+                return ResourceManager.GetString("ModificaLaDeudaDe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No one owes you, tap here to add someone.
+        /// </summary>
+        internal static string NadieTeDebe {
+            get {
+                return ResourceManager.GetString("NadieTeDebe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  owes you .
         /// </summary>
         internal static string TeDebe {
             get {
                 return ResourceManager.GetString("TeDebe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Owes you.
+        /// </summary>
+        internal static string TeDebeDetail {
+            get {
+                return ResourceManager.GetString("TeDebeDetail", resourceCulture);
             }
         }
     }

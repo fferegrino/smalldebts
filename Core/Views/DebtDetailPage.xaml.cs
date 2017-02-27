@@ -2,6 +2,7 @@
 using System.Net.Http;
 using Acr.UserDialogs;
 using Microsoft.WindowsAzure.MobileServices;
+using Smalldebts.Core.UI.Resources;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
 
@@ -25,7 +26,36 @@ namespace Smalldebts.Core.UI.Views
         {
             base.OnAppearing();
             Title = Debt.Name;
-            BalanceLabel.Text = $"{Debt.Balance:#,##0.00}";
+            UpdateAmounts();
+        }
+
+        void UpdateAmounts()
+        {
+            BalanceLabel.Text = $"{Math.Abs(Debt.Balance):#,##0.00}";
+
+            if (Debt.Balance < 0)
+            {
+
+                BalanceLabel.TextColor = App.RealCurrent.NegativeColor;
+                BalanceDescriptionLabel.Text = AppStrings.LeDebesDetail;
+                PlusButton.Text = AppStrings.LePague;
+                MinusButton.Text = AppStrings.MePresto;
+            }
+            else if (Debt.Balance > 0)
+            {
+
+                BalanceLabel.TextColor = App.RealCurrent.PositiveColor;
+                BalanceDescriptionLabel.Text = AppStrings.TeDebeDetail;
+                PlusButton.Text = AppStrings.LePreste;
+                MinusButton.Text = AppStrings.MePago;
+            }
+            else
+            {
+                BalanceLabel.TextColor = App.RealCurrent.NeutralColor;
+                BalanceDescriptionLabel.Text = AppStrings.AManoDetail;
+                PlusButton.Text = AppStrings.LePreste;
+                MinusButton.Text = AppStrings.MePresto;
+            }
         }
 
 
@@ -52,11 +82,10 @@ namespace Smalldebts.Core.UI.Views
                 Reason = null,
                 Balance = amount
             };
-            var result = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", updated, HttpMethod.Put, null);
-            DebtUpdated?.Invoke(sender, result);
+            Debt = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", updated, HttpMethod.Put, null);
+            DebtUpdated?.Invoke(sender, Debt);
             AmountEntry.Text = null;
-
-            BalanceLabel.Text = $"{result.Balance:#,##0.00}";
+            UpdateAmounts();
 
             UserDialogs.Instance.HideLoading();
         }

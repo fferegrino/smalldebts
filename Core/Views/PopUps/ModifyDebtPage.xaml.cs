@@ -5,6 +5,7 @@ using Acr.UserDialogs;
 using Microsoft.WindowsAzure.MobileServices;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
+using Smalldebts.Core.UI.Resources;
 using Smalldebts.Core.UI.ViewModels;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
@@ -35,14 +36,34 @@ namespace Smalldebts.Core.UI.Views.PopUps
 
         protected override void OnAppearing()
         {
-            if (DebtManipulation?.Name != null)
+            
+
+            if (DebtManipulation?.Name != null) // Modification
             {
-                DebtTitleLabel.Text = "Modify " + DebtManipulation.Name + "'s debt";
+                if (DebtManipulation.Amount < 0)
+                {
+                    PlusButton.Text = AppStrings.LePague;
+                    MinusButton.Text = AppStrings.MePresto;
+                }
+                else if (DebtManipulation.Amount > 0)
+                {
+
+                    PlusButton.Text = AppStrings.LePreste;
+                    MinusButton.Text = AppStrings.MePago;
+                }
+                else
+                {
+                    PlusButton.Text = AppStrings.LePreste;
+                    MinusButton.Text = AppStrings.MePresto;
+                }
+                DebtTitleLabel.Text = String.Format(AppStrings.ModificaLaDeudaDe, DebtManipulation.Name);
                 DebtTitleLabel.IsVisible = true;
                 DebtNameEntry.IsVisible = false;
             }
-            else
+            else // Creation
             {
+                PlusButton.Text = AppStrings.LePreste;
+                MinusButton.Text = AppStrings.MePresto;
                 DebtTitleLabel.IsVisible = false;
                 DebtNameEntry.IsVisible = true;
             }

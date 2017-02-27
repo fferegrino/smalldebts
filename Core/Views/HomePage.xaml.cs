@@ -34,7 +34,7 @@ namespace Smalldebts.Core.UI.Views
             NavigationPage.SetBackButtonTitle(this, "Debts");
 
 
-            _serviceClient = new MobileServiceClient("http://192.168.0.11/smalldebts");
+            _serviceClient = new MobileServiceClient("http://192.168.0.100/smalldebts");
 
             DebtModificationPage = new ModifyDebtPage(_serviceClient);
             DebtModificationPage.DebtUpdated += DebtModificationPage_DebtUpdated;

@@ -130,12 +130,33 @@
     <value>Le presté</value>
   </data>
   <data name="MePago" xml:space="preserve">
-    <value>Pago</value>
+    <value>Me pagó</value>
   </data>
   <data name="MePresto" xml:space="preserve">
     <value>Me prestó</value>
   </data>
   <data name="TeDebe" xml:space="preserve">
     <value> te debe </value>
+  </data>
+  <data name="NadieTeDebe" xml:space="preserve">
+    <value>Nadie te debe, presiona aquí para agregar a alguien</value>
+  </data>
+  <data name="ModificaLaDeudaDe" xml:space="preserve">
+    <value>Modifica la deuda de {0}</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="TeDebeDetail" xml:space="preserve">
+    <value>Te debe</value>
+  </data>
+  <data name="LeDebesDetail" xml:space="preserve">
+    <value>Le debes</value>
+  </data>
+  <data name="AManoDetail" xml:space="preserve">
+    <value>A mano</value>
   </data>
 </root>

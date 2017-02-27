@@ -10,13 +10,7 @@ namespace Smalldebts.Core.UI
         {
             InitializeComponent();
             SetupCodedStyles();
-
-            if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
-            {
-                var ci = DependencyService.Get<ILocalization>().GetCurrentCultureInfo();
-                //Resx.AppResources.Culture = ci; // set the RESX for resource localization
-                DependencyService.Get<ILocalization>().SetLocale(ci); // set the Thread for locale-aware methods
-            }
+            SetupLanguage();
 
             MainPage = new NavigationPage(new HomePage());
         }

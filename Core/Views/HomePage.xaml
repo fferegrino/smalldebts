@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Smalldebts.Core.UI.Views.HomePage"
              xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
+             xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
              Title="Smalldebts">
     <Grid RowSpacing="0">
         <Grid.RowDefinitions>
@@ -28,10 +29,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackLayout Grid.Row="1" Margin="10" Padding="10" x:Name="AddNewDebtOptionPanel" VerticalOptions="Center"
+        <StackLayout Grid.Row="1" Margin="10" Padding="20" x:Name="AddNewDebtOptionPanel" VerticalOptions="Center"
                      HorizontalOptions="Center">
             <Image HorizontalOptions="Center" Source="add_debt_big" />
-            <Label HorizontalTextAlignment="Center" Text="No one owes you money, tap here to add someone" />
+            <Label FontSize="Large" HorizontalTextAlignment="Center" Text="{i:Translate NadieTeDebe}" />
         </StackLayout>
     </Grid>
 </ContentPage>

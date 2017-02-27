@@ -124,7 +124,7 @@
     <value>You owe to </value>
   </data>
   <data name="LePague" xml:space="preserve">
-    <value>I paid</value>
+    <value>I paid her/him</value>
   </data>
   <data name="LePreste" xml:space="preserve">
     <value>I lent him/her</value>
@@ -137,5 +137,26 @@
   </data>
   <data name="TeDebe" xml:space="preserve">
     <value> owes you </value>
+  </data>
+  <data name="NadieTeDebe" xml:space="preserve">
+    <value>No one owes you, tap here to add someone</value>
+  </data>
+  <data name="ModificaLaDeudaDe" xml:space="preserve">
+    <value>Modify {0}'s debt</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="TeDebeDetail" xml:space="preserve">
+    <value>Owes you</value>
+  </data>
+  <data name="LeDebesDetail" xml:space="preserve">
+    <value>You owe</value>
+  </data>
+  <data name="AManoDetail" xml:space="preserve">
+    <value>You are even</value>
   </data>
 </root>

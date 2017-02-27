@@ -3,46 +3,49 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
              xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects" x:Class="Smalldebts.Core.UI.Views.DebtDetailPage">
-    <Grid RowSpacing="0" ColumnSpacing="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
-        <Label Style="{StaticResource YugeLabel}" Text="1566.48"
-               Grid.ColumnSpan="2" x:Name="BalanceLabel" />
-        <Entry HorizontalTextAlignment="Center" Placeholder="New amount"
-               FontSize="Large" Margin="10" HeightRequest="50" x:Name="AmountEntry" Grid.Row="1" Grid.ColumnSpan="2" />
-        <Button Grid.Row="2" Grid.Column="0" x:Name="PlusButton" Text="Le presté"
-                Style="{StaticResource RectangleButton}"
-                BackgroundColor="{StaticResource PositiveColor}" Clicked="ButtonClicked">
-            <Button.Effects>
-                <effects:RectButtonEffect />
-            </Button.Effects>
-        </Button>
-        <Button Grid.Row="2" Grid.Column="1" x:Name="MinusButton"
-                Text="Me pagó" Style="{StaticResource RectangleButton}"
-                BackgroundColor="{StaticResource NegativeColor}" Clicked="ButtonClicked">
-            <Button.Effects>
-                <effects:RectButtonEffect />
-            </Button.Effects>
-        </Button>
-        <ContentView Grid.Row="3" Padding="5" BackgroundColor="Silver" Grid.ColumnSpan="2">
-            <Label FontAttributes="Bold"
-                   Text="Movimientos" FontSize="Large" HorizontalTextAlignment="Center" />
-        </ContentView>
-        <ListView Grid.Row="4" Grid.ColumnSpan="2" x:Name="DetailList">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <cells:MovementCell />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </Grid>
+  <Grid RowSpacing="0" ColumnSpacing="0">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*" />
+      <ColumnDefinition Width="*" />
+    </Grid.ColumnDefinitions>
+    <Label Style="{StaticResource NotSoYugeLabel}" Text="0" Grid.Row="0"
+           Grid.ColumnSpan="2" x:Name="BalanceDescriptionLabel" />
+    <Label Style="{StaticResource YugeLabel}" Text="0" Grid.Row="1"
+           Grid.ColumnSpan="2" x:Name="BalanceLabel" />
+    <Entry HorizontalTextAlignment="Center" Placeholder="New amount" Keyboard="Numeric"
+           FontSize="Large" Margin="10" HeightRequest="50" x:Name="AmountEntry" Grid.Row="2" Grid.ColumnSpan="2" />
+    <Button Grid.Row="3" Grid.Column="0" x:Name="PlusButton" Text="Le presté"
+            Style="{StaticResource RectangleButton}"
+            BackgroundColor="{StaticResource PositiveColor}" Clicked="ButtonClicked">
+      <Button.Effects>
+        <effects:RectButtonEffect />
+      </Button.Effects>
+    </Button>
+    <Button Grid.Row="3" Grid.Column="1" x:Name="MinusButton"
+            Text="Me pagó" Style="{StaticResource RectangleButton}"
+            BackgroundColor="{StaticResource NegativeColor}" Clicked="ButtonClicked">
+      <Button.Effects>
+        <effects:RectButtonEffect />
+      </Button.Effects>
+    </Button>
+    <ContentView Grid.Row="4" Padding="5" BackgroundColor="Silver" Grid.ColumnSpan="2">
+      <Label FontAttributes="Bold"
+             Text="Movimientos" FontSize="Large" HorizontalTextAlignment="Center" />
+    </ContentView>
+    <ListView Grid.Row="5" Grid.ColumnSpan="2" x:Name="DetailList">
+      <ListView.ItemTemplate>
+        <DataTemplate>
+          <cells:MovementCell />
+        </DataTemplate>
+      </ListView.ItemTemplate>
+    </ListView>
+  </Grid>
 </ContentPage>

@@ -1,4 +1,6 @@
 ﻿using Smalldebts.Core.UI.Converters;
+using Smalldebts.Core.UI.Resources;
+using Smalldebts.Core.UI.Services;
 using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI
@@ -28,6 +30,17 @@ namespace Smalldebts.Core.UI
 
             Resources.Add("YugeLabel", yugeLabelStyle);
             Resources.Add("NotSoYugeLabel", notSoYugeLabel);
+        }
+
+        private void SetupLanguage()
+        {
+
+            if (Device.OS == TargetPlatform.iOS || Device.OS == TargetPlatform.Android)
+            {
+                var ci = DependencyService.Get<ILocalization>().GetCurrentCultureInfo();
+                AppStrings.Culture = ci;
+                DependencyService.Get<ILocalization>().SetLocale(ci); 
+            }
         }
     }
 }

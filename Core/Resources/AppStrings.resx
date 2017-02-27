@@ -118,24 +118,24 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AMano" xml:space="preserve">
-    <value />
+    <value>You are even with </value>
   </data>
   <data name="LeDebes" xml:space="preserve">
-    <value />
+    <value>You owe to </value>
   </data>
   <data name="LePague" xml:space="preserve">
-    <value />
+    <value>I paid</value>
   </data>
   <data name="LePreste" xml:space="preserve">
-    <value />
+    <value>I lent him/her</value>
   </data>
   <data name="MePago" xml:space="preserve">
-    <value />
+    <value>(s)he paid me</value>
   </data>
   <data name="MePresto" xml:space="preserve">
-    <value />
+    <value>(s)he lent me</value>
   </data>
   <data name="TeDebe" xml:space="preserve">
-    <value />
+    <value> owes you </value>
   </data>
 </root>

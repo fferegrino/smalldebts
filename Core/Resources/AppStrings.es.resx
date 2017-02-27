@@ -118,81 +118,81 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AMano" xml:space="preserve">
-    <value>You are even with </value>
+    <value>Estás a mano con </value>
   </data>
   <data name="LeDebes" xml:space="preserve">
-    <value>You owe to </value>
+    <value>Le debes a </value>
   </data>
   <data name="LePague" xml:space="preserve">
-    <value>I paid her/him</value>
+    <value>Le pagué</value>
   </data>
   <data name="LePreste" xml:space="preserve">
-    <value>I lent him/her</value>
+    <value>Le presté</value>
   </data>
   <data name="MePago" xml:space="preserve">
-    <value>(s)he paid me</value>
+    <value>Me pagó</value>
   </data>
   <data name="MePresto" xml:space="preserve">
-    <value>(s)he lent me</value>
+    <value>Me prestó</value>
   </data>
   <data name="TeDebe" xml:space="preserve">
-    <value> owes you </value>
+    <value> te debe </value>
   </data>
   <data name="NadieTeDebe" xml:space="preserve">
-    <value>No one owes you, tap here to add someone</value>
+    <value>Nadie te debe, presiona aquí para agregar a alguien</value>
   </data>
   <data name="ModificaLaDeudaDe" xml:space="preserve">
-    <value>Modify {0}'s debt</value>
+    <value>Modifica la deuda de {0}</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Cancelar</value>
   </data>
   <data name="Accept" xml:space="preserve">
-    <value>Accept</value>
+    <value>Aceptar</value>
   </data>
   <data name="TeDebeDetail" xml:space="preserve">
-    <value>Owes you</value>
+    <value>Te debe</value>
   </data>
   <data name="LeDebesDetail" xml:space="preserve">
-    <value>You owe</value>
+    <value>Le debes</value>
   </data>
   <data name="AManoDetail" xml:space="preserve">
-    <value>You are even</value>
+    <value>A mano</value>
   </data>
   <data name="Sort" xml:space="preserve">
-    <value>Sort</value>
+    <value>Ordenar</value>
   </data>
   <data name="Filter" xml:space="preserve">
-    <value>Show</value>
+    <value>Mostrar</value>
   </data>
   <data name="SortByDate" xml:space="preserve">
-    <value>by update date</value>
+    <value>por fecha de modificación</value>
   </data>
   <data name="SortByName" xml:space="preserve">
-    <value>by name</value>
+    <value>por nombre</value>
   </data>
   <data name="SortByBalance" xml:space="preserve">
-    <value>by balance</value>
+    <value>por montos</value>
   </data>
   <data name="FilterByPeopleImEvenWith" xml:space="preserve">
-    <value>people who I'm even with</value>
+    <value>personas con las que estoy a mano</value>
   </data>
   <data name="FilterByPeopleWhoOweMe" xml:space="preserve">
-    <value>people who owe me</value>
+    <value>personas que me deben</value>
   </data>
   <data name="FilterByPeopleIOweTo" xml:space="preserve">
-    <value>people who I owe to</value>
+    <value>personas a las que le debo</value>
   </data>
   <data name="PeopleIOweOrTheyOweMe" xml:space="preserve">
-    <value>people who have business with me</value>
+    <value>personas con las que tengo negocio</value>
   </data>
   <data name="FilterAll" xml:space="preserve">
-    <value>all</value>
+    <value>todos</value>
   </data>
   <data name="NewAmount" xml:space="preserve">
-    <value>New amount</value>
+    <value>Nuevo monto</value>
   </data>
   <data name="LastTransactions" xml:space="preserve">
-    <value>Transactions</value>
+    <value>Transacciones</value>
   </data>
 </root>

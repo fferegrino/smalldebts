@@ -1,40 +1,35 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-			xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects"
-             x:Class="Smalldebts.Core.UI.Views.PopUps.FilterSettingsPage">
-  <!--Animations use example-->
-  <pages:PopupPage.Animation>
-    <animations:ScaleAnimation
-      PositionIn="Center"
-      PositionOut="Center"
-      ScaleIn="1.2"
-      ScaleOut="0.8"
-      DurationIn="400"
-      DurationOut="300"
-      EasingIn="SinOut"
-      EasingOut="SinIn"
-      HasBackgroundAnimation="True"/>
-  </pages:PopupPage.Animation>
-  <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
-    <Frame Margin="30" WidthRequest="300">
+﻿<?xml version="1.0" encoding="utf-8"?>
 
-			<StackLayout Orientation="Vertical">
-				<Label Style="{StaticResource DialogTitle}" Text="Show"></Label>
-				<Picker x:Name="FilterPicker"
-						HorizontalOptions="FillAndExpand" Grid.Column="1" 
-						SelectedIndexChanged="Handle_SelectedIndexChanged">
-					<Picker.Items>
-					<x:String>all</x:String>
-					<x:String>people I have business with</x:String> 
-					<x:String>people I owe to</x:String> 
-					<x:String>people who owe me</x:String>
-					<x:String>people who I even with</x:String>
-					</Picker.Items>
-				</Picker>
-			</StackLayout>
-    </Frame>
-  </StackLayout>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects"
+                xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
+                 x:Class="Smalldebts.Core.UI.Views.PopUps.FilterSettingsPage">
+    <!--Animations use example-->
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True" />
+    </pages:PopupPage.Animation>
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
+        <Frame Margin="30" WidthRequest="300">
+
+            <StackLayout Orientation="Vertical">
+                <Label Style="{StaticResource DialogTitle}" Text="{i:Translate Filter}" />
+                <Picker x:Name="FilterPicker"
+                        HorizontalOptions="FillAndExpand" Grid.Column="1"
+                        SelectedIndexChanged="Handle_SelectedIndexChanged">
+                </Picker>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
 </pages:PopupPage>

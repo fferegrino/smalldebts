@@ -1,55 +1,85 @@
-﻿using Acr.UserDialogs;
-using Microsoft.WindowsAzure.MobileServices;
-using Smalldebts.ItermediateObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using Acr.UserDialogs;
+using Microsoft.WindowsAzure.MobileServices;
+using Smalldebts.Core.UI.Resources;
+using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI.Views
 {
     public partial class DebtDetailPage : ContentPage
     {
-        public Debt Debt { get; internal set; }
-
-        MobileServiceClient _serviceClient;
-        public event EventHandler<Debt> DebtUpdated;
+        private readonly MobileServiceClient _serviceClient;
 
         public DebtDetailPage(MobileServiceClient serviceClient)
         {
             InitializeComponent();
             _serviceClient = serviceClient;
-            DetailList.ItemSelected += DetailList_ItemSelected;
+            MovementDetailList.ItemSelected += DetailList_ItemSelected;
         }
 
-        protected override void OnAppearing()
+        public Debt Debt { get; internal set; }
+        public event EventHandler<Debt> DebtUpdated;
+
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
             Title = Debt.Name;
-            BalanceLabel.Text = $"{Debt.Balance:#,##0.00}";
+            UpdateAmounts();
+
+            var movements = await _serviceClient.InvokeApiAsync<List<Movement>>("movements/"+Debt.Id, HttpMethod.Get, null);
+            MovementDetailList.ItemsSource = movements;
         }
 
-
-        async void DetailList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        void UpdateAmounts()
         {
-            if (DetailList.SelectedItem != null)
+            BalanceLabel.Text = $"{Math.Abs(Debt.Balance):#,##0.00}";
+
+            if (Debt.Balance < 0)
             {
-                await Navigation.PushAsync(new MovementDetailPage());
-                DetailList.SelectedItem = null;
+
+                BalanceLabel.TextColor = App.RealCurrent.NegativeColor;
+                BalanceDescriptionLabel.Text = AppStrings.LeDebesDetail;
+                PlusButton.Text = AppStrings.LePague;
+                MinusButton.Text = AppStrings.MePresto;
             }
-        }
-
-        async void ButtonClicked(object sender, System.EventArgs e)
-        {
-            decimal amount;
-            if (decimal.TryParse(AmountEntry.Text, out amount))
+            else if (Debt.Balance > 0)
             {
-                amount *= (sender == PlusButton ? 1 : -1);
+
+                BalanceLabel.TextColor = App.RealCurrent.PositiveColor;
+                BalanceDescriptionLabel.Text = AppStrings.TeDebeDetail;
+                PlusButton.Text = AppStrings.LePreste;
+                MinusButton.Text = AppStrings.MePago;
             }
             else
             {
-                return;
+                BalanceLabel.TextColor = App.RealCurrent.NeutralColor;
+                BalanceDescriptionLabel.Text = AppStrings.AManoDetail;
+                PlusButton.Text = AppStrings.LePreste;
+                MinusButton.Text = AppStrings.MePresto;
             }
+        }
+
+        private MovementDetailPage m = new MovementDetailPage();
+        private async void DetailList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (MovementDetailList.SelectedItem != null)
+            {
+                m.Movement = MovementDetailList.SelectedItem as Movement;
+                await Navigation.PushAsync(m);
+                MovementDetailList.SelectedItem = null;
+            }
+        }
+
+        private async void ButtonClicked(object sender, EventArgs e)
+        {
+            decimal amount;
+            if (decimal.TryParse(AmountEntry.Text, out amount))
+                amount *= sender == PlusButton ? 1 : -1;
+            else
+                return;
             UserDialogs.Instance.ShowLoading();
             var updated = new Debt
             {
@@ -57,11 +87,10 @@ namespace Smalldebts.Core.UI.Views
                 Reason = null,
                 Balance = amount
             };
-            var result = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", updated, HttpMethod.Put, null);
-            DebtUpdated?.Invoke(sender, result);
+            Debt = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", updated, HttpMethod.Put, null);
+            DebtUpdated?.Invoke(sender, Debt);
             AmountEntry.Text = null;
-            
-            BalanceLabel.Text = $"{result.Balance:#,##0.00}";
+            UpdateAmounts();
 
             UserDialogs.Instance.HideLoading();
         }

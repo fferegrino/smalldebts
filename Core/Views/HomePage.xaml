@@ -1,36 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	x:Class="Smalldebts.Core.UI.Views.HomePage"
-	xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
-	Title="Smalldebts">
-  <Grid RowSpacing="0">
-  <Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-  </Grid.RowDefinitions>
-	<Grid BackgroundColor="#C0C0C5">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="8*"></ColumnDefinition>
-				<ColumnDefinition Width="1*"></ColumnDefinition>
-				<ColumnDefinition Width="1*"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-			<SearchBar TextChanged="SearchTextChanged" />
-			<Image HorizontalOptions="CenterAndExpand" Source="filter_small" Grid.Column="1" x:Name="FilterImage" />
-			<Image HorizontalOptions="CenterAndExpand" Source="sort_small" Grid.Column="2" x:Name="SortImage" />
-	</Grid>
 
-    <ListView Grid.Row="1" x:Name="DebtList">
-      <ListView.ItemTemplate>
-        <DataTemplate>
-          <cells:DebtCell />
-        </DataTemplate>
-      </ListView.ItemTemplate>
-    </ListView>
-    <StackLayout Grid.Row="1" Margin="10" Padding="10" x:Name="AddNewDebtOptionPanel" VerticalOptions="Center" 
-			HorizontalOptions="Center" >
-      <Image HorizontalOptions="Center" Source="add_debt_big"></Image>
-      <Label HorizontalTextAlignment="Center" Text="No one owes you money, tap here to add someone"></Label>
-    </StackLayout>
-  </Grid>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Smalldebts.Core.UI.Views.HomePage"
+             xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
+             xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
+             Title="Smalldebts">
+    <Grid RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid BackgroundColor="#C0C0C5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <SearchBar TextChanged="SearchTextChanged" />
+            <Image HorizontalOptions="CenterAndExpand" Source="filter_small" Grid.Column="1" x:Name="FilterImage" />
+            <Image HorizontalOptions="CenterAndExpand" Source="sort_small" Grid.Column="2" x:Name="SortImage" />
+        </Grid>
+
+        <ListView Grid.Row="1" x:Name="DebtList">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <cells:DebtCell />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <StackLayout Grid.Row="1" Margin="10" Padding="20" x:Name="AddNewDebtOptionPanel" VerticalOptions="Center"
+                     HorizontalOptions="Center">
+            <Image HorizontalOptions="Center" Source="add_debt_big" />
+            <Label FontSize="Large" HorizontalTextAlignment="Center" Text="{i:Translate NadieTeDebe}" />
+        </StackLayout>
+    </Grid>
 </ContentPage>

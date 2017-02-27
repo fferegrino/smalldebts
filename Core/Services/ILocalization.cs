@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Smalldebts.Core.UI.Services
 {
     public interface ILocalization
     {
-
         CultureInfo GetCurrentCultureInfo();
         void SetLocale(CultureInfo ci);
     }
@@ -18,10 +13,9 @@ namespace Smalldebts.Core.UI.Services
     {
         public PlatformCulture(string platformCultureString)
         {
-            if (String.IsNullOrEmpty(platformCultureString))
-            {
-                throw new ArgumentException("Expected culture identifier", "platformCultureString"); // in C# 6 use nameof(platformCultureString)
-            }
+            if (string.IsNullOrEmpty(platformCultureString))
+                throw new ArgumentException("Expected culture identifier", "platformCultureString");
+                    // in C# 6 use nameof(platformCultureString)
             PlatformString = platformCultureString.Replace("_", "-"); // .NET expects dash, not underscore
             var dashIndex = PlatformString.IndexOf("-", StringComparison.Ordinal);
             if (dashIndex > 0)
@@ -36,9 +30,11 @@ namespace Smalldebts.Core.UI.Services
                 LocaleCode = "";
             }
         }
-        public string PlatformString { get; private set; }
+
+        public string PlatformString { get; }
         public string LanguageCode { get; private set; }
         public string LocaleCode { get; private set; }
+
         public override string ToString()
         {
             return PlatformString;

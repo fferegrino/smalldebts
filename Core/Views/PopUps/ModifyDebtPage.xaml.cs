@@ -1,16 +1,14 @@
-﻿using Rg.Plugins.Popup.Pages;
-using Smalldebts.Core.UI.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Rg.Plugins.Popup.Services;
-using Xamarin.Forms;
-using Smalldebts.ItermediateObjects;
 using Acr.UserDialogs;
 using Microsoft.WindowsAzure.MobileServices;
-using System.Net.Http;
+using Rg.Plugins.Popup.Pages;
+using Rg.Plugins.Popup.Services;
+using Smalldebts.Core.UI.Resources;
+using Smalldebts.Core.UI.ViewModels;
+using Smalldebts.ItermediateObjects;
+using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI.Views.PopUps
 {
@@ -24,7 +22,8 @@ namespace Smalldebts.Core.UI.Views.PopUps
 
     public partial class ModifyDebtPage : PopupPage
     {
-        MobileServiceClient _serviceClient;
+        private readonly MobileServiceClient _serviceClient;
+
         public ModifyDebtPage(MobileServiceClient serviceClient)
         {
             _serviceClient = serviceClient;
@@ -37,14 +36,34 @@ namespace Smalldebts.Core.UI.Views.PopUps
 
         protected override void OnAppearing()
         {
-            if (DebtManipulation?.Name != null)
+            
+
+            if (DebtManipulation?.Name != null) // Modification
             {
-                DebtTitleLabel.Text = "Modify " + DebtManipulation.Name + "'s debt";
+                if (DebtManipulation.Amount < 0)
+                {
+                    PlusButton.Text = AppStrings.LePague;
+                    MinusButton.Text = AppStrings.MePresto;
+                }
+                else if (DebtManipulation.Amount > 0)
+                {
+
+                    PlusButton.Text = AppStrings.LePreste;
+                    MinusButton.Text = AppStrings.MePago;
+                }
+                else
+                {
+                    PlusButton.Text = AppStrings.LePreste;
+                    MinusButton.Text = AppStrings.MePresto;
+                }
+                DebtTitleLabel.Text = String.Format(AppStrings.ModificaLaDeudaDe, DebtManipulation.Name);
                 DebtTitleLabel.IsVisible = true;
                 DebtNameEntry.IsVisible = false;
             }
-            else
+            else // Creation
             {
+                PlusButton.Text = AppStrings.LePreste;
+                MinusButton.Text = AppStrings.MePresto;
                 DebtTitleLabel.IsVisible = false;
                 DebtNameEntry.IsVisible = true;
             }
@@ -67,7 +86,8 @@ namespace Smalldebts.Core.UI.Views.PopUps
         // Invoked before custom animation begin
         protected virtual Task OnDisappearingAnimationBegin()
         {
-            return Content.FadeTo(1); ;
+            return Content.FadeTo(1);
+            ;
         }
 
         protected override bool OnBackButtonPressed()
@@ -94,13 +114,9 @@ namespace Smalldebts.Core.UI.Views.PopUps
             var id = DebtManipulation?.Id;
             decimal amount;
             if (decimal.TryParse(DebtAmountEntry.Text, out amount))
-            {
-                amount *= (sender == PlusButton ? 1 : -1);
-            }
+                amount *= sender == PlusButton ? 1 : -1;
             else
-            {
                 return;
-            }
             UserDialogs.Instance.ShowLoading();
             if (id != null) // modify debt
             {
@@ -125,6 +141,9 @@ namespace Smalldebts.Core.UI.Views.PopUps
                 var result = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", created);
                 DebtCreated?.Invoke(sender, result);
             }
+            DebtReasonEntry.Text = "";
+            DebtNameEntry.Text = "";
+            DebtAmountEntry.Text = "";
             UserDialogs.Instance.HideLoading();
             await PopupNavigation.PopAsync();
         }

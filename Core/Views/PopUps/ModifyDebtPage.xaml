@@ -1,65 +1,69 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-             xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-			xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects"
-             x:Class="Smalldebts.Core.UI.Views.PopUps.ModifyDebtPage">
-  <!--Animations use example-->
-  <pages:PopupPage.Animation>
-    <animations:ScaleAnimation
-      PositionIn="Center"
-      PositionOut="Center"
-      ScaleIn="1.2"
-      ScaleOut="0.8"
-      DurationIn="400"
-      DurationOut="300"
-      EasingIn="SinOut"
-      EasingOut="SinIn"
-      HasBackgroundAnimation="True"/>
-  </pages:PopupPage.Animation>
-  <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
-    <Frame Margin="30" Padding="0" >
-      <Grid Padding="0" RowSpacing="0" ColumnSpacing="0">
-        <Grid.RowDefinitions>
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-          <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="*"></ColumnDefinition>
-          <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
-        <Label Margin="10,20,10,5" FontSize="Large" HorizontalTextAlignment="Center"
-				Grid.Row="0" Grid.ColumnSpan="2" x:Name="DebtTitleLabel" Text="Modify debt"></Label>
-        <Entry Margin="10,20,10,5" FontSize="Large" HeightRequest="50"
-				x:Name="DebtNameEntry" Placeholder="Name" Grid.ColumnSpan="2" Keyboard="Default"></Entry>
-        <Entry Margin="10,5" FontSize="Large" HeightRequest="50" Placeholder="Amount"
-				x:Name="DebtAmountEntry" Grid.Row="1" Grid.ColumnSpan="2" Keyboard="Numeric"></Entry>
-        <Entry Margin="10,5,10,20" Placeholder="Reason"  Grid.Row="2"
-            x:Name="DebtReasonEntry" Grid.ColumnSpan="2" Keyboard="Chat"></Entry>
+﻿<?xml version="1.0" encoding="utf-8"?>
 
-        <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource PositiveColor}"
-                x:Name="PlusButton" Clicked="Button_OnClicked" Text="Paid">
-          <Button.Effects>
-            <effects:RectButtonEffect />
-          </Button.Effects>
-        </Button>
-        <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource NegativeColor}"
-                x:Name="MinusButton" Clicked="Button_OnClicked" Text="Borrowed">
-          <Button.Effects>
-            <effects:RectButtonEffect />
-          </Button.Effects>
-        </Button>
-        <Button Grid.Row="4" Style="{StaticResource RectangleButton}" Grid.ColumnSpan="2" Text="Cancel" BackgroundColor="Black"
-                x:Name="CancelButton" Clicked="Button_OnClicked" Margin="0,0,0,5">
-          <Button.Effects>
-            <effects:RectButtonEffect />
-          </Button.Effects>
-        </Button>
-      </Grid>
-    </Frame>
-  </StackLayout>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                 xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects"
+                 x:Class="Smalldebts.Core.UI.Views.PopUps.ModifyDebtPage">
+    <!--Animations use example-->
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            PositionIn="Center"
+            PositionOut="Center"
+            ScaleIn="1.2"
+            ScaleOut="0.8"
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="True" />
+    </pages:PopupPage.Animation>
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
+        <Frame Margin="30" Padding="0">
+            <Grid Padding="0" RowSpacing="0" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Margin="10,20,10,5" FontSize="Large" HorizontalTextAlignment="Center"
+                       Grid.Row="0" Grid.ColumnSpan="2" x:Name="DebtTitleLabel" Text="Modify debt" />
+                <Entry Margin="10,20,10,5" FontSize="Large" HeightRequest="50"
+                       x:Name="DebtNameEntry" Placeholder="Name" Grid.ColumnSpan="2" Keyboard="Default" />
+                <Entry Margin="10,5" FontSize="Large" HeightRequest="50" Placeholder="Amount"
+                       x:Name="DebtAmountEntry" Grid.Row="1" Grid.ColumnSpan="2" Keyboard="Numeric" />
+                <Entry Margin="10,5,10,20" Placeholder="Reason" Grid.Row="2"
+                       x:Name="DebtReasonEntry" Grid.ColumnSpan="2" Keyboard="Chat" />
+
+                <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource RectangleButton}"
+                        BackgroundColor="{StaticResource PositiveColor}"
+                        x:Name="PlusButton" Clicked="Button_OnClicked" Text="Paid">
+                    <Button.Effects>
+                        <effects:RectButtonEffect />
+                    </Button.Effects>
+                </Button>
+                <Button Grid.Row="3" Grid.Column="1" Style="{StaticResource RectangleButton}"
+                        BackgroundColor="{StaticResource NegativeColor}"
+                        x:Name="MinusButton" Clicked="Button_OnClicked" Text="Borrowed">
+                    <Button.Effects>
+                        <effects:RectButtonEffect />
+                    </Button.Effects>
+                </Button>
+                <Button Grid.Row="4" Style="{StaticResource RectangleButton}" Grid.ColumnSpan="2" Text="Cancel"
+                        BackgroundColor="Black"
+                        x:Name="CancelButton" Clicked="Button_OnClicked" Margin="0,0,0,5">
+                    <Button.Effects>
+                        <effects:RectButtonEffect />
+                    </Button.Effects>
+                </Button>
+            </Grid>
+        </Frame>
+    </StackLayout>
 </pages:PopupPage>

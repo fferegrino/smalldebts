@@ -1,19 +1,15 @@
-﻿using Acr.UserDialogs;
+﻿using System;
+using System.Net.Http;
+using Acr.UserDialogs;
 using Microsoft.WindowsAzure.MobileServices;
 using Smalldebts.ItermediateObjects;
-using System;
-using System.Collections.Generic;
-using System.Net.Http;
 using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI.Views
 {
     public partial class DebtDetailPage : ContentPage
     {
-        public Debt Debt { get; internal set; }
-
-        MobileServiceClient _serviceClient;
-        public event EventHandler<Debt> DebtUpdated;
+        private readonly MobileServiceClient _serviceClient;
 
         public DebtDetailPage(MobileServiceClient serviceClient)
         {
@@ -21,6 +17,9 @@ namespace Smalldebts.Core.UI.Views
             _serviceClient = serviceClient;
             DetailList.ItemSelected += DetailList_ItemSelected;
         }
+
+        public Debt Debt { get; internal set; }
+        public event EventHandler<Debt> DebtUpdated;
 
         protected override void OnAppearing()
         {
@@ -30,7 +29,7 @@ namespace Smalldebts.Core.UI.Views
         }
 
 
-        async void DetailList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void DetailList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (DetailList.SelectedItem != null)
             {
@@ -39,17 +38,13 @@ namespace Smalldebts.Core.UI.Views
             }
         }
 
-        async void ButtonClicked(object sender, System.EventArgs e)
+        private async void ButtonClicked(object sender, EventArgs e)
         {
             decimal amount;
             if (decimal.TryParse(AmountEntry.Text, out amount))
-            {
-                amount *= (sender == PlusButton ? 1 : -1);
-            }
+                amount *= sender == PlusButton ? 1 : -1;
             else
-            {
                 return;
-            }
             UserDialogs.Instance.ShowLoading();
             var updated = new Debt
             {
@@ -60,7 +55,7 @@ namespace Smalldebts.Core.UI.Views
             var result = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", updated, HttpMethod.Put, null);
             DebtUpdated?.Invoke(sender, result);
             AmountEntry.Text = null;
-            
+
             BalanceLabel.Text = $"{result.Balance:#,##0.00}";
 
             UserDialogs.Instance.HideLoading();

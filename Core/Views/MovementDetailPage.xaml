@@ -1,12 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-	xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-	x:Class="Smalldebts.Core.UI.Views.MovementDetailPage">
-	<StackLayout x:Name="Stack">
-		<Label x:Name="MovementAmountLabel"  Style="{StaticResource YugeLabel}"></Label>
-		<Label x:Name="MovementDateLabel"  Style="{StaticResource NotSoYugeLabel}"></Label>
-		<Label x:Name="MovementReasonLabel" Margin="20" HorizontalTextAlignment="Center"></Label>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 
-	</StackLayout>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Smalldebts.Core.UI.Views.MovementDetailPage">
+    <StackLayout x:Name="Stack">
+        <Label x:Name="MovementAmountLabel" Style="{StaticResource YugeLabel}" />
+        <Label x:Name="MovementDateLabel" Style="{StaticResource NotSoYugeLabel}" />
+        <Label x:Name="MovementReasonLabel" Margin="20" HorizontalTextAlignment="Center" />
+
+    </StackLayout>
 </ContentPage>

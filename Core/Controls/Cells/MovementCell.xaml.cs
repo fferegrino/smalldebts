@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Smalldebts.ItermediateObjects;
+﻿using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI.Controls.Cells
@@ -14,8 +9,8 @@ namespace Smalldebts.Core.UI.Controls.Cells
         {
             InitializeComponent();
         }
-        
-        Movement Movement => BindingContext as Movement;
+
+        private Movement Movement => BindingContext as Movement;
 
         protected override void OnBindingContextChanged()
         {
@@ -24,7 +19,8 @@ namespace Smalldebts.Core.UI.Controls.Cells
             {
                 DateLabel.Text = Movement.Date.ToString();
                 AmountLabel.Text = $"{Movement.Amount:0,000.00}";
-                AmountLabel.TextColor = (Color)App.RealCurrent.ColorConverter.Convert(Movement.Amount, null, null, null);
+                AmountLabel.TextColor =
+                    (Color) App.RealCurrent.ColorConverter.Convert(Movement.Amount, null, null, null);
             }
         }
     }

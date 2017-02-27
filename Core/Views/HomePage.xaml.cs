@@ -1,35 +1,32 @@
-﻿using Acr.UserDialogs;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Acr.UserDialogs;
+using Microsoft.WindowsAzure.MobileServices;
+using Rg.Plugins.Popup.Services;
 using Smalldebts.Core.UI.Controls.Cells;
 using Smalldebts.Core.UI.ViewModels;
-using System;
-using System.Collections.Generic;
-using Rg.Plugins.Popup.Services;
-using Xamarin.Forms;
-using Microsoft.WindowsAzure.MobileServices;
-using Smalldebts.ItermediateObjects;
-using System.Linq;
-using System.Collections.ObjectModel;
 using Smalldebts.Core.UI.Views.PopUps;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using System.Net.Http;
+using Smalldebts.ItermediateObjects;
+using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI.Views
 {
     public partial class HomePage : ContentPage
     {
-        private ModifyDebtPage DebtModificationPage;
-        private DebtDetailPage DebtDetailPage;
-        private FilterSettingsPage FilterSettingsPage;
-        private SortingSettingsPage SortingSettingsPage;
+        private readonly MobileServiceClient _serviceClient;
+        private readonly DebtDetailPage DebtDetailPage;
+        private readonly ModifyDebtPage DebtModificationPage;
 
         private FilterKind Filter = FilterKind.All;
+        private readonly FilterSettingsPage FilterSettingsPage;
+
+        private List<Debt> OriginalDebts;
+        private IEnumerable<Debt> ShownDebts;
         private SortingKind Sorting = SortingKind.ByAmount;
-
-        MobileServiceClient _serviceClient;
-
-        List<Debt> OriginalDebts;
-        IEnumerable<Debt> ShownDebts;
+        private readonly SortingSettingsPage SortingSettingsPage;
 
         public HomePage()
         {
@@ -62,20 +59,18 @@ namespace Smalldebts.Core.UI.Views
             SortImage.GestureRecognizers.Add(tapSort);
 
 
-
-
             DebtList.ItemSelected += DebtList_ItemSelected;
 
-            var item = new ToolbarItem() { Text = "Add", Icon = "add" };
+            var item = new ToolbarItem {Text = "Add", Icon = "add"};
             item.Clicked += async (s, a) => await OpenDebtModificationPage();
             ToolbarItems.Add(item);
 
 
-            MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "update", async (sender, debtManipulation) =>
-                                                                           await OpenDebtModificationPage(debtManipulation));
+            MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "update",
+                async (sender, debtManipulation) =>
+                    await OpenDebtModificationPage(debtManipulation));
 
             MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "deleted", Delete);
-
         }
 
         protected override async void OnAppearing()
@@ -104,20 +99,20 @@ namespace Smalldebts.Core.UI.Views
             base.OnAppearing();
         }
 
-        async Task OpenDebtModificationPage(DebtManipulationViewModel debtModification = null)
+        private async Task OpenDebtModificationPage(DebtManipulationViewModel debtModification = null)
         {
             DebtModificationPage.DebtManipulation = debtModification;
             await PopupNavigation.PushAsync(DebtModificationPage);
         }
 
-        void SortingChanged(object sender, PopUps.SortingKind e)
+        private void SortingChanged(object sender, SortingKind e)
         {
             Sorting = e;
             ApplySorting();
             SetNewItemSource();
         }
 
-        void ApplySorting()
+        private void ApplySorting()
         {
             switch (Sorting)
             {
@@ -133,16 +128,15 @@ namespace Smalldebts.Core.UI.Views
             }
         }
 
-        void FilterChanged(object sender, PopUps.FilterKind filterKind)
+        private void FilterChanged(object sender, FilterKind filterKind)
         {
             Filter = filterKind;
             ApplyFilter();
             SetNewItemSource();
         }
 
-        void ApplyFilter()
+        private void ApplyFilter()
         {
-
             switch (Filter)
             {
                 case FilterKind.ImEven:
@@ -164,12 +158,12 @@ namespace Smalldebts.Core.UI.Views
         }
 
 
-        async void Delete(DebtCell cell, DebtManipulationViewModel vm)
+        private async void Delete(DebtCell cell, DebtManipulationViewModel vm)
         {
             var result = await UserDialogs.Instance.ConfirmAsync("Seguro");
         }
 
-        async void DebtList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void DebtList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (DebtList.SelectedItem != null)
             {
@@ -180,13 +174,13 @@ namespace Smalldebts.Core.UI.Views
             }
         }
 
-        void SearchTextChanged(object sender, Xamarin.Forms.TextChangedEventArgs e)
+        private void SearchTextChanged(object sender, TextChangedEventArgs e)
         {
             ShownDebts = ShownDebts.Where(debt => debt.Name.Contains(e.NewTextValue));
             SetNewItemSource();
         }
 
-        void DebtModificationPage_DebtUpdated(object sender, Debt e)
+        private void DebtModificationPage_DebtUpdated(object sender, Debt e)
         {
             var updated = ShownDebts.FirstOrDefault(d => d.Id == e.Id);
             updated.Balance = e.Balance;
@@ -195,7 +189,7 @@ namespace Smalldebts.Core.UI.Views
             SetNewItemSource();
         }
 
-        void DebtModificationPage_DebtCreated(object sender, Debt result)
+        private void DebtModificationPage_DebtCreated(object sender, Debt result)
         {
             OriginalDebts.Add(result);
             (DebtList.ItemsSource as ObservableCollection<Debt>).Insert(0, result);
@@ -206,7 +200,7 @@ namespace Smalldebts.Core.UI.Views
             }
         }
 
-        void SetNewItemSource()
+        private void SetNewItemSource()
         {
             DebtList.ItemsSource = new ObservableCollection<Debt>(ShownDebts);
         }

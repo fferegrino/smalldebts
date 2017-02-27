@@ -62,12 +62,13 @@ namespace Smalldebts.Core.UI.Views
             }
         }
 
-
+        private MovementDetailPage m = new MovementDetailPage();
         private async void DetailList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (MovementDetailList.SelectedItem != null)
             {
-                await Navigation.PushAsync(new MovementDetailPage());
+                m.Movement = MovementDetailList.SelectedItem as Movement;
+                await Navigation.PushAsync(m);
                 MovementDetailList.SelectedItem = null;
             }
         }

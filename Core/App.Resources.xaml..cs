@@ -26,7 +26,7 @@ namespace Smalldebts.Core.UI
 
 
             var yugeLabelStyle = new Style(typeof(Label)) {BasedOn = notSoYugeLabel};
-            yugeLabelStyle.Setters.Add(Label.FontSizeProperty, largeFontSize * 2);
+            yugeLabelStyle.Setters.Add(Label.FontSizeProperty, largeFontSize * 1.5);
 
             Resources.Add("YugeLabel", yugeLabelStyle);
             Resources.Add("NotSoYugeLabel", notSoYugeLabel);

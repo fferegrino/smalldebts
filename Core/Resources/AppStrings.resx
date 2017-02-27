@@ -159,4 +159,34 @@
   <data name="AManoDetail" xml:space="preserve">
     <value>You are even</value>
   </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="SortByDate" xml:space="preserve">
+    <value>by update date</value>
+  </data>
+  <data name="SortByName" xml:space="preserve">
+    <value>by name</value>
+  </data>
+  <data name="SortByBalance" xml:space="preserve">
+    <value>by balance</value>
+  </data>
+  <data name="FilterByPeopleImEvenWith" xml:space="preserve">
+    <value>people who I'm even with</value>
+  </data>
+  <data name="FilterByPeopleWhoOweMe" xml:space="preserve">
+    <value>people who owe me</value>
+  </data>
+  <data name="FilterByPeopleIOweTo" xml:space="preserve">
+    <value>people who I owe to</value>
+  </data>
+  <data name="PeopleIOweOrTheyOweMe" xml:space="preserve">
+    <value>people who have business with me</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>all</value>
+  </data>
 </root>

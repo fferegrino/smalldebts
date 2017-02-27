@@ -5,6 +5,7 @@
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
                  xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects"
+             xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
                  x:Class="Smalldebts.Core.UI.Views.PopUps.SortingSettingsPage">
     <!--Animations use example-->
     <pages:PopupPage.Animation>
@@ -22,10 +23,10 @@
     <StackLayout VerticalOptions="Center" HorizontalOptions="Center" Padding="0" Margin="0">
         <Frame Margin="30" WidthRequest="300">
             <StackLayout Orientation="Vertical">
-                <Label Style="{StaticResource DialogTitle}" Text="Sort" />
-                <Button Clicked="SortingClicked" x:Name="SortByAmount" Text="By amount" />
-                <Button Clicked="SortingClicked" x:Name="SortByName" Text="By name" />
-                <Button Clicked="SortingClicked" x:Name="SortByDate" Text="By updated date" />
+                <Label Style="{StaticResource DialogTitle}" Text="{i:Translate Sort}" />
+                <Button Clicked="SortingClicked" x:Name="SortByAmount" Text="{i:Translate SortByBalance}" />
+                <Button Clicked="SortingClicked" x:Name="SortByName" Text="{i:Translate SortByName}" />
+                <Button Clicked="SortingClicked" x:Name="SortByDate" Text="{i:Translate SortByDate}" />
             </StackLayout>
         </Frame>
     </StackLayout>

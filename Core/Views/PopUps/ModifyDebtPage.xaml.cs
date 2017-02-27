@@ -141,6 +141,9 @@ namespace Smalldebts.Core.UI.Views.PopUps
                 var result = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", created);
                 DebtCreated?.Invoke(sender, result);
             }
+            DebtReasonEntry.Text = "";
+            DebtNameEntry.Text = "";
+            DebtAmountEntry.Text = "";
             UserDialogs.Instance.HideLoading();
             await PopupNavigation.PopAsync();
         }

@@ -98,6 +98,51 @@ namespace Smalldebts.Core.UI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        internal static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to all.
+        /// </summary>
+        internal static string FilterAll {
+            get {
+                return ResourceManager.GetString("FilterAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to people who I&apos;m even with.
+        /// </summary>
+        internal static string FilterByPeopleImEvenWith {
+            get {
+                return ResourceManager.GetString("FilterByPeopleImEvenWith", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to people who I owe to.
+        /// </summary>
+        internal static string FilterByPeopleIOweTo {
+            get {
+                return ResourceManager.GetString("FilterByPeopleIOweTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to people who owe me.
+        /// </summary>
+        internal static string FilterByPeopleWhoOweMe {
+            get {
+                return ResourceManager.GetString("FilterByPeopleWhoOweMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You owe to .
         /// </summary>
         internal static string LeDebes {
@@ -166,6 +211,51 @@ namespace Smalldebts.Core.UI.Resources {
         internal static string NadieTeDebe {
             get {
                 return ResourceManager.GetString("NadieTeDebe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to people who have business with me.
+        /// </summary>
+        internal static string PeopleIOweOrTheyOweMe {
+            get {
+                return ResourceManager.GetString("PeopleIOweOrTheyOweMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort.
+        /// </summary>
+        internal static string Sort {
+            get {
+                return ResourceManager.GetString("Sort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to by balance.
+        /// </summary>
+        internal static string SortByBalance {
+            get {
+                return ResourceManager.GetString("SortByBalance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to by update date.
+        /// </summary>
+        internal static string SortByDate {
+            get {
+                return ResourceManager.GetString("SortByDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to by name.
+        /// </summary>
+        internal static string SortByName {
+            get {
+                return ResourceManager.GetString("SortByName", resourceCulture);
             }
         }
         

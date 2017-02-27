@@ -159,4 +159,34 @@
   <data name="AManoDetail" xml:space="preserve">
     <value>A mano</value>
   </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Ordenar</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Mostrar</value>
+  </data>
+  <data name="SortByDate" xml:space="preserve">
+    <value>por fecha de modificación</value>
+  </data>
+  <data name="SortByName" xml:space="preserve">
+    <value>por nombre</value>
+  </data>
+  <data name="SortByBalance" xml:space="preserve">
+    <value>por montos</value>
+  </data>
+  <data name="FilterByPeopleImEvenWith" xml:space="preserve">
+    <value>personas con las que estoy a mano</value>
+  </data>
+  <data name="FilterByPeopleWhoOweMe" xml:space="preserve">
+    <value>personas que me deben</value>
+  </data>
+  <data name="FilterByPeopleIOweTo" xml:space="preserve">
+    <value>personas a las que le debo</value>
+  </data>
+  <data name="PeopleIOweOrTheyOweMe" xml:space="preserve">
+    <value>personas con las que tengo negocio</value>
+  </data>
+  <data name="FilterAll" xml:space="preserve">
+    <value>todos</value>
+  </data>
 </root>

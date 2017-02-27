@@ -5,6 +5,7 @@
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
                  xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects"
+                xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
                  x:Class="Smalldebts.Core.UI.Views.PopUps.FilterSettingsPage">
     <!--Animations use example-->
     <pages:PopupPage.Animation>
@@ -23,17 +24,10 @@
         <Frame Margin="30" WidthRequest="300">
 
             <StackLayout Orientation="Vertical">
-                <Label Style="{StaticResource DialogTitle}" Text="Show" />
+                <Label Style="{StaticResource DialogTitle}" Text="{i:Translate Filter}" />
                 <Picker x:Name="FilterPicker"
                         HorizontalOptions="FillAndExpand" Grid.Column="1"
                         SelectedIndexChanged="Handle_SelectedIndexChanged">
-                    <Picker.Items>
-                        <x:String>all</x:String>
-                        <x:String>people I have business with</x:String>
-                        <x:String>people I owe to</x:String>
-                        <x:String>people who owe me</x:String>
-                        <x:String>people who I even with</x:String>
-                    </Picker.Items>
                 </Picker>
             </StackLayout>
         </Frame>

@@ -11,7 +11,9 @@ using Smalldebts.Core.UI.ViewModels;
 using Smalldebts.Core.UI.Views.PopUps;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Smalldebts.Core.UI.Views
 {
     public partial class HomePage : ContentPage
@@ -80,11 +82,11 @@ namespace Smalldebts.Core.UI.Views
 
             OriginalDebts = debtList;
             ShownDebts = OriginalDebts;
-            SetNewItemSource();
             if (OriginalDebts.Count > 0)
             {
                 ApplyFilter();
                 ApplySorting();
+                SetNewItemSource();
                 AddNewDebtOptionPanel.IsVisible = false;
             }
             else
@@ -117,13 +119,13 @@ namespace Smalldebts.Core.UI.Views
             switch (Sorting)
             {
                 case SortingKind.ByDate:
-                    ShownDebts = ShownDebts.OrderBy(d => d.Id);
+                    ShownDebts = ShownDebts.OrderByDescending(d => d.UpdatedAt ?? d.CreatedAt);
                     break;
                 case SortingKind.ByName:
                     ShownDebts = ShownDebts.OrderBy(d => d.Name);
                     break;
                 case SortingKind.ByAmount:
-                    ShownDebts = ShownDebts.OrderBy(d => d.Balance);
+                    ShownDebts = ShownDebts.OrderByDescending(d => d.Balance);
                     break;
             }
         }
@@ -140,19 +142,19 @@ namespace Smalldebts.Core.UI.Views
             switch (Filter)
             {
                 case FilterKind.ImEven:
-                    ShownDebts = ShownDebts.Where(d => d.Balance == 0);
+                    ShownDebts = OriginalDebts.Where(d => d.Balance == 0);
                     break;
                 case FilterKind.IOweToTheyOweMe:
-                    ShownDebts = ShownDebts.Where(d => d.Balance != 0);
+                    ShownDebts = OriginalDebts.Where(d => d.Balance != 0);
                     break;
                 case FilterKind.TheyOweMe:
-                    ShownDebts = ShownDebts.Where(d => d.Balance > 0);
+                    ShownDebts = OriginalDebts.Where(d => d.Balance > 0);
                     break;
                 case FilterKind.IOweTo:
-                    ShownDebts = ShownDebts.Where(d => d.Balance > 0);
+                    ShownDebts = OriginalDebts.Where(d => d.Balance < 0);
                     break;
                 default:
-
+                    ShownDebts = OriginalDebts; 
                     break;
             }
         }

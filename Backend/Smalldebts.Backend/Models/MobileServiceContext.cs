@@ -1,13 +1,14 @@
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Tables;
 using Smalldebts.Backend.DataObjects;
 
 namespace Smalldebts.Backend.Models
 {
-    public class MobileServiceContext : DbContext
+    public class MobileServiceContext : IdentityDbContext<ApplicationUser>
     {
         // You can add custom code to this file. Changes will not be overwritten.
         // 
@@ -24,9 +25,16 @@ namespace Smalldebts.Backend.Models
 
         public MobileServiceContext() : base(connectionStringName)
         {
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
         }
 
-        public DbSet<TodoItem> TodoItems { get; set; }
+
+        public static MobileServiceContext Create()
+        {
+            return new MobileServiceContext();
+        }
+
         public DbSet<Debt> Debts { get; set; }
         public DbSet<Movement> Movements { get; set; }
 
@@ -35,6 +43,14 @@ namespace Smalldebts.Backend.Models
             modelBuilder.Conventions.Add(
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
+
+            modelBuilder.Entity<IdentityUserRole>()
+            .HasKey(r => new { r.UserId, r.RoleId })
+            .ToTable("AspNetUserRoles");
+
+            modelBuilder.Entity<IdentityUserLogin>()
+                .HasKey(l => new { l.LoginProvider, l.ProviderKey, l.UserId })
+                .ToTable("AspNetUserLogins");
         }
     }
 }

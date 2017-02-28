@@ -13,10 +13,10 @@ namespace Smalldebts.Backend.DataObjects
         {
             Movements = new List<Movement>();
         }
+        public virtual ICollection<Movement> Movements { get; set; }
 
         public string Name { get; set; }
         public decimal Balance { get; set; }
 
-        public virtual ICollection<Movement> Movements { get; set; }
     }
 }

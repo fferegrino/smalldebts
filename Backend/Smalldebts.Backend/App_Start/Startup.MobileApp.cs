@@ -61,11 +61,6 @@ namespace Smalldebts.Backend
     {
         protected override void Seed(MobileServiceContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
-            {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false }
-            };
             List<Debt> debts = new List<Debt>
             {
                 new Debt { Id = "551ef9ab-0714-4b70-b887-f1290d2053c3", Name = "Ruby", Balance = 0m },
@@ -80,11 +75,6 @@ namespace Smalldebts.Backend
                 new Debt { Id = "d3053457-5ff7-4a16-b561-08d14a9850cb", Name = "Brian", Balance = 4969.52m },
                 new Debt { Id = "7e85de8c-572a-471a-885f-7a27fd4eaa3a", Name = "Jimmy", Balance = 4874.23m },
             };
-
-            foreach (TodoItem todoItem in todoItems)
-            {
-                context.Set<TodoItem>().Add(todoItem);
-            }
 
             foreach (var debt in debts)
             {

@@ -20,7 +20,7 @@ namespace Smalldebts.Backend.Controllers
         {
             Context = new MobileServiceContext();
         }
-
+        
         [Route("{id}")]
         public ItermediateObjects.Debt Get(string id)
         {

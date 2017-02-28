@@ -6,14 +6,15 @@ using Microsoft.WindowsAzure.MobileServices;
 using Smalldebts.Core.UI.Resources;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
+using Smalldebts.Core.UI.DataAccess;
 
 namespace Smalldebts.Core.UI.Views
 {
     public partial class DebtDetailPage : ContentPage
     {
-        private readonly MobileServiceClient _serviceClient;
+        private readonly SmalldebtsManager _serviceClient;
 
-        public DebtDetailPage(MobileServiceClient serviceClient)
+        public DebtDetailPage(SmalldebtsManager serviceClient)
         {
             InitializeComponent();
             _serviceClient = serviceClient;
@@ -29,7 +30,7 @@ namespace Smalldebts.Core.UI.Views
             Title = Debt.Name;
             UpdateAmounts();
 
-            var movements = await _serviceClient.InvokeApiAsync<List<Movement>>("movements/"+Debt.Id, HttpMethod.Get, null);
+            var movements = await _serviceClient.GetMovementsForDebt(Debt.Id);
             MovementDetailList.ItemsSource = movements;
         }
 
@@ -87,7 +88,7 @@ namespace Smalldebts.Core.UI.Views
                 Reason = null,
                 Balance = amount
             };
-            Debt = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", updated, HttpMethod.Put, null);
+            Debt = await _serviceClient.AddMovementToDebt(updated);
             DebtUpdated?.Invoke(sender, Debt);
             AmountEntry.Text = null;
             UpdateAmounts();

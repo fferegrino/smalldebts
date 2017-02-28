@@ -28,7 +28,7 @@ namespace Smalldebts.Core.UI
         protected override async void OnStart()
         {
             // Handle when your app starts
-            var authed = await Authenticator.Authenticate();
+            //var authed = await Authenticator.Authenticate();
         }
 
         protected override void OnSleep()

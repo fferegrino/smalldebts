@@ -8,7 +8,8 @@ namespace Smalldebts.Core.UI.Controls.Cells
 {
     public partial class DebtCell : ViewCell
     {
-        private static readonly double FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label)) * 0.9;
+		private static readonly double FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)) * 0.9;
+		private static readonly double FontSizeBig = Device.GetNamedSize(NamedSize.Large, typeof(Label)) * 0.9;
         private static readonly Span YouOweToSpan = new Span { Text = AppStrings.LeDebes, FontSize = FontSize };
         private static readonly Span TheyOweYouSpan = new Span { Text = AppStrings.TeDebe, FontSize = FontSize };
         private static readonly Span YouAreEvenWithSpan = new Span { Text = AppStrings.AMano, FontSize = FontSize };
@@ -35,8 +36,8 @@ namespace Smalldebts.Core.UI.Controls.Cells
             if (Debt != null)
             {
                 var fs = new FormattedString();
-                var nameSpan = new Span { Text = Debt.Name, FontSize = FontSize, FontAttributes = FontAttributes.Bold };
-                var moneySpan = new Span { Text = $" {Math.Abs(Debt.Balance):#,##0.##} ", FontSize = FontSize };
+                var nameSpan = new Span { Text = Debt.Name, FontSize = FontSizeBig, FontAttributes = FontAttributes.Bold };
+				var moneySpan = new Span { Text = String.Format(AppStrings.AmountFormat, Math.Abs(Debt.Balance)), FontSize = FontSizeBig };
                 if (Debt.Balance < 0) // you owe money
                 {
                     moneySpan.ForegroundColor = App.RealCurrent.NegativeColor;

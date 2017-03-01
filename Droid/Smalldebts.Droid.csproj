@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Smalldebts.Droid</RootNamespace>
     <AssemblyName>Smalldebts.Core.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -126,6 +126,9 @@
     <Reference Include="Microsoft.WindowsAzure.Mobile.Ext">
       <HintPath>..\packages\Microsoft.Azure.Mobile.Client.3.1.0\lib\monoandroid\Microsoft.WindowsAzure.Mobile.Ext.dll</HintPath>
     </Reference>
+    <Reference Include="Xamarin.Forms.CarouselView">
+      <HintPath>..\packages\Xamarin.Forms.CarouselView.2.3.0-pre2\lib\MonoAndroid10\Xamarin.Forms.CarouselView.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -163,6 +166,9 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\sort_small.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\filter_small.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\sort_small.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\edit.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\edit.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\edit.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Smalldebts.Core.UI.csproj">

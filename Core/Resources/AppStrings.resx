@@ -192,6 +192,9 @@
   <data name="NewAmount" xml:space="preserve">
     <value>New amount</value>
   </data>
+  <data name="AmountFormat" xml:space="preserve">
+    <value>{0:#,##0.##}</value>
+  </data>
   <data name="LastTransactions" xml:space="preserve">
     <value>Transactions</value>
   </data>

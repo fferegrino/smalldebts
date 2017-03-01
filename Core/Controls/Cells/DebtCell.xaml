@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -6,11 +6,12 @@
   <Grid ColumnSpacing="0">
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*"></ColumnDefinition>
-      <ColumnDefinition Width="60"></ColumnDefinition>
+      <ColumnDefinition Width="40"></ColumnDefinition>
     </Grid.ColumnDefinitions>
 
     <Label Margin="10" FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Column="0"
            x:Name="Explanation" />
-    <Button Margin="0" Grid.Column="1" Clicked="EditDebtClicked" Text="Edit"></Button>
+    <Button Margin="0" Grid.Column="1" Clicked="EditDebtClicked" 
+		Image="edit"></Button>
   </Grid>
 </ViewCell>

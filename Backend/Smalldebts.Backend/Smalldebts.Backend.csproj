@@ -296,6 +296,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <None Include="Properties\PublishProfiles\smalldebts-test - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\smalldebts-test - Web Deploy.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

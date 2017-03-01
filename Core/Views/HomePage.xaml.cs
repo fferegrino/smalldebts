@@ -12,13 +12,14 @@ using Smalldebts.Core.UI.Views.PopUps;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Smalldebts.Core.UI.DataAccess;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Smalldebts.Core.UI.Views
 {
     public partial class HomePage : ContentPage
     {
-        private readonly MobileServiceClient _serviceClient;
+        private readonly SmalldebtsManager _serviceClient;
         private readonly DebtDetailPage DebtDetailPage;
         private readonly ModifyDebtPage DebtModificationPage;
 
@@ -34,9 +35,7 @@ namespace Smalldebts.Core.UI.Views
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "Debts");
-
-
-            _serviceClient = new MobileServiceClient("http://192.168.0.100/smalldebts");
+            _serviceClient = SmalldebtsManager.DefaultManager; ;
 
             DebtModificationPage = new ModifyDebtPage(_serviceClient);
             DebtModificationPage.DebtUpdated += DebtModificationPage_DebtUpdated;
@@ -63,7 +62,7 @@ namespace Smalldebts.Core.UI.Views
 
             DebtList.ItemSelected += DebtList_ItemSelected;
 
-            var item = new ToolbarItem {Text = "Add", Icon = "add"};
+            var item = new ToolbarItem { Text = "Add", Icon = "add" };
             item.Clicked += async (s, a) => await OpenDebtModificationPage();
             ToolbarItems.Add(item);
 
@@ -75,10 +74,10 @@ namespace Smalldebts.Core.UI.Views
             MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "deleted", Delete);
         }
 
-        protected override async void OnAppearing()
+
+        async Task LoadData()
         {
-            // 
-            var debtList = await _serviceClient.InvokeApiAsync<List<Debt>>("debts", HttpMethod.Get, null);
+            var debtList = await _serviceClient.GetDebts();
 
             OriginalDebts = debtList;
             ShownDebts = OriginalDebts;
@@ -97,7 +96,21 @@ namespace Smalldebts.Core.UI.Views
                 tap.Tapped += async (s, a) => await OpenDebtModificationPage();
                 AddNewDebtOptionPanel.GestureRecognizers.Add(tap);
             }
+        }
 
+
+        protected override async void OnAppearing()
+        {
+            if (!App.LoggedIn)
+            {
+                var loginPage = new LoginPage();
+                loginPage.LoggedIn += async (s, a) => await LoadData();
+				await Navigation.PushModalAsync(loginPage);
+            }
+            else
+            {
+                await LoadData();
+            }
             base.OnAppearing();
         }
 
@@ -154,7 +167,7 @@ namespace Smalldebts.Core.UI.Views
                     ShownDebts = OriginalDebts.Where(d => d.Balance < 0);
                     break;
                 default:
-                    ShownDebts = OriginalDebts; 
+                    ShownDebts = OriginalDebts;
                     break;
             }
         }

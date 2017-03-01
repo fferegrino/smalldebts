@@ -6,21 +6,36 @@ namespace Smalldebts.Core.UI
 {
     public partial class App : Application
     {
+        public static IAuthenticate Authenticator { get; private set; }
+
+        public static void Init(IAuthenticate authenticator)
+        {
+            Authenticator = authenticator;
+        }
+
         public App()
         {
             InitializeComponent();
             SetupCodedStyles();
             SetupLanguage();
 
-            MainPage = new NavigationPage(new HomePage());
+			var mainPage = new HomePage();
+			var navMainPage = new NavigationPage(mainPage);
+
+			navMainPage.BarBackgroundColor = BrandColor;
+			navMainPage.BarTextColor = BrandLightColor;
+
+			MainPage = navMainPage;
         }
 
         public static App RealCurrent => Current as App;
 
+        public static bool LoggedIn { get; internal set; }
 
-        protected override void OnStart()
+        protected override async void OnStart()
         {
             // Handle when your app starts
+            //var authed = await Authenticator.Authenticate();
         }
 
         protected override void OnSleep()

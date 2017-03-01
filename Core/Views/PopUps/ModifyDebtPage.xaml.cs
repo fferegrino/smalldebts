@@ -9,6 +9,7 @@ using Smalldebts.Core.UI.Resources;
 using Smalldebts.Core.UI.ViewModels;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
+using Smalldebts.Core.UI.DataAccess;
 
 namespace Smalldebts.Core.UI.Views.PopUps
 {
@@ -22,9 +23,9 @@ namespace Smalldebts.Core.UI.Views.PopUps
 
     public partial class ModifyDebtPage : PopupPage
     {
-        private readonly MobileServiceClient _serviceClient;
+        private readonly SmalldebtsManager _serviceClient;
 
-        public ModifyDebtPage(MobileServiceClient serviceClient)
+        public ModifyDebtPage(SmalldebtsManager serviceClient)
         {
             _serviceClient = serviceClient;
             InitializeComponent();
@@ -126,7 +127,7 @@ namespace Smalldebts.Core.UI.Views.PopUps
                     Reason = DebtReasonEntry.Text,
                     Balance = amount
                 };
-                var result = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", updated, HttpMethod.Put, null);
+                var result = await _serviceClient.AddMovementToDebt(updated);
                 DebtUpdated?.Invoke(sender, result);
             }
             else
@@ -138,7 +139,7 @@ namespace Smalldebts.Core.UI.Views.PopUps
                     Balance = amount
                 };
 
-                var result = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", created);
+                var result = await _serviceClient.AddNewDebt(created);
                 DebtCreated?.Invoke(sender, result);
             }
             DebtReasonEntry.Text = "";

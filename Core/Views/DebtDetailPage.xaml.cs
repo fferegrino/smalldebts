@@ -6,14 +6,16 @@ using Microsoft.WindowsAzure.MobileServices;
 using Smalldebts.Core.UI.Resources;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
+using Smalldebts.Core.UI.DataAccess;
+using System.Collections.ObjectModel;
 
 namespace Smalldebts.Core.UI.Views
 {
     public partial class DebtDetailPage : ContentPage
     {
-        private readonly MobileServiceClient _serviceClient;
+        private readonly SmalldebtsManager _serviceClient;
 
-        public DebtDetailPage(MobileServiceClient serviceClient)
+        public DebtDetailPage(SmalldebtsManager serviceClient)
         {
             InitializeComponent();
             _serviceClient = serviceClient;
@@ -21,7 +23,8 @@ namespace Smalldebts.Core.UI.Views
         }
 
         public Debt Debt { get; internal set; }
-        public event EventHandler<Debt> DebtUpdated;
+		public event EventHandler<Debt> DebtUpdated;
+		private ObservableCollection<Movement> Movements;
 
         protected override async void OnAppearing()
         {
@@ -29,13 +32,14 @@ namespace Smalldebts.Core.UI.Views
             Title = Debt.Name;
             UpdateAmounts();
 
-            var movements = await _serviceClient.InvokeApiAsync<List<Movement>>("movements/"+Debt.Id, HttpMethod.Get, null);
-            MovementDetailList.ItemsSource = movements;
+            var movements = await _serviceClient.GetMovementsForDebt(Debt.Id);
+			Movements = new ObservableCollection<Movement>(movements);
+            MovementDetailList.ItemsSource = Movements;
         }
 
         void UpdateAmounts()
         {
-            BalanceLabel.Text = $"{Math.Abs(Debt.Balance):#,##0.00}";
+			BalanceLabel.Text = String.Format(AppStrings.AmountFormat, Math.Abs(Debt.Balance));
 
             if (Debt.Balance < 0)
             {
@@ -87,8 +91,9 @@ namespace Smalldebts.Core.UI.Views
                 Reason = null,
                 Balance = amount
             };
-            Debt = await _serviceClient.InvokeApiAsync<Debt, Debt>("debts", updated, HttpMethod.Put, null);
+            Debt = await _serviceClient.AddMovementToDebt(updated);
             DebtUpdated?.Invoke(sender, Debt);
+			Movements.Insert(0, new Movement { Amount = amount, CreatedAt = Debt.UpdatedAt.Value, Reason = Debt.Reason });
             AmountEntry.Text = null;
             UpdateAmounts();
 

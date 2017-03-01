@@ -4,10 +4,12 @@ using System.Text;
 
 namespace Smalldebts.IntermediateObjects
 {
-    public class ApplicationUser
+    public class SimpleUser
     {
         public string Id { get; set; }
-        public DateTimeOffset JoinDate { get; set; }
+        public string Username { get; set; }
         public string Email { get; set; }
+        public bool EmailConfirmed { get; set; }
+        public DateTimeOffset JoinDate { get; set; }
     }
 }

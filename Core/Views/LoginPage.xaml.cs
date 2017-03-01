@@ -4,72 +4,85 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Smalldebts.Core.UI.DataAccess;
 using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI.Views
 {
-    public partial class LoginPage : ContentPage
-    { // Track whether the user has authenticated.
-        bool authenticated = false;
+	public partial class LoginPage : ContentPage
+	{
+	    private readonly SmalldebtsManager _serviceClient;
+// Track whether the user has authenticated.
+		bool authenticated = false;
 
-        bool signUp = false;
+		bool signUp = false;
 
-        public event EventHandler LoggedIn;
+		public event EventHandler LoggedIn;
 
-        public LoginPage()
-        {
-            InitializeComponent();
-            LoginPanel.IsVisible = !signUp;
-            SignupPanel.IsVisible = signUp;
-        }
+		public LoginPage(SmalldebtsManager serviceClient)
+		{
+		    _serviceClient = serviceClient;
+		    InitializeComponent();
+			LoginPanel.IsVisible = !signUp;
+			SignupPanel.IsVisible = signUp;
+		}
 
-        protected override async void OnAppearing()
-        {
-            base.OnAppearing();
+		protected override async void OnAppearing()
+		{
+			base.OnAppearing();
 
-            // Refresh items only when authenticated.
-            if (authenticated == true)
-            {
-                // Set syncItems to true in order to synchronize the data
-                // on startup when running in offline mode.
-                //await RefreshItems(true, syncItems: false);
+			// Refresh items only when authenticated.
+			if (authenticated == true)
+			{
+				// Set syncItems to true in order to synchronize the data
+				// on startup when running in offline mode.
+				//await RefreshItems(true, syncItems: false);
 
-                // Hide the Sign-in button.
-                this.LoginButton.IsVisible = false;
-            }
-        }
+				// Hide the Sign-in button.
+				this.LoginButton.IsVisible = false;
+			}
+		}
 
-        void ActionButtonClicked(object sender, EventArgs e)
-        {
-            signUp = !signUp;
-            LoginPanel.IsVisible = !signUp;
-            SignupPanel.IsVisible = signUp;
-        }
+		void ActionButtonClicked(object sender, EventArgs e)
+		{
+			signUp = !signUp;
+			LoginPanel.IsVisible = !signUp;
+			SignupPanel.IsVisible = signUp;
+		}
 
 
-        Random r = new Random();
-        private async void LoginButtonClicked(object sender, EventArgs e)
-        {
-            await Task.Delay(500);
-            var result = r.Next(0, 152) % 2 == 0;
+		Random r = new Random();
+		private async void LoginButtonClicked(object sender, EventArgs e)
+		{
+			await Task.Delay(500);
+			var result = r.Next(0, 152) % 2 == 0;
 
-            if(result)
-            {
-                App.LoggedIn = true;
-                LoggedIn?.Invoke(this, new EventArgs());
+			if(result)
+			{
+				App.LoggedIn = true;
+				LoggedIn?.Invoke(this, new EventArgs());
 				await Navigation.PopModalAsync();
-            }
-            else
-            {
-                UserDialogs.Instance.ShowError("Wooops, credenciales invalidas", 1000);
-            }
-        }
+			}
+			else
+			{
+				UserDialogs.Instance.ShowError("Wooops, credenciales invalidas", 1000);
+			}
+		}
 
-        private async void SignUpButtonClicked(object sender, EventArgs e)
-        {
-            await Task.Delay(1000);
-            await UserDialogs.Instance.AlertAsync("Cuenta creada chido");
-        }
-    }
+		private async void SignUpButtonClicked(object sender, EventArgs e)
+		{
+		    try
+		    {
+		        var newUser = await _serviceClient.RegisterUser(SignupEmailEntry.Text, SignupEmailEntry.Text,
+		            SignupPassEntry.Text,
+		            SignupPassConfirmationEntry.Text);
+		        await UserDialogs.Instance.AlertAsync($"{newUser.JoinDate}");
+		    }
+		    catch (Exception xe)
+		    {
+		        UserDialogs.Instance.ShowError(xe.Message);
+		    }
+
+		}
+	}
 }

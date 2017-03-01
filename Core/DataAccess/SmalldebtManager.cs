@@ -7,11 +7,14 @@
 */
 //#define OFFLINE_SYNC_ENABLED
 
+using System;
 using Microsoft.WindowsAzure.MobileServices;
 using Smalldebts.ItermediateObjects;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Smalldebts.IntermediateObjects;
 
 #if OFFLINE_SYNC_ENABLED
 using Microsoft.WindowsAzure.MobileServices.SQLiteStore;
@@ -85,6 +88,40 @@ namespace Smalldebts.Core.UI.DataAccess
         public async Task<List<Debt>> GetDebts()
         {
             return await client.InvokeApiAsync<List<Debt>>("debts", HttpMethod.Get, null);
+        }
+
+        public async Task<SimpleUser> RegisterUser(string email, string username, string password, string passwordConfirmation)
+        {
+            var m = new AccountModelBinding()
+            {
+                Email = email,
+                Username = username,
+                Password = password,
+                ConfirmPassword = passwordConfirmation
+            };
+
+
+            try
+            {
+                return await client.InvokeApiAsync<AccountModelBinding, SimpleUser>("accounts", m);
+            }
+            catch (MobileServiceInvalidOperationException exception)
+            {
+                if (exception.Response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    /* If you have the latest framework */
+                    string content = await exception.Response.Content.ReadAsStringAsync();
+
+                    if (content.Contains("is already taken."))
+                        throw new AccountAlreadyTakenException(exception);
+                    if (content.Contains("least 6 characters"))
+                        throw new PasswordTooShortException(exception);
+                    else
+                        throw;
+                }
+                else
+                    throw;
+            }
         }
 
         //public bool IsOfflineEnabled
@@ -176,5 +213,21 @@ namespace Smalldebts.Core.UI.DataAccess
             }
         }
 #endif
+    }
+
+    public class AccountAlreadyTakenException : Exception
+    {
+        public AccountAlreadyTakenException(MobileServiceInvalidOperationException exception)
+            : base("This account is already taken", exception)
+        {
+        }
+    }
+
+    public class PasswordTooShortException : Exception
+    {
+        public PasswordTooShortException(MobileServiceInvalidOperationException exception)
+            : base("Your password is too short", exception)
+        {
+        }
     }
 }

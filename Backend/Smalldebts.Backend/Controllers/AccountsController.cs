@@ -21,8 +21,8 @@ namespace Smalldebts.Backend.Controllers
 
         //[Route("create")]
         [AllowAnonymous]
-        //[ResponseType(typeof(UserReturnModel))]
-        public async Task<UserReturnModel> Post(AccountModelBinding createUserModel)
+        [ResponseType(typeof(SimpleUser))]
+        public async Task<IHttpActionResult> Post(AccountModelBinding createUserModel)
         {
 
             var user = new ApplicationUser()
@@ -37,15 +37,12 @@ namespace Smalldebts.Backend.Controllers
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
 
-            //if (!addUserResult.Succeeded)
-            //{
-            //    return GetErrorResult(addUserResult);
-            //}
+            if (!addUserResult.Succeeded)
+            {
+                return GetErrorResult(addUserResult);
+            }
 
-            //Uri locationHeader = new Uri(Url.Link("GetUserById", new { id = user.Id }));
-
-            return  TheModelFactory.Create(user);
-            System.Diagnostics.Debug.WriteLine(createUserModel);
+            return Created("http://smalldebts", TheModelFactory.Create(user));
         }
     }
 }

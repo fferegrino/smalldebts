@@ -4,11 +4,13 @@ using System.Linq;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Results;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
-using Smalldebts.Backend.DataObjects;
 using Smalldebts.Backend.Models;
+using Smalldebts.IntermediateObjects;
+using ApplicationUser = Smalldebts.Backend.DataObjects.ApplicationUser;
 
 namespace Smalldebts.Backend.Controllers
 {
@@ -85,22 +87,21 @@ namespace Smalldebts.Backend.Controllers
             _AppUserManager = appUserManager;
         }
 
-        public UserReturnModel Create(ApplicationUser appUser)
+        public SimpleUser Create(ApplicationUser appUser)
         {
-            return new UserReturnModel
+            return new SimpleUser
             {
-                //Url = _UrlHelper.Link("GetUserById", new { id = appUser.Id }),
                 Id = appUser.Id,
-                UserName = appUser.UserName,
-                //FullName = string.Format("{0} {1}", appUser.FirstName, appUser.LastName),
+                Username = appUser.UserName,
                 Email = appUser.Email,
                 EmailConfirmed = appUser.EmailConfirmed,
-                //Level = appUser.Level,
-                JoinDate = appUser.JoinDate,
-                Roles = _AppUserManager.GetRolesAsync(appUser.Id).Result,
-                Claims = _AppUserManager.GetClaimsAsync(appUser.Id).Result
+                JoinDate = appUser.JoinDate
             };
         }
+
+
+
+       
     }
 
     public class UserReturnModel

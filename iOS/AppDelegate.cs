@@ -54,8 +54,12 @@ namespace Smalldebts.iOS
 			global::Xamarin.Forms.Forms.Init();
 			CurrentPlatform.Init();
             LoadApplication(new App());
+			UIApplication.SharedApplication.SetStatusBarStyle(UIStatusBarStyle.BlackOpaque, false);
+
 
 			return base.FinishedLaunching(app, options);
 		}
+
+
 	}
 }

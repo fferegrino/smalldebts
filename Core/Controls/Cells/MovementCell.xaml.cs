@@ -1,4 +1,5 @@
 ﻿using System;
+using Smalldebts.Core.UI.Resources;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
 
@@ -29,7 +30,7 @@ namespace Smalldebts.Core.UI.Controls.Cells
                 }
 
                 DateLabel.Text = Movement.Date.LocalDateTime.ToString();
-                AmountLabel.Text = $"{Math.Abs(Movement.Amount):#,##0.00}";
+				AmountLabel.Text =String.Format(AppStrings.AmountFormat, Math.Abs(Movement.Amount));
                 AmountLabel.TextColor =
                     (Color) App.RealCurrent.ColorConverter.Convert(Movement.Amount, null, null, null);
             }

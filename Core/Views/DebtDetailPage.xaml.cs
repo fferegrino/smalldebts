@@ -39,7 +39,7 @@ namespace Smalldebts.Core.UI.Views
 
         void UpdateAmounts()
         {
-            BalanceLabel.Text = $"{Math.Abs(Debt.Balance):#,##0.00}";
+			BalanceLabel.Text = String.Format(AppStrings.AmountFormat, Math.Abs(Debt.Balance));
 
             if (Debt.Balance < 0)
             {

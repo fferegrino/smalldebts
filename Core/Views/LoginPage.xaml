@@ -2,38 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Smalldebts.Core.UI.Views.LoginPage">
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="200"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
-			<RowDefinition Height="200"></RowDefinition>
-		</Grid.RowDefinitions>
-		<Image Source="add_debt_big"></Image>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Image Source="add_debt_big"></Image>
+        <StackLayout Grid.Row="1" Padding="20" x:Name="LoginPanel">
+            <Label Text="Email" FontSize="Small" Margin="0,10,0,0"></Label>
+            <Entry x:Name="LoginEmailEntry" Text="me@me.com"></Entry>
+            <Label Text="Password" FontSize="Small" Margin="0,10,0,0"></Label>
+            <Entry x:Name="LoginPassEntry" Text="Abc-123@" IsPassword="true"></Entry>
+            <Button x:Name="LoginButton" Text="Sign-in" MinimumHeightRequest="30" Clicked="LoginButtonClicked" />
+            <Button x:Name="NoAccountButton" Text="Don't have an account?" 
+			    MinimumHeightRequest="30" Clicked="ActionButtonClicked"/>
+        </StackLayout>
 
+        <StackLayout  Grid.Row="1" Padding="20" x:Name="SignupPanel">
+            <Label Text="Email" FontSize="Small" Margin="0,10,0,0"></Label>
+            <Entry x:Name="SignupEmailEntry" Text="me@me.com"></Entry>
+            <Label Text="Password" FontSize="Small" Margin="0,10,0,0"></Label>
+            <Entry x:Name="SignupPassEntry" Text="Abc-123@" IsPassword="true"></Entry>
+            <Label Text="Password confirmation" FontSize="Small" Margin="0,10,0,0"></Label>
+            <Entry x:Name="SignupPassConfirmationEntry" Text="Abc-123@" IsPassword="true"></Entry>
+            <Button x:Name="SignUpButton" Text="Sign-up" MinimumHeightRequest="30" Clicked="SignUpButtonClicked"/>
+            <Button x:Name="IHaveAnAccountButton" 
+			Text="Wait, I already have an account" Clicked="ActionButtonClicked" MinimumHeightRequest="30"/>
+        </StackLayout>
 
-    <StackLayout Grid.Row="1" Padding="20">
-		<Label Text="Email" FontSize="Small" Margin="0,10,0,0"></Label>
-		<Entry x:Name="LoginEmailEntry"></Entry>
-		<Label Text="Password" FontSize="Small" Margin="0,10,0,0"></Label>
-		<Entry x:Name="LoginPassEntry" IsPassword="true"></Entry>
-        <Button x:Name="LoginButton" Text="Sign-in" MinimumHeightRequest="30"
-     Clicked="loginButton_Clicked"/>
-    </StackLayout>
-
- <StackLayout  Grid.Row="1" Padding="20">
-		<Label Text="Email" FontSize="Small" Margin="0,10,0,0"></Label>
-		<Entry x:Name="SignupEmailEntry"></Entry>
-		<Label Text="Password" FontSize="Small" Margin="0,10,0,0"></Label>
-		<Entry x:Name="SignupPassEntry" IsPassword="true"></Entry>
-		<Label Text="Password confirmation" FontSize="Small" Margin="0,10,0,0"></Label>
-		<Entry x:Name="SignupPassConfirmationEntry" IsPassword="true"></Entry>
-        <Button x:Name="SignUpButton" Text="Sign-up" MinimumHeightRequest="30"/>
-    </StackLayout>
-
-        <Button x:Name="NoAccountButton" Text="Don't have an account?" 
-			MinimumHeightRequest="30" Grid.Row="2" Clicked="loginButton_Clicked"/>
-
-        <Button x:Name="IHaveAnAccountButton" 
-			Text="Wait, I already have an accoun" Grid.Row="2" MinimumHeightRequest="30"/>
-	</Grid>
+    </Grid>
 </ContentPage>

@@ -11,8 +11,8 @@ namespace Smalldebts.Core.UI
 
 
 #if DEBUG
-        //_serviceClient = new MobileServiceClient("http://192.168.0.100/smalldebts");
-        public const string ApplicationUrl = "https://smalldebts-test.azurewebsites.net";
+        public const string ApplicationUrl = "http://192.168.0.11//smalldebts";
+        //public const string ApplicationUrl = "https://smalldebts-test.azurewebsites.net";
 #else
         public const string ApplicationUrl = "https://smalldebts-test.azurewebsites.net";
 #endif

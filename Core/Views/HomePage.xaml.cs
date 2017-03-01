@@ -74,9 +74,9 @@ namespace Smalldebts.Core.UI.Views
             MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "deleted", Delete);
         }
 
-        protected override async void OnAppearing()
+
+        async Task LoadData()
         {
-            // 
             var debtList = await _serviceClient.GetDebts();
 
             OriginalDebts = debtList;
@@ -96,7 +96,21 @@ namespace Smalldebts.Core.UI.Views
                 tap.Tapped += async (s, a) => await OpenDebtModificationPage();
                 AddNewDebtOptionPanel.GestureRecognizers.Add(tap);
             }
+        }
 
+
+        protected override async void OnAppearing()
+        {
+            if (!App.LoggedIn)
+            {
+                var loginPage = new LoginPage();
+                loginPage.LoggedIn += async (s, a) => await LoadData();
+                await Navigation.PushAsync(loginPage);
+            }
+            else
+            {
+                await LoadData();
+            }
             base.OnAppearing();
         }
 

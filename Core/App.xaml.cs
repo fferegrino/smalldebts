@@ -18,12 +18,12 @@ namespace Smalldebts.Core.UI
             InitializeComponent();
             SetupCodedStyles();
             SetupLanguage();
-			MainPage = new NavigationPage(new LoginPage());
+			MainPage = new NavigationPage(new HomePage());
         }
 
         public static App RealCurrent => Current as App;
 
-
+        public static bool LoggedIn { get; internal set; }
 
         protected override async void OnStart()
         {

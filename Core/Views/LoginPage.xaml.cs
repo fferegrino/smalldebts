@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Acr.UserDialogs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,15 @@ namespace Smalldebts.Core.UI.Views
     { // Track whether the user has authenticated.
         bool authenticated = false;
 
+        bool signUp = false;
+
+        public event EventHandler LoggedIn;
+
         public LoginPage()
         {
             InitializeComponent();
+            LoginPanel.IsVisible = !signUp;
+            SignupPanel.IsVisible = signUp;
         }
 
         protected override async void OnAppearing()
@@ -29,18 +36,40 @@ namespace Smalldebts.Core.UI.Views
                 //await RefreshItems(true, syncItems: false);
 
                 // Hide the Sign-in button.
-				this.LoginButton.IsVisible = false;
+                this.LoginButton.IsVisible = false;
             }
         }
 
-        async void loginButton_Clicked(object sender, EventArgs e)
+        void ActionButtonClicked(object sender, EventArgs e)
         {
-            if (App.Authenticator != null)
-                authenticated = await App.Authenticator.Authenticate();
+            signUp = !signUp;
+            LoginPanel.IsVisible = !signUp;
+            SignupPanel.IsVisible = signUp;
+        }
 
-            // Set syncItems to true to synchronize the data on startup when offline is enabled.
-            //if (authenticated == true)
-            //    await RefreshItems(true, syncItems: false);
+
+        Random r = new Random();
+        private async void LoginButtonClicked(object sender, EventArgs e)
+        {
+            await Task.Delay(500);
+            var result = r.Next(0, 152) % 2 == 0;
+
+            if(result)
+            {
+                App.LoggedIn = true;
+                LoggedIn?.Invoke(this, new EventArgs());
+                await Navigation.PopAsync();
+            }
+            else
+            {
+                UserDialogs.Instance.ShowError("Wooops, credenciales invalidas", 1000);
+            }
+        }
+
+        private async void SignUpButtonClicked(object sender, EventArgs e)
+        {
+            await Task.Delay(1000);
+            await UserDialogs.Instance.AlertAsync("Cuenta creada chido");
         }
     }
 }

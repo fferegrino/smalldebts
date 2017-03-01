@@ -18,7 +18,7 @@ namespace Smalldebts.Core.UI
             InitializeComponent();
             SetupCodedStyles();
             SetupLanguage();
-            MainPage = new NavigationPage(new HomePage());
+			MainPage = new NavigationPage(new LoginPage());
         }
 
         public static App RealCurrent => Current as App;

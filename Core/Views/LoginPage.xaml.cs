@@ -29,7 +29,7 @@ namespace Smalldebts.Core.UI.Views
                 //await RefreshItems(true, syncItems: false);
 
                 // Hide the Sign-in button.
-                this.loginButton.IsVisible = false;
+				this.LoginButton.IsVisible = false;
             }
         }
 

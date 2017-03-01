@@ -9,6 +9,8 @@
             <Color x:Key="NegativeColor">#DD173C</Color>
             <Color x:Key="PositiveColor">#23B000</Color>
             <Color x:Key="NeutralColor">#1F1A1A</Color>
+            <Color x:Key="BrandColor">#034513</Color>
+            <Color x:Key="BrandLightColor">#F6F8F4</Color>
 
             <converters:ColorConverter x:Key="ColorConverter" />
 

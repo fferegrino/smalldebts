@@ -35,7 +35,7 @@ namespace Smalldebts.Core.UI.Views
         {
             InitializeComponent();
             NavigationPage.SetBackButtonTitle(this, "Debts");
-            _serviceClient = SmalldebtsManager.DefaultManager; ;
+            _serviceClient = SmalldebtsManager.DefaultManager;
 
             DebtModificationPage = new ModifyDebtPage(_serviceClient);
             DebtModificationPage.DebtUpdated += DebtModificationPage_DebtUpdated;
@@ -81,11 +81,11 @@ namespace Smalldebts.Core.UI.Views
 
             OriginalDebts = debtList;
             ShownDebts = OriginalDebts;
+            SetNewItemSource();
             if (OriginalDebts.Count > 0)
             {
                 ApplyFilter();
                 ApplySorting();
-                SetNewItemSource();
                 AddNewDebtOptionPanel.IsVisible = false;
             }
             else

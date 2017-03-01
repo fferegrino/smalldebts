@@ -13,7 +13,11 @@ using Smalldebts.ItermediateObjects;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using HttpLogger;
+using ModernHttpClient;
+using Newtonsoft.Json;
 using Smalldebts.IntermediateObjects;
 
 #if OFFLINE_SYNC_ENABLED
@@ -38,7 +42,11 @@ namespace Smalldebts.Core.UI.DataAccess
 
         private SmalldebtsManager()
         {
-            this.client = new MobileServiceClient(Constants.ApplicationUrl);
+#if DEBUG
+            this.client = new MobileServiceClient(Constants.ApplicationUrl, new HttpLoggingHandler(new HttpClientHandler()));
+#else
+            this.client = new MobileServiceClient(Constants.ApplicationUrl, new NativeMessageHandler());
+#endif
 
             //#if OFFLINE_SYNC_ENABLED
             //            var store = new MobileServiceSQLiteStore(offlineDbPath);
@@ -124,49 +132,88 @@ namespace Smalldebts.Core.UI.DataAccess
             }
         }
 
-        //public bool IsOfflineEnabled
-        //{
-        //    get { return todoTable is Microsoft.WindowsAzure.MobileServices.Sync.IMobileServiceSyncTable<TodoItem>; }
-        //}
+        public async Task<AuthenticationToken> GetAuthenticationToken(string email,
+             string password)
+        {
+            try
+            {
+                // define request content
+                HttpContent content = new StringContent(
+            string.Format("username={0}&password={1}&grant_type=password",
+                          email.ToLower(),
+                          password));
 
-        //            public async Task<ObservableCollection<TodoItem>> GetTodoItemsAsync(bool syncItems = false)
-        //            {
-        //                try
-        //                {
-        //#if OFFLINE_SYNC_ENABLED
-        //                if (syncItems)
-        //                {
-        //                    await this.SyncAsync();
-        //                }
-        //#endif
-        //                    IEnumerable<TodoItem> items = await todoTable
-        //                        .Where(todoItem => !todoItem.Done)
-        //                        .ToEnumerableAsync();
+                // set header
+                content.Headers.ContentType
+                = new MediaTypeHeaderValue("application/x-www-form-urlencoded");
 
-        //                    return new ObservableCollection<TodoItem>(items);
-        //                }
-        //                catch (MobileServiceInvalidOperationException msioe)
-        //                {
-        //                    Debug.WriteLine(@"Invalid sync operation: {0}", msioe.Message);
-        //                }
-        //                catch (Exception e)
-        //                {
-        //                    Debug.WriteLine(@"Sync error: {0}", e.Message);
-        //                }
-        //                return null;
-        //            }
+                // invoke Api
+                HttpResponseMessage response 
+                    = await client.InvokeApiAsync("../oauth/token",
+                                                   content,
+                                                   HttpMethod.Post,
+                                                   null,
+                                                   null);
 
-        //            public async Task SaveTaskAsync(TodoItem item)
-        //            {
-        //                if (item.Id == null)
-        //                {
-        //                    await todoTable.InsertAsync(item);
-        //                }
-        //                else
-        //                {
-        //                    await todoTable.UpdateAsync(item);
-        //                }
-        //            }
+                // read and parse token
+                string flatToken = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<AuthenticationToken>(flatToken);
+
+            }
+            catch (MobileServiceInvalidOperationException exception)
+            {
+                if (string.Equals(exception.Message, "invalid_grant"))
+                    throw new InvalidGrantException("Wrong credentails",
+                                                    exception);
+                else
+                    throw;
+            }
+        }
+    }
+
+    //public bool IsOfflineEnabled
+    //{
+    //    get { return todoTable is Microsoft.WindowsAzure.MobileServices.Sync.IMobileServiceSyncTable<TodoItem>; }
+    //}
+
+    //            public async Task<ObservableCollection<TodoItem>> GetTodoItemsAsync(bool syncItems = false)
+    //            {
+    //                try
+    //                {
+    //#if OFFLINE_SYNC_ENABLED
+    //                if (syncItems)
+    //                {
+    //                    await this.SyncAsync();
+    //                }
+    //#endif
+    //                    IEnumerable<TodoItem> items = await todoTable
+    //                        .Where(todoItem => !todoItem.Done)
+    //                        .ToEnumerableAsync();
+
+    //                    return new ObservableCollection<TodoItem>(items);
+    //                }
+    //                catch (MobileServiceInvalidOperationException msioe)
+    //                {
+    //                    Debug.WriteLine(@"Invalid sync operation: {0}", msioe.Message);
+    //                }
+    //                catch (Exception e)
+    //                {
+    //                    Debug.WriteLine(@"Sync error: {0}", e.Message);
+    //                }
+    //                return null;
+    //            }
+
+    //            public async Task SaveTaskAsync(TodoItem item)
+    //            {
+    //                if (item.Id == null)
+    //                {
+    //                    await todoTable.InsertAsync(item);
+    //                }
+    //                else
+    //                {
+    //                    await todoTable.UpdateAsync(item);
+    //                }
+    //            }
 
 #if OFFLINE_SYNC_ENABLED
         public async Task SyncAsync()
@@ -213,7 +260,7 @@ namespace Smalldebts.Core.UI.DataAccess
             }
         }
 #endif
-    }
+
 
     public class AccountAlreadyTakenException : Exception
     {
@@ -227,6 +274,14 @@ namespace Smalldebts.Core.UI.DataAccess
     {
         public PasswordTooShortException(MobileServiceInvalidOperationException exception)
             : base("Your password is too short", exception)
+        {
+        }
+    }
+
+    public class InvalidGrantException : Exception
+    {
+        public InvalidGrantException(string message, MobileServiceInvalidOperationException exception)
+            : base(message, exception)
         {
         }
     }

@@ -11,9 +11,24 @@ namespace Smalldebts.Backend.Providers
 {
     public class CustomZumoTokenFormat : ISecureDataFormat<AuthenticationTicket>
     {
-        private string _host = string.Format("https://smalldebts.azurewebsites.net/",
-                Environment.ExpandEnvironmentVariables("%WEBSITE_SITE_NAME%")
+        private string _host = string.Format("https://{0}.azurewebsites.net/",
+            Environment.ExpandEnvironmentVariables("%WEBSITE_SITE_NAME%")
                 .ToLower());
+
+        //private string GetSiteUrl()
+        //{
+        //    var settings = this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
+
+        //    if (string.IsNullOrEmpty(settings.HostName))
+        //    {
+        //        return "http://localhost";
+        //    }
+        //    else
+        //    {
+        //        return "https://" + settings.HostName + "/";
+        //    }
+        //}
+
 
         public string Protect(AuthenticationTicket data)
         {

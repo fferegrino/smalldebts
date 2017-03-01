@@ -6,8 +6,10 @@ using Smalldebts.Backend.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
 
 namespace Smalldebts.Backend.Controllers
 {
@@ -20,7 +22,7 @@ namespace Smalldebts.Backend.Controllers
         {
             Context = new MobileServiceContext();
         }
-        
+
         [Route("{id}")]
         public ItermediateObjects.Debt Get(string id)
         {
@@ -28,19 +30,24 @@ namespace Smalldebts.Backend.Controllers
             return AutoMapper.Mapper.Map<ItermediateObjects.Debt>(debt);
         }
 
+        [Authorize]
         public List<ItermediateObjects.Debt> Get()
         {
-            var debt = Context.Debts;
+            var userId = User.Identity.GetUserId();
+            var debt = Context.Debts.Where(d => d.UserId == userId);
             return AutoMapper.Mapper.Map<List<ItermediateObjects.Debt>>(debt);
         }
 
-        // GET api/values
+        [Authorize]
         public ItermediateObjects.Debt Post(ItermediateObjects.Debt newDebt)
         {
+            var userId = User.Identity.GetUserId();
+
             var debt = Context.Debts.Create();
             debt.Id = Guid.NewGuid().ToString();
             debt.Name = newDebt.Name;
             debt.Balance = newDebt.Balance;
+            debt.UserId = userId;
 
             var newMovement = Context.Movements.Create();
             newMovement.Id = Guid.NewGuid().ToString();
@@ -54,9 +61,11 @@ namespace Smalldebts.Backend.Controllers
             return AutoMapper.Mapper.Map<ItermediateObjects.Debt>(debt);
         }
 
+        [Authorize]
         public ItermediateObjects.Debt Put(ItermediateObjects.Debt newDebt)
         {
-            var debt = Context.Debts.FirstOrDefault(d => d.Id == newDebt.Id);
+            var userId = User.Identity.GetUserId();
+            var debt = Context.Debts.FirstOrDefault(d => d.Id == newDebt.Id && d.UserId == userId);
             debt.Balance += newDebt.Balance;
 
             var newMovement = Context.Movements.Create();
@@ -69,7 +78,8 @@ namespace Smalldebts.Backend.Controllers
             Context.SaveChanges();
             return AutoMapper.Mapper.Map<ItermediateObjects.Debt>(debt);
         }
-        
+
+        [Authorize]
         public ItermediateObjects.Debt Delete(ItermediateObjects.Debt newDebt)
         {
             var debt = Context.Debts.FirstOrDefault(d => d.Id == newDebt.Id);

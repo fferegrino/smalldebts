@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.Entity;
+using System.Linq;
 using System.Web.Http;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
@@ -10,6 +11,8 @@ using Smalldebts.Backend.DataObjects;
 using Smalldebts.Backend.Models;
 using Owin;
 using AutoMapper;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Smalldebts.Backend
 {
@@ -23,7 +26,8 @@ namespace Smalldebts.Backend
             config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling
 = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
-            Mapper.Initialize(cfg => {
+            Mapper.Initialize(cfg =>
+            {
                 cfg.CreateMap<DataObjects.Debt, ItermediateObjects.Debt>();
                 cfg.CreateMap<DataObjects.Movement, ItermediateObjects.Movement>();
             });
@@ -52,36 +56,163 @@ namespace Smalldebts.Backend
 
             app.UseWebApi(config);
             //config.MapHttpAttributeRoutes();
-           
+
         }
     }
 
 
     public class MobileServiceInitializer : CreateDatabaseIfNotExists<MobileServiceContext>
     {
+        private ApplicationUser DemoUser;
+
+        
+
         protected override void Seed(MobileServiceContext context)
         {
-            List<Debt> debts = new List<Debt>
+            InitializeIdentityForEF(context);
+
+            var debts = new Debt[]
             {
-                new Debt { Id = "551ef9ab-0714-4b70-b887-f1290d2053c3", Name = "Ruby", Balance = 0m },
-                new Debt { Id = "2a5f867b-6bf6-4bbe-9e1f-74f63e8b4dd2", Name = "David", Balance = -2878.34m },
-                new Debt { Id = "09c07cfd-bc19-4240-86bf-008adbcbc064", Name = "Benjamin", Balance = 4911.41m },
-                new Debt { Id = "9ae84c63-bfc4-453b-995c-81787fc2d6d1", Name = "Janet", Balance = -9043.6m },
-                new Debt { Id = "102c5c81-9ef9-4228-bb76-c68ac66734ca", Name = "Louise", Balance = 7922.95m },
-                new Debt { Id = "c2465f12-32a6-4bbd-8f0a-f5973ac8dc88", Name = "Michael", Balance = -9865.14m },
-                new Debt { Id = "975367d6-7770-40b5-b9dd-66cf7bd373b2", Name = "Anna", Balance = 8334.43m },
-                new Debt { Id = "fb85522e-9870-46f6-8f33-fdc327d46998", Name = "Lillian", Balance = 1066.01m },
-                new Debt { Id = "ebbb87b7-07c9-4ac5-a2fd-14e860146fe5", Name = "Brenda", Balance = 0m },
-                new Debt { Id = "d3053457-5ff7-4a16-b561-08d14a9850cb", Name = "Brian", Balance = 4969.52m },
-                new Debt { Id = "7e85de8c-572a-471a-885f-7a27fd4eaa3a", Name = "Jimmy", Balance = 4874.23m },
+                new Debt
+                {
+                    Id = "50b39267-d1ec-4c44-a1ec-bf16960bc6c2",
+                    Name = "Earl"
+                },
+                new Debt
+                {
+                    Id = "d8e40c04-7be9-4941-808b-a0fcfbb14061",
+                    Name = "Christine"
+                },
+                new Debt
+                {
+                    Id = "fb8f36c3-0479-4ee6-9275-10c48aaff5f1",
+                    Name = "Debra"
+                },
+                new Debt
+                {
+                    Id = "d34bb64c-37c1-4bd8-a7ff-2345cabccfa4",
+                    Name = "Alan"
+                },
+                new Debt
+                {
+                    Id = "c92a4237-fcb3-4879-ac80-2f199a52e57e",
+                    Name = "Andrea"
+                },
+                new Debt
+                {
+                    Id = "8f2b7c79-0735-4af9-addb-84fca8662ad3",
+                    Name = "Louis"
+                },
+                new Debt
+                {
+                    Id = "4aab7d1f-02db-4372-945e-e3e46beb70de",
+                    Name = "Brandon"
+                },
+                new Debt
+                {
+                    Id = "976acb7f-720c-4089-a535-fb5a3370ca3e",
+                    Name = "Frances"
+                },
+                new Debt
+                {
+                    Id = "d7d3d8fe-240d-4db6-961f-b440738d343a",
+                    Name = "Juan"
+                },
+                new Debt
+                {
+                    Id = "331f1681-c476-464e-9bd0-d62b9e6ade3a",
+                    Name = "Craig"
+                },
+                new Debt
+                {
+                    Id = "bcc34853-c76c-40d0-8263-ce202d555406",
+                    Name = "Katherine"
+                },
+                new Debt
+                {
+                    Id = "d953baaa-ea29-4de8-af90-16027a4a4cfe",
+                    Name = "Timothy"
+                },
+                new Debt
+                {
+                    Id = "e3c09d52-4313-42dd-ad13-2578a19b3383",
+                    Name = "Mildred"
+                },
+                new Debt
+                {
+                    Id = "048a7fb3-7a1e-438d-a3b0-66669c8f4550",
+                    Name = "Nicholas"
+                },
+                new Debt
+                {
+                    Id = "7022fec2-59a1-4655-afaf-a8da938abd27",
+                    Name = "Jonathan"
+                },
+                new Debt
+                {
+                    Id = "4a6c885f-62fb-4783-a4f2-f2b1be639fa0",
+                    Name = "Willie"
+                },
+                new Debt
+                {
+                    Id = "dd2bebb7-0d1f-450d-ae2b-4148567ea04d",
+                    Name = "Ralph"
+                },
+                new Debt
+                {
+                    Id = "18ee4cce-d6ac-4007-affd-21348a1b9660",
+                    Name = "Deborah"
+                },
+                new Debt
+                {
+                    Id = "ecba5e73-c7eb-47fa-acac-da83aba44cc9",
+                    Name = "Patrick"
+                },
+                new Debt
+                {
+                    Id = "46865106-e11b-4281-a23f-a5a062e90438",
+                    Name = "Phyllis"
+                }
             };
 
-            foreach (var debt in debts)
+            foreach (var d in debts)
             {
-                context.Set<Debt>().Add(debt);
+                d.UserId = DemoUser.Id;
+                d.User = DemoUser;
+                context.Debts.Add(d);
             }
 
             base.Seed(context);
+        }
+
+        public void InitializeIdentityForEF(MobileServiceContext db)
+        {
+
+            if (!db.Users.Any())
+            {
+                var roleStore = new RoleStore<IdentityRole>(db);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var userStore = new UserStore<ApplicationUser>(db);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+
+
+                DemoUser = userManager.FindByName("admin");
+                if (DemoUser == null)
+                {
+                    DemoUser = new ApplicationUser()
+                    {
+                        UserName = "demo@messier16.com",
+                        Email = "demo@messier16.com",
+                        EmailConfirmed = true,
+                        JoinDate = DateTimeOffset.Now
+                    };
+                    userManager.Create(DemoUser, "9XN@p#=8yZdu?dg");
+                    userManager.SetLockoutEnabled(DemoUser.Id, false);
+                }
+                
+
+            }
+
         }
     }
 }

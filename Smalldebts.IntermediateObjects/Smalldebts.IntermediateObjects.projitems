@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AccountModelBinding.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ApplicationUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AuthenticationToken.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Debt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Movement.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SimpleUser.cs" />

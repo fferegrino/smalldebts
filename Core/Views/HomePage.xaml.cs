@@ -105,7 +105,7 @@ namespace Smalldebts.Core.UI.Views
             {
                 var loginPage = new LoginPage();
                 loginPage.LoggedIn += async (s, a) => await LoadData();
-                await Navigation.PushAsync(loginPage);
+				await Navigation.PushModalAsync(loginPage);
             }
             else
             {

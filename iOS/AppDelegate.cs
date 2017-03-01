@@ -53,7 +53,6 @@ namespace Smalldebts.iOS
 		{
 			global::Xamarin.Forms.Forms.Init();
 			CurrentPlatform.Init();
-            App.Init(this);
             LoadApplication(new App());
 
 			return base.FinishedLaunching(app, options);

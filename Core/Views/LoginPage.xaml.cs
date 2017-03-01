@@ -58,7 +58,7 @@ namespace Smalldebts.Core.UI.Views
             {
                 App.LoggedIn = true;
                 LoggedIn?.Invoke(this, new EventArgs());
-                await Navigation.PopAsync();
+				await Navigation.PopModalAsync();
             }
             else
             {

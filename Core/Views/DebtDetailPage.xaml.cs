@@ -7,6 +7,7 @@ using Smalldebts.Core.UI.Resources;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
 using Smalldebts.Core.UI.DataAccess;
+using System.Collections.ObjectModel;
 
 namespace Smalldebts.Core.UI.Views
 {
@@ -22,7 +23,8 @@ namespace Smalldebts.Core.UI.Views
         }
 
         public Debt Debt { get; internal set; }
-        public event EventHandler<Debt> DebtUpdated;
+		public event EventHandler<Debt> DebtUpdated;
+		private ObservableCollection<Movement> Movements;
 
         protected override async void OnAppearing()
         {
@@ -31,7 +33,8 @@ namespace Smalldebts.Core.UI.Views
             UpdateAmounts();
 
             var movements = await _serviceClient.GetMovementsForDebt(Debt.Id);
-            MovementDetailList.ItemsSource = movements;
+			Movements = new ObservableCollection<Movement>(movements);
+            MovementDetailList.ItemsSource = Movements;
         }
 
         void UpdateAmounts()
@@ -90,6 +93,7 @@ namespace Smalldebts.Core.UI.Views
             };
             Debt = await _serviceClient.AddMovementToDebt(updated);
             DebtUpdated?.Invoke(sender, Debt);
+			Movements.Insert(0, new Movement { Amount = amount, CreatedAt = Debt.UpdatedAt.Value, Reason = Debt.Reason });
             AmountEntry.Text = null;
             UpdateAmounts();
 

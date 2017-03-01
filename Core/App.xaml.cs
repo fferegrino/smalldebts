@@ -18,7 +18,14 @@ namespace Smalldebts.Core.UI
             InitializeComponent();
             SetupCodedStyles();
             SetupLanguage();
-			MainPage = new NavigationPage(new HomePage());
+
+			var mainPage = new HomePage();
+			var navMainPage = new NavigationPage(mainPage);
+
+			navMainPage.BarBackgroundColor = BrandColor;
+			navMainPage.BarTextColor = BrandLightColor;
+
+			MainPage = navMainPage;
         }
 
         public static App RealCurrent => Current as App;

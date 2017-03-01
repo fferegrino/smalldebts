@@ -22,7 +22,7 @@
             <Image HorizontalOptions="CenterAndExpand" Source="sort_small" Grid.Column="2" x:Name="SortImage" />
         </Grid>
 
-        <ListView Grid.Row="1" x:Name="DebtList">
+        <ListView Grid.Row="1" x:Name="DebtList" IsPullToRefreshEnabled="true">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <cells:DebtCell />

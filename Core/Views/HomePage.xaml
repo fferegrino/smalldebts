@@ -22,14 +22,14 @@
             <Image HorizontalOptions="CenterAndExpand" Source="sort_small" Grid.Column="2" x:Name="SortImage" />
         </Grid>
 
-        <ListView Grid.Row="1" x:Name="DebtList" IsPullToRefreshEnabled="true">
+        <ListView Grid.Row="1" x:Name="DebtList" IsPullToRefreshEnabled="true" IsVisible="False">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <cells:DebtCell />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackLayout Grid.Row="1" Margin="10" Padding="20" x:Name="AddNewDebtOptionPanel" VerticalOptions="Center"
+        <StackLayout Grid.Row="1" Margin="10" Padding="20" x:Name="AddNewDebtOptionPanel"  IsVisible="False" VerticalOptions="Center"
                      HorizontalOptions="Center">
             <Image HorizontalOptions="Center" Source="add_debt_big" />
             <Label FontSize="Large" HorizontalTextAlignment="Center" Text="{i:Translate NadieTeDebe}" />

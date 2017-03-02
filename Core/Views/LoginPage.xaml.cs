@@ -1,4 +1,4 @@
-﻿using Acr.UserDialogs;
+using Acr.UserDialogs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.WindowsAzure.MobileServices;
 using Smalldebts.Core.UI.DataAccess;
 using Xamarin.Forms;
+using Smalldebts.Core.UI.Services;
 
 namespace Smalldebts.Core.UI.Views
 {
@@ -51,25 +52,23 @@ namespace Smalldebts.Core.UI.Views
             SignupPanel.IsVisible = signUp;
         }
 
-
-        Random r = new Random();
         private async void LoginButtonClicked(object sender, EventArgs e)
         {
 
+			var secureStorage = DependencyService.Get<ISecureStorage>();
             try
             {
-                var token = await _serviceClient.GetAuthenticationToken(LoginEmailEntry.Text, LoginPassEntry.Text);
-
-                MobileServiceUser user = new MobileServiceUser(token.Guid);
-                user.MobileServiceAuthenticationToken = token.AccessToken;
-                _serviceClient.CurrentClient.CurrentUser = user;
-
-                App.LoggedIn = true;
+				await App.RealCurrent.Auth(LoginEmailEntry.Text, LoginPassEntry.Text);
                 LoggedIn?.Invoke(this, new EventArgs());
                 await Navigation.PopModalAsync();
             }
             catch (Exception xe)
             {
+				secureStorage.Delete(Constants.UserId);
+				secureStorage.Delete(Constants.Token);
+				secureStorage.Delete(Constants.UserEmail);
+				secureStorage.Delete(Constants.UserPassword);
+				secureStorage.Delete(Constants.TokenExpirationDate);
                 UserDialogs.Instance.ShowError(xe.Message);
             }
 

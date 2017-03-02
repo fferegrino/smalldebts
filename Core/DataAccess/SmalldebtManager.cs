@@ -78,6 +78,13 @@ namespace Smalldebts.Core.UI.DataAccess
             get { return client; }
         }
 
+		public void SetCredentials(string id, string token)
+		{
+			MobileServiceUser user = new MobileServiceUser(id);
+			user.MobileServiceAuthenticationToken = token;
+			client.CurrentUser = user;
+		}
+
         public async Task<Debt> AddMovementToDebt(Debt debt)
         {
             return await client.InvokeApiAsync<Debt, Debt>("debts", debt, HttpMethod.Put, null);
@@ -131,6 +138,12 @@ namespace Smalldebts.Core.UI.DataAccess
                     throw;
             }
         }
+
+		public async Task<SimpleUser> Me()
+		{
+			
+				return await client.InvokeApiAsync<SimpleUser>("accounts/me", HttpMethod.Get, null);
+		}
 
         public async Task<AuthenticationToken> GetAuthenticationToken(string email,
              string password)

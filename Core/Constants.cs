@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +16,12 @@ namespace Smalldebts.Core.UI
 #else
         public const string ApplicationUrl = "https://smalldebts-test.azurewebsites.net";
 #endif
+
+		public const string UserId = "UserId";
+		public const string Token = "Token";
+		public const string UserEmail = "UserEmail";
+		public const string UserPassword = "UserPassword";
+		public const string TokenExpirationDate = "TokenExpirationDate";
 
     }
 }

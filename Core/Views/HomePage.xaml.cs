@@ -115,6 +115,7 @@ namespace Smalldebts.Core.UI.Views
                 ApplyFilter();
                 ApplySorting();
                 AddNewDebtOptionPanel.IsVisible = false;
+				DebtList.IsVisible = true;
             }
             else
             {
@@ -129,7 +130,8 @@ namespace Smalldebts.Core.UI.Views
 
         protected override async void OnAppearing()
         {
-            if (!App.LoggedIn)
+			var authed = await App.RealCurrent.AutoAuthenticate();
+			if (!authed)
             {
                 var loginPage = new LoginPage(_serviceClient);
                 loginPage.LoggedIn += async (s, a) => await LoadData();

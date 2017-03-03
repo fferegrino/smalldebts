@@ -1,51 +1,92 @@
-﻿using Smalldebts.Core.UI.Services;
+using System;
+using System.Threading.Tasks;
+using Microsoft.WindowsAzure.MobileServices;
+using Smalldebts.Core.UI.DataAccess;
+using Smalldebts.Core.UI.Services;
 using Smalldebts.Core.UI.Views;
 using Xamarin.Forms;
 
 namespace Smalldebts.Core.UI
 {
-    public partial class App : Application
-    {
-        public static IAuthenticate Authenticator { get; private set; }
-
-        public static void Init(IAuthenticate authenticator)
-        {
-            Authenticator = authenticator;
-        }
-
-        public App()
-        {
-            InitializeComponent();
-            SetupCodedStyles();
-            SetupLanguage();
+	public partial class App : Application
+	{
+		public App()
+		{
+			InitializeComponent();
+			SetupCodedStyles();
+			SetupLanguage();
 
 			var mainPage = new HomePage();
 			var navMainPage = new NavigationPage(mainPage);
 
-			navMainPage.BarBackgroundColor = BrandColor;
-			navMainPage.BarTextColor = BrandLightColor;
+			navMainPage.BarBackgroundColor = BrandLightColor;
+			navMainPage.BarTextColor = BrandColor;
 
 			MainPage = navMainPage;
-        }
+		}
 
-        public static App RealCurrent => Current as App;
+		public static App RealCurrent => Current as App;
 
-        public static bool LoggedIn { get; internal set; }
 
-        protected override async void OnStart()
-        {
-            // Handle when your app starts
-            //var authed = await Authenticator.Authenticate();
-        }
 
-        protected override void OnSleep()
-        {
-            // Handle when your app sleeps
-        }
+		public async Task Auth(string email, string password)
+		{
+			var secureStorage = DependencyService.Get<ISecureStorage>();
+			var _serviceClient = SmalldebtsManager.DefaultManager;
+			var token = await _serviceClient.GetAuthenticationToken(email, password);
 
-        protected override void OnResume()
-        {
-            // Handle when your app resumes
-        }
-    }
+			_serviceClient.SetCredentials(token.Guid, token.AccessToken);
+
+			secureStorage.Store(Constants.UserId, token.Guid);
+			secureStorage.Store(Constants.Token, token.AccessToken);
+
+			secureStorage.Store(Constants.TokenExpirationDate,
+					 token.Expires.Ticks.ToString());
+			secureStorage.Store(Constants.UserEmail, email);
+			secureStorage.Store(Constants.UserPassword, password);
+		}
+
+		public async Task<bool> AutoAuthenticate()
+		{
+			try
+			{
+				var _secureStorage = DependencyService.Get<ISecureStorage>();
+				if (_secureStorage.Contains(Constants.UserId)
+					  && _secureStorage.Contains(Constants.Token)
+					  && _secureStorage.Contains(Constants.TokenExpirationDate)
+					  && _secureStorage.Contains(Constants.UserEmail)
+					  && _secureStorage.Contains(Constants.UserPassword))
+				{
+					var expirationDateTicks
+						= _secureStorage.Retrieve(Constants.TokenExpirationDate);
+					DateTime expirationDate
+						= new DateTime(long.Parse(expirationDateTicks));
+
+					if (expirationDate < DateTime.Now)
+					{
+						// you can also check first if email and password exists
+						var email = _secureStorage.Retrieve(Constants.UserEmail);
+						var password = _secureStorage.Retrieve(Constants.UserPassword);
+
+						await Auth(email, password);
+					}
+					else
+					{
+						var id = _secureStorage.Retrieve(Constants.UserId);
+						var token = _secureStorage.Retrieve(Constants.Token);
+
+						SmalldebtsManager.DefaultManager.SetCredentials(id, token);
+					}
+					var user = await SmalldebtsManager.DefaultManager.Me();
+					return true;
+				}
+				return false;
+			}
+			catch
+			{
+				return false;
+			}
+
+		}
+	}
 }

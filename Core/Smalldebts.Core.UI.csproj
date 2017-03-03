@@ -115,6 +115,7 @@
     <Compile Include="Views\PopUps\ModifyDebtPage.xaml.cs">
       <DependentUpon>ModifyDebtPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Services\ISecureStorage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

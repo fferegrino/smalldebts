@@ -31,6 +31,8 @@ namespace Smalldebts.Core.UI.Views
         private SortingKind Sorting = SortingKind.ByAmount;
         private readonly SortingSettingsPage SortingSettingsPage;
 
+		public bool IsBusy { get; set; }
+
         public HomePage()
         {
             InitializeComponent();
@@ -59,6 +61,7 @@ namespace Smalldebts.Core.UI.Views
             tapSort.Tapped += async (sender, e) => await PopupNavigation.PushAsync(SortingSettingsPage);
             SortImage.GestureRecognizers.Add(tapSort);
 
+			DebtList.RefreshCommand = LoadDebtsCommand; 
 
             DebtList.ItemSelected += DebtList_ItemSelected;
 
@@ -74,6 +77,31 @@ namespace Smalldebts.Core.UI.Views
             MessagingCenter.Subscribe<DebtCell, DebtManipulationViewModel>(this, "deleted", Delete);
         }
 
+		private Command _loadDebtsCommand;
+
+		public Command LoadDebtsCommand
+		{
+			get
+			{
+				return _loadDebtsCommand ?? (_loadDebtsCommand = new Command(async () =>
+				{
+
+			if (IsBusy)
+						return;
+					IsBusy = true;
+					LoadDebtsCommand.ChangeCanExecute();
+					await LoadData();
+					IsBusy = false;
+					DebtList.IsRefreshing = false;
+					LoadDebtsCommand.ChangeCanExecute();
+				}, 
+				                                                             () =>
+			   {
+				   return !IsBusy;
+			   }));
+			}
+		}
+
 
         async Task LoadData()
         {
@@ -87,6 +115,7 @@ namespace Smalldebts.Core.UI.Views
                 ApplyFilter();
                 ApplySorting();
                 AddNewDebtOptionPanel.IsVisible = false;
+				DebtList.IsVisible = true;
             }
             else
             {
@@ -101,7 +130,8 @@ namespace Smalldebts.Core.UI.Views
 
         protected override async void OnAppearing()
         {
-            if (!App.LoggedIn)
+			var authed = await App.RealCurrent.AutoAuthenticate();
+			if (!authed)
             {
                 var loginPage = new LoginPage(_serviceClient);
                 loginPage.LoggedIn += async (s, a) => await LoadData();

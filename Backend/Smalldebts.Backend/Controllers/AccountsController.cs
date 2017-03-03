@@ -18,6 +18,24 @@ namespace Smalldebts.Backend.Controllers
     [MobileAppController]
     public class AccountsController : BaseApiController
     {
+        [HttpGet]
+        [Route("confirm")]
+        [AllowAnonymous]
+        public async Task<string> ConfirmEmail()
+        {
+            var user = await AppUserManager.FindByEmailAsync("demo@messier16.com");
+
+            var code = await AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            var callbackUrl = Url.Link("DefaultWeb", new
+            {
+                Controller = "Account",
+                Action = "ConfirmEmail",
+                userId = user.Id,
+                code = code
+            });
+
+            return callbackUrl;
+        }
 
         [Route("me")]
         [HttpGet]
@@ -30,12 +48,30 @@ namespace Smalldebts.Backend.Controllers
             return Ok(TheModelFactory.Create(user));
         }
 
-        //[Route("create")]
+        [HttpGet]
+        [Route("forgotten")]
+        [AllowAnonymous]
+        public async Task<string> ForgottenPassword()
+        {
+            var user = await AppUserManager.FindByEmailAsync("demo@messier16.com");
+
+            var code = await AppUserManager.GeneratePasswordResetTokenAsync(user.Id);
+
+            var callbackUrl = Url.Link("DefaultWeb", new
+            {
+                Controller = "Account",
+                Action = "ResetPassword",
+                userId = user.Id,
+                code = code
+            });
+
+            return callbackUrl;
+        }
+		
         [AllowAnonymous]
         [ResponseType(typeof(SimpleUser))]
         public async Task<IHttpActionResult> Post(AccountModelBinding createUserModel)
         {
-
             var user = new ApplicationUser()
             {
                 UserName = createUserModel.Username,

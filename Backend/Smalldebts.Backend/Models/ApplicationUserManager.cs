@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Smalldebts.Backend.DataObjects;
+using Microsoft.Owin.Security.DataProtection;
 
 namespace Smalldebts.Backend.Models
 {
@@ -20,8 +21,10 @@ namespace Smalldebts.Backend.Models
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
                                                     IOwinContext context)
         {
+            var provider = new DpapiDataProtectionProvider("Sample");
             var appDbContext = context.Get<MobileServiceContext>();
             var appUserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(appDbContext));
+            appUserManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));
             return appUserManager;
         }
     }

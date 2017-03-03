@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
           xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -7,14 +7,10 @@
     <Grid.RowDefinitions>
       <RowDefinition Height="Auto"></RowDefinition>
       <RowDefinition Height="Auto"></RowDefinition>
-      <RowDefinition Height="Auto"></RowDefinition>
     </Grid.RowDefinitions>
-
-    <Label  FontSize="Micro" HorizontalTextAlignment="Center" Grid.Row="0"
-           x:Name="DateLabel" />
     <Label FontSize="Large" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Grid.Row="1"
            x:Name="AmountLabel" />
-    <Label FontSize="Small" HorizontalTextAlignment="Center" Grid.Row="2" x:Name="MovementReasonLabel"></Label>
+    <Label FontSize="Micro" HorizontalTextAlignment="Center" Grid.Row="2" x:Name="MovementReasonLabel"></Label>
   </Grid>
 
 </ViewCell>

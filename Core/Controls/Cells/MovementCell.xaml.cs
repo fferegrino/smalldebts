@@ -21,15 +21,12 @@ namespace Smalldebts.Core.UI.Controls.Cells
             {
                 if (String.IsNullOrWhiteSpace(Movement.Reason))
                 {
-                    MovementReasonLabel.IsVisible = false;
+					MovementReasonLabel.Text = $"{Movement.Date.LocalDateTime:dddd dd, MMMM yyyy}";
                 }
                 else
                 {
-                    MovementReasonLabel.IsVisible = true;
-                    MovementReasonLabel.Text = Movement.Reason;
+					MovementReasonLabel.Text = $"{Movement.Date.LocalDateTime:dddd dd, MMMM yyyy}: {Movement.Reason}";
                 }
-
-                DateLabel.Text = Movement.Date.LocalDateTime.ToString();
 				AmountLabel.Text =String.Format(AppStrings.AmountFormat, Math.Abs(Movement.Amount));
                 AmountLabel.TextColor =
                     (Color) App.RealCurrent.ColorConverter.Convert(Movement.Amount, null, null, null);

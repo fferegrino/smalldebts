@@ -202,6 +202,7 @@
     <Compile Include="Effects\RectButtonEffect.cs" />
     <Compile Include="Services\LocalizationImplementation.cs" />
     <Compile Include="Services\SecureStorage.cs" />
+    <Compile Include="Effects\RemoveBorderEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Smalldebts.Core.UI.csproj">

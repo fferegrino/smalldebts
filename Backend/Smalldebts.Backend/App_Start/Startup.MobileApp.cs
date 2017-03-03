@@ -36,6 +36,8 @@ namespace Smalldebts.Backend
                 .UseDefaultConfiguration()
                 .ApplyTo(config);
 
+            config.Routes.MapHttpRoute("DefaultWeb", "{controller}/{action}");
+
             // Use Entity Framework Code First to create database tables based on your DbContext
             Database.SetInitializer(new MobileServiceInitializer());
 

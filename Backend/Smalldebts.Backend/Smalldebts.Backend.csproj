@@ -225,6 +225,8 @@
     <Compile Include="Controllers\MovementsController.cs" />
     <Compile Include="Controllers\DebtsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\Web\AccountController.cs" />
+    <Compile Include="Controllers\Web\HomeController.cs" />
     <Compile Include="DataObjects\ApplicationUser.cs" />
     <Compile Include="DataObjects\Debt.cs" />
     <Compile Include="DataObjects\Movement.cs" />
@@ -265,6 +267,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Forgotten.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

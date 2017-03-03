@@ -8,6 +8,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using Smalldebts.Core.UI.DataAccess;
 using Xamarin.Forms;
 using Smalldebts.Core.UI.Services;
+using Smalldebts.Core.UI.Resources;
 
 namespace Smalldebts.Core.UI.Views
 {
@@ -58,8 +59,10 @@ namespace Smalldebts.Core.UI.Views
 			var secureStorage = DependencyService.Get<ISecureStorage>();
             try
             {
+                UserDialogs.Instance.ShowLoading(AppStrings.LogginIn);
 				await App.RealCurrent.Auth(LoginEmailEntry.Text, LoginPassEntry.Text);
                 LoggedIn?.Invoke(this, new EventArgs());
+                UserDialogs.Instance.HideLoading();
                 await Navigation.PopModalAsync();
             }
             catch (Exception xe)

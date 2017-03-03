@@ -11,39 +11,36 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="*" />
       <ColumnDefinition Width="*" />
     </Grid.ColumnDefinitions>
-    <Label FontSize="Large" HorizontalTextAlignment="Center" Text="0" Grid.Row="0"
-           Grid.ColumnSpan="2" x:Name="BalanceDescriptionLabel" />
-    <Label Style="{StaticResource YugeLabel}" Text="0" Grid.Row="1"
+    <Label Style="{StaticResource YugeLabel}" Text="0" Grid.Row="0"
            Grid.ColumnSpan="2" x:Name="BalanceLabel" />
     <Entry HorizontalTextAlignment="Center" 
              Placeholder="{i:Translate NewAmount}" Keyboard="Numeric"
-           FontSize="Large" Margin="10" HeightRequest="45" x:Name="AmountEntry" Grid.Row="2" Grid.ColumnSpan="2" />
-    <Button Grid.Row="3" Grid.Column="0" x:Name="PlusButton" Text="Le presté"
+           FontSize="Large" Margin="10" HeightRequest="45" x:Name="AmountEntry" Grid.Row="1" Grid.ColumnSpan="2" />
+    <Button Grid.Row="2" Grid.Column="0" x:Name="PlusButton" Text="Le presté"
             Style="{StaticResource RectangleButton}"
             BackgroundColor="{StaticResource PositiveColor}" Clicked="ButtonClicked">
       <Button.Effects>
         <effects:RectButtonEffect />
       </Button.Effects>
     </Button>
-    <Button Grid.Row="3" Grid.Column="1" x:Name="MinusButton"
+    <Button Grid.Row="2" Grid.Column="1" x:Name="MinusButton"
             Text="Me pagó" Style="{StaticResource RectangleButton}"
             BackgroundColor="{StaticResource NegativeColor}" Clicked="ButtonClicked">
       <Button.Effects>
         <effects:RectButtonEffect />
       </Button.Effects>
     </Button>
-    <ContentView Grid.Row="4" Padding="5" BackgroundColor="Silver" Grid.ColumnSpan="2">
+    <ContentView Grid.Row="3" Padding="5" BackgroundColor="Silver" Grid.ColumnSpan="2">
       <Label FontAttributes="Bold"
              Text="{i:Translate LastTransactions}" HorizontalTextAlignment="Center" />
     </ContentView>
-    <ListView HasUnevenRows="True" RowHeight="-1" Grid.Row="5" Grid.ColumnSpan="2" x:Name="MovementDetailList">
+    <ListView HasUnevenRows="True" RowHeight="-1" Grid.Row="4" Grid.ColumnSpan="2" x:Name="MovementDetailList">
       <ListView.ItemTemplate>
         <DataTemplate>
           <cells:MovementCell />

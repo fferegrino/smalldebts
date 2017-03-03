@@ -151,13 +151,13 @@
     <value>Accept</value>
   </data>
   <data name="TeDebeDetail" xml:space="preserve">
-    <value>Owes you</value>
+    <value> owes you</value>
   </data>
   <data name="LeDebesDetail" xml:space="preserve">
-    <value>You owe</value>
+    <value>You owe </value>
   </data>
   <data name="AManoDetail" xml:space="preserve">
-    <value>You are even</value>
+    <value>You are even with </value>
   </data>
   <data name="Sort" xml:space="preserve">
     <value>Sort</value>
@@ -197,5 +197,35 @@
   </data>
   <data name="LastTransactions" xml:space="preserve">
     <value>Transactions</value>
+  </data>
+  <data name="LogginIn" xml:space="preserve">
+    <value>Loggin in</value>
+  </data>
+  <data name="Wait" xml:space="preserve">
+    <value>Please wait</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Log in</value>
+  </data>
+  <data name="NoAccButton" xml:space="preserve">
+    <value>Don't have an account ?</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
+  <data name="YesAccButton" xml:space="preserve">
+    <value>Wait, I already have an account</value>
+  </data>
+  <data name="SuccesfulSignUp" xml:space="preserve">
+    <value>You have been succesfully registered, now  you can log in</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordConfirmation" xml:space="preserve">
+    <value>Password confirmation</value>
+  </data>
+  <data name="Debts" xml:space="preserve">
+    <value>Debts</value>
   </data>
 </root>

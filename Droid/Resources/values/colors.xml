@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+  <item name="negative" type="color">#DD173C</item>
+  <item name="positive" type="color">#23B000</item>
+  <item name="neutral" type="color">#1F1A1A</item>
+  <item name="brand" type="color">#034513</item>
+  <item name="brandLight" type="color">#F6F8F4</item>
+  <item name="brandLightDark" type="color">#818280</item>
+  
+
+</resources>

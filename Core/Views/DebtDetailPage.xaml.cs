@@ -23,44 +23,42 @@ namespace Smalldebts.Core.UI.Views
         }
 
         public Debt Debt { get; internal set; }
-		public event EventHandler<Debt> DebtUpdated;
-		private ObservableCollection<Movement> Movements;
+        public event EventHandler<Debt> DebtUpdated;
+        private ObservableCollection<Movement> Movements;
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            Title = Debt.Name;
             UpdateAmounts();
 
             var movements = await _serviceClient.GetMovementsForDebt(Debt.Id);
-			Movements = new ObservableCollection<Movement>(movements);
+            Movements = new ObservableCollection<Movement>(movements);
             MovementDetailList.ItemsSource = Movements;
         }
 
         void UpdateAmounts()
         {
-			BalanceLabel.Text = String.Format(AppStrings.AmountFormat, Math.Abs(Debt.Balance));
+            BalanceLabel.Text = String.Format(AppStrings.AmountFormat, Math.Abs(Debt.Balance));
 
             if (Debt.Balance < 0)
             {
-
+                Title = AppStrings.LeDebesDetail + Debt.Name;
                 BalanceLabel.TextColor = App.RealCurrent.NegativeColor;
-                BalanceDescriptionLabel.Text = AppStrings.LeDebesDetail;
                 PlusButton.Text = AppStrings.LePague;
                 MinusButton.Text = AppStrings.MePresto;
             }
             else if (Debt.Balance > 0)
             {
 
+                Title = Debt.Name + AppStrings.TeDebeDetail;
                 BalanceLabel.TextColor = App.RealCurrent.PositiveColor;
-                BalanceDescriptionLabel.Text = AppStrings.TeDebeDetail;
                 PlusButton.Text = AppStrings.LePreste;
                 MinusButton.Text = AppStrings.MePago;
             }
             else
             {
+                Title = AppStrings.AManoDetail + Debt.Name;
                 BalanceLabel.TextColor = App.RealCurrent.NeutralColor;
-                BalanceDescriptionLabel.Text = AppStrings.AManoDetail;
                 PlusButton.Text = AppStrings.LePreste;
                 MinusButton.Text = AppStrings.MePresto;
             }
@@ -93,7 +91,7 @@ namespace Smalldebts.Core.UI.Views
             };
             Debt = await _serviceClient.AddMovementToDebt(updated);
             DebtUpdated?.Invoke(sender, Debt);
-			Movements.Insert(0, new Movement { Amount = amount, CreatedAt = Debt.UpdatedAt.Value, Reason = Debt.Reason });
+            Movements.Insert(0, new Movement { Amount = amount, CreatedAt = Debt.UpdatedAt.Value, Reason = Debt.Reason });
             AmountEntry.Text = null;
             UpdateAmounts();
 

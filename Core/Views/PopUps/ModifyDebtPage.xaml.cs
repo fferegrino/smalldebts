@@ -118,7 +118,7 @@ namespace Smalldebts.Core.UI.Views.PopUps
                 amount *= sender == PlusButton ? 1 : -1;
             else
                 return;
-            UserDialogs.Instance.ShowLoading();
+            UserDialogs.Instance.ShowLoading(AppStrings.Wait);
             if (id != null) // modify debt
             {
                 var updated = new Debt

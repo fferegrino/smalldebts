@@ -19,6 +19,17 @@ namespace Smalldebts.Backend.Controllers
     public class AccountsController : BaseApiController
     {
 
+        [Route("me")]
+        [HttpGet]
+        [Authorize]
+        [ResponseType(typeof(SimpleUser))]
+        public async Task<IHttpActionResult> Me()
+        {
+            var userId = User.Identity.GetUserId();
+            var user = await AppUserManager.FindByIdAsync(userId);
+            return Ok(TheModelFactory.Create(user));
+        }
+
         //[Route("create")]
         [AllowAnonymous]
         [ResponseType(typeof(SimpleUser))]

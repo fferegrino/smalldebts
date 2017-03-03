@@ -7,8 +7,14 @@
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="NegativeColor">#DD173C</Color>
+            <Color x:Key="NegativeWashedColor">#FFA3A6</Color>
+
             <Color x:Key="PositiveColor">#23B000</Color>
+            <Color x:Key="PositiveWashedColor">#A2F5AF</Color>
+
             <Color x:Key="NeutralColor">#1F1A1A</Color>
+            <Color x:Key="NeutralWashedColor">#E4E4E4</Color>
+            
             <Color x:Key="BrandColor">#034513</Color>
             <Color x:Key="BrandLightColor">#F6F8F4</Color>
 

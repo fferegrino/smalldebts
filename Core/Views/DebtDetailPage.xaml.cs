@@ -42,6 +42,7 @@ namespace Smalldebts.Core.UI.Views
 
             if (Debt.Balance < 0)
             {
+                DebtBackground.BackgroundColor = App.RealCurrent.NegativeWashedColor;
                 Title = AppStrings.LeDebesDetail + Debt.Name;
                 BalanceLabel.TextColor = App.RealCurrent.NegativeColor;
                 PlusButton.Text = AppStrings.LePague;
@@ -49,7 +50,7 @@ namespace Smalldebts.Core.UI.Views
             }
             else if (Debt.Balance > 0)
             {
-
+                DebtBackground.BackgroundColor = App.RealCurrent.PositiveWashedColor;
                 Title = Debt.Name + AppStrings.TeDebeDetail;
                 BalanceLabel.TextColor = App.RealCurrent.PositiveColor;
                 PlusButton.Text = AppStrings.LePreste;
@@ -57,6 +58,7 @@ namespace Smalldebts.Core.UI.Views
             }
             else
             {
+                DebtBackground.BackgroundColor = App.RealCurrent.NeutralWashedColor;
                 Title = AppStrings.AManoDetail + Debt.Name;
                 BalanceLabel.TextColor = App.RealCurrent.NeutralColor;
                 PlusButton.Text = AppStrings.LePreste;

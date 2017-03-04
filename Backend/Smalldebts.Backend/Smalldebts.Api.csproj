@@ -15,7 +15,7 @@
     <AssemblyName>Smalldebts.Backend</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -222,11 +222,10 @@
     <Compile Include="App_Start\Startup.MobileApp.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
+    <Compile Include="Controllers\MeController.cs" />
     <Compile Include="Controllers\MovementsController.cs" />
     <Compile Include="Controllers\DebtsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="Controllers\Web\AccountController.cs" />
-    <Compile Include="Controllers\Web\HomeController.cs" />
     <Compile Include="DataObjects\ApplicationUser.cs" />
     <Compile Include="DataObjects\Debt.cs" />
     <Compile Include="DataObjects\Movement.cs" />

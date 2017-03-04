@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26127.3
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smalldebts.Backend", "Backend\Smalldebts.Backend\Smalldebts.Backend.csproj", "{FAB77F4E-599D-476E-8E7C-230FE0B8EFE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smalldebts.Api", "Backend\Smalldebts.Backend\Smalldebts.Api.csproj", "{FAB77F4E-599D-476E-8E7C-230FE0B8EFE0}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Smalldebts.IntermediateObjects", "Smalldebts.IntermediateObjects\Smalldebts.IntermediateObjects.shproj", "{7E7BFE89-2282-43D4-A1E7-8E7B23ED8461}"
 EndProject

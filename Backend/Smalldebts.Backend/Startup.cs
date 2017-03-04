@@ -28,7 +28,7 @@ namespace Smalldebts.Backend
 #if DEBUG
                     AllowInsecureHttp = true, // NEVER IN PRODUCTION!
 #endif
-                    TokenEndpointPath = new PathString("/oauth/token"),
+                    TokenEndpointPath = new PathString("/api/oauth/token"),
                     Provider = new CustomAuthProvider(),
                     AccessTokenExpireTimeSpan = TimeSpan.FromDays(1),
                     AccessTokenFormat = new CustomZumoTokenFormat(),

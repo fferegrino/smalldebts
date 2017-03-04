@@ -37,16 +37,6 @@ namespace Smalldebts.Backend.Controllers
             return callbackUrl;
         }
 
-        [Route("me")]
-        [HttpGet]
-        [Authorize]
-        [ResponseType(typeof(SimpleUser))]
-        public async Task<IHttpActionResult> Me()
-        {
-            var userId = User.Identity.GetUserId();
-            var user = await AppUserManager.FindByIdAsync(userId);
-            return Ok(TheModelFactory.Create(user));
-        }
 
         [HttpGet]
         [Route("forgotten")]

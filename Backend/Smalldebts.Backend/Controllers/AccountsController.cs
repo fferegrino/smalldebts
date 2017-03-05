@@ -8,6 +8,8 @@ using System.Web.Http.Description;
 using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.Azure.Mobile.Server.Config;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using Smalldebts.IntermediateObjects;
 using ApplicationUser = Smalldebts.Backend.DataObjects.ApplicationUser;
 
@@ -18,46 +20,46 @@ namespace Smalldebts.Backend.Controllers
     [MobileAppController]
     public class AccountsController : BaseApiController
     {
-        [HttpGet]
-        [Route("confirm")]
-        [AllowAnonymous]
-        public async Task<string> ConfirmEmail()
-        {
-            var user = await AppUserManager.FindByEmailAsync("demo@messier16.com");
+        //[HttpGet]
+        //[Route("confirm")]
+        //[AllowAnonymous]
+        //public async Task<string> ConfirmEmail()
+        //{
+        //    var user = await AppUserManager.FindByEmailAsync("demo@messier16.com");
 
-            var code = await AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            var callbackUrl = Url.Link("DefaultWeb", new
-            {
-                Controller = "Account",
-                Action = "ConfirmEmail",
-                userId = user.Id,
-                code = code
-            });
+        //    
+        //    var callbackUrl = Url.Link("DefaultWeb", new
+        //    {
+        //        Controller = "Account",
+        //        Action = "ConfirmEmail",
+        //        userId = user.Id,
+        //        code = code
+        //    });
 
-            return callbackUrl;
-        }
+        //    return callbackUrl;
+        //}
 
 
-        [HttpGet]
-        [Route("forgotten")]
-        [AllowAnonymous]
-        public async Task<string> ForgottenPassword()
-        {
-            var user = await AppUserManager.FindByEmailAsync("demo@messier16.com");
+        //[HttpGet]
+        //[Route("forgotten")]
+        //[AllowAnonymous]
+        //public async Task<string> ForgottenPassword()
+        //{
+        //    var user = await AppUserManager.FindByEmailAsync("demo@messier16.com");
 
-            var code = await AppUserManager.GeneratePasswordResetTokenAsync(user.Id);
+        //    var code = await AppUserManager.GeneratePasswordResetTokenAsync(user.Id);
 
-            var callbackUrl = Url.Link("DefaultWeb", new
-            {
-                Controller = "Account",
-                Action = "ResetPassword",
-                userId = user.Id,
-                code = code
-            });
+        //    var callbackUrl = Url.Link("DefaultWeb", new
+        //    {
+        //        Controller = "Account",
+        //        Action = "ResetPassword",
+        //        userId = user.Id,
+        //        code = code
+        //    });
 
-            return callbackUrl;
-        }
-		
+        //    return callbackUrl;
+        //}
+
         [AllowAnonymous]
         [ResponseType(typeof(SimpleUser))]
         public async Task<IHttpActionResult> Post(AccountModelBinding createUserModel)
@@ -73,6 +75,33 @@ namespace Smalldebts.Backend.Controllers
             };
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
+
+            var code = await AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+            var callbackUrl = Url.Link("DefaultWeb", new
+            {
+                Controller = "Account",
+                Action = "ConfirmEmail",
+                userId = user.Id,
+                code = code
+            });
+            //await AppUserManager.SendEmailAsync(user.Id,
+            //   "Confirm your account",
+            //   "Please confirm your account by clicking this link: <a href=\""
+            //                                   + callbackUrl + "\">link</a>");
+
+
+            var apiKey = System.Environment.GetEnvironmentVariable("SENDGRID_APIKEY") ?? "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";
+            var client = new SendGridClient(apiKey);
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("test@example.com", "DX Team"),
+                Subject = "Hello World from the SendGrid CSharp SDK!",
+                PlainTextContent = "Please confirm your account by clicking this link:" + callbackUrl,
+                HtmlContent = "Please confirm your account by clicking this link: <a href=\""
+                                                   + callbackUrl + "\">link</a>"
+            };
+            msg.AddTo(new EmailAddress("antonio.feregrino@gmail.com", "Test User"));
+            var response = await client.SendEmailAsync(msg);
 
             if (!addUserResult.Succeeded)
             {

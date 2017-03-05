@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Mvc;
 using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
 using Microsoft.Azure.Mobile.Server.Config;
@@ -35,7 +36,9 @@ namespace Smalldebts.Backend
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()
                 .ApplyTo(config);
-            
+            config.Routes.MapHttpRoute("DefaultWeb",
+                "{controller}/{action}");
+
 
             // Use Entity Framework Code First to create database tables based on your DbContext
             Database.SetInitializer(new MobileServiceInitializer());
@@ -65,7 +68,7 @@ namespace Smalldebts.Backend
     {
         private ApplicationUser DemoUser;
 
-        
+
 
         protected override void Seed(MobileServiceContext context)
         {
@@ -209,7 +212,7 @@ namespace Smalldebts.Backend
                     userManager.Create(DemoUser, "9XN@p#=8yZdu?dg");
                     userManager.SetLockoutEnabled(DemoUser.Id, false);
                 }
-                
+
 
             }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.Owin;
+using Microsoft.Owin.Security.DataProtection;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Smalldebts.Backend.Models;
@@ -20,6 +21,8 @@ namespace Smalldebts.Backend
             ConfigureCustomAuth(app);
         }
 
+        internal static IDataProtectionProvider DataProtectionProvider { get; private set; }
+        
         public static void ConfigureCustomAuth(IAppBuilder appBuilder)
         {
             OAuthAuthorizationServerOptions oAuthServerOptions =
@@ -35,6 +38,7 @@ namespace Smalldebts.Backend
                 };
 
             // OAuth Configuration
+            DataProtectionProvider = appBuilder.GetDataProtectionProvider();
             appBuilder.UseOAuthAuthorizationServer(oAuthServerOptions);
         }
     }

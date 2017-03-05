@@ -21,7 +21,7 @@ namespace Smalldebts.Backend.Models
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options,
                                                     IOwinContext context)
         {
-            var provider = new DpapiDataProtectionProvider("Sample");
+            var provider = Startup.DataProtectionProvider;
             var appDbContext = context.Get<MobileServiceContext>();
             var appUserManager = new ApplicationUserManager(new UserStore<ApplicationUser>(appDbContext));
             appUserManager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(provider.Create("EmailConfirmation"));

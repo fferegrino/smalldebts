@@ -76,6 +76,11 @@ namespace Smalldebts.Backend.Controllers
 
             IdentityResult addUserResult = await this.AppUserManager.CreateAsync(user, createUserModel.Password);
 
+            if (!addUserResult.Succeeded)
+            {
+                return GetErrorResult(addUserResult);
+            }
+
             var code = await AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
             var callbackUrl = Url.Link("DefaultWeb", new
             {
@@ -84,29 +89,21 @@ namespace Smalldebts.Backend.Controllers
                 userId = user.Id,
                 code = code
             });
-            //await AppUserManager.SendEmailAsync(user.Id,
-            //   "Confirm your account",
-            //   "Please confirm your account by clicking this link: <a href=\""
-            //                                   + callbackUrl + "\">link</a>");
 
 
-            var apiKey = System.Environment.GetEnvironmentVariable("SENDGRID_APIKEY") ?? "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";
+            var apiKey = System.Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
             var client = new SendGridClient(apiKey);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("test@example.com", "DX Team"),
-                Subject = "Hello World from the SendGrid CSharp SDK!",
+                From = new EmailAddress("smalldebts@messier16.com", "The Smalldebts team"),
+                Subject = "Welcome to Smalldebts!",
                 PlainTextContent = "Please confirm your account by clicking this link:" + callbackUrl,
                 HtmlContent = "Please confirm your account by clicking this link: <a href=\""
                                                    + callbackUrl + "\">link</a>"
             };
-            msg.AddTo(new EmailAddress("antonio.feregrino@gmail.com", "Test User"));
+            msg.AddTo(new EmailAddress(createUserModel.Username, createUserModel.Username));
             var response = await client.SendEmailAsync(msg);
 
-            if (!addUserResult.Succeeded)
-            {
-                return GetErrorResult(addUserResult);
-            }
 
             return Created("http://smalldebts", TheModelFactory.Create(user));
         }

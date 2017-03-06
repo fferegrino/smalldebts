@@ -3,17 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smalldebts.Api", "Smalldebts.Api\Smalldebts.Api.csproj", "{FAB77F4E-599D-476E-8E7C-230FE0B8EFE0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smalldebts.Api", "Backend\Smalldebts.Backend\Smalldebts.Api.csproj", "{FAB77F4E-599D-476E-8E7C-230FE0B8EFE0}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Smalldebts.IntermediateObjects", "Smalldebts.IntermediateObjects\Smalldebts.IntermediateObjects.shproj", "{7E7BFE89-2282-43D4-A1E7-8E7B23ED8461}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smalldebts.WebSite", "Smalldebts.WebSite\Smalldebts.WebSite.csproj", "{E7E3CB6B-BA7B-41E5-B8DC-4D386B4CF4E8}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Smalldebts.Data", "Smalldebts.Data\Smalldebts.Data.shproj", "{49D1FD7C-9269-4314-9AC0-8190132F17A5}"
-EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Smalldebts.Data\Smalldebts.Data.projitems*{49d1fd7c-9269-4314-9ac0-8190132f17a5}*SharedItemsImports = 13
 		Smalldebts.IntermediateObjects\Smalldebts.IntermediateObjects.projitems*{7e7bfe89-2282-43d4-a1e7-8e7b23ed8461}*SharedItemsImports = 13
 		Smalldebts.IntermediateObjects\Smalldebts.IntermediateObjects.projitems*{fab77f4e-599d-476e-8e7c-230fe0b8efe0}*SharedItemsImports = 4
 	EndGlobalSection
@@ -26,10 +21,6 @@ Global
 		{FAB77F4E-599D-476E-8E7C-230FE0B8EFE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAB77F4E-599D-476E-8E7C-230FE0B8EFE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAB77F4E-599D-476E-8E7C-230FE0B8EFE0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7E3CB6B-BA7B-41E5-B8DC-4D386B4CF4E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7E3CB6B-BA7B-41E5-B8DC-4D386B4CF4E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7E3CB6B-BA7B-41E5-B8DC-4D386B4CF4E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7E3CB6B-BA7B-41E5-B8DC-4D386B4CF4E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

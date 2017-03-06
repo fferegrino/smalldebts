@@ -9,6 +9,5 @@
     <Import_RootNamespace>Smalldebts.Data</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)DataObjects\" />
   </ItemGroup>
 </Project>

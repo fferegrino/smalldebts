@@ -36,8 +36,6 @@ namespace Smalldebts.Backend
             new MobileAppConfiguration()
                 .UseDefaultConfiguration()
                 .ApplyTo(config);
-            config.Routes.MapHttpRoute("DefaultWeb",
-                "{controller}/{action}");
 
 
             // Use Entity Framework Code First to create database tables based on your DbContext
@@ -51,9 +49,9 @@ namespace Smalldebts.Backend
                 {
                     // This middleware is intended to be used locally for debugging. By default, HostName will
                     // only have a value when running in an App Service application.
-                    SigningKey = ConfigurationManager.AppSettings["SigningKey"],
-                    ValidAudiences = new[] { ConfigurationManager.AppSettings["ValidAudience"] },
-                    ValidIssuers = new[] { ConfigurationManager.AppSettings["ValidIssuer"] },
+                    SigningKey = Constants.SigninKey,
+                    ValidAudiences = new [] { Constants.Host },
+                    ValidIssuers = new[] { Constants.Host },
                     TokenHandler = config.GetAppServiceTokenHandler()
                 });
             }

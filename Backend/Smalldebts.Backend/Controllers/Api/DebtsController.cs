@@ -1,17 +1,12 @@
-﻿using Microsoft.Azure.Mobile.Server;
-using Microsoft.Azure.Mobile.Server.Config;
-using Smalldebts.Backend.DataObjects;
-using Smalldebts.ItermediateObjects;
-using Smalldebts.Backend.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
-using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
+using Microsoft.Azure.Mobile.Server.Config;
+using Smalldebts.Backend.Models;
 
-namespace Smalldebts.Backend.Controllers
+namespace Smalldebts.Backend.Controllers.Api
 {
     [MobileAppController]
     public class DebtsController : ApiController

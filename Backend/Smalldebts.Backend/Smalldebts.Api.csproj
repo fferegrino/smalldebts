@@ -224,11 +224,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.MobileApp.cs" />
-    <Compile Include="Controllers\AccountsController.cs" />
-    <Compile Include="Controllers\BaseApiController.cs" />
-    <Compile Include="Controllers\MeController.cs" />
-    <Compile Include="Controllers\MovementsController.cs" />
-    <Compile Include="Controllers\DebtsController.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Controllers\Api\AccountsController.cs" />
+    <Compile Include="Controllers\Api\BaseApiAuthController.cs" />
+    <Compile Include="Controllers\Api\MeController.cs" />
+    <Compile Include="Controllers\Api\MovementsController.cs" />
+    <Compile Include="Controllers\Api\DebtsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DataObjects\ApplicationUser.cs" />
     <Compile Include="DataObjects\Debt.cs" />
@@ -238,7 +239,6 @@
     </Compile>
     <Compile Include="Models\ApplicationUserManager.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
-    <Compile Include="OwinStartup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\CustomAuthProvider.cs" />
     <Compile Include="Providers\CustomZumoTokens.cs" />
@@ -253,6 +253,7 @@
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\test-smalldebts - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

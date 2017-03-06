@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
-using System.Web.Http.Results;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -12,9 +9,9 @@ using Smalldebts.Backend.Models;
 using Smalldebts.IntermediateObjects;
 using ApplicationUser = Smalldebts.Backend.DataObjects.ApplicationUser;
 
-namespace Smalldebts.Backend.Controllers
+namespace Smalldebts.Backend.Controllers.Api
 {
-    public class BaseApiController : ApiController
+    public class BaseApiAuthController : ApiController
     {
 
         //private ModelFactory _modelFactory;
@@ -28,7 +25,7 @@ namespace Smalldebts.Backend.Controllers
             }
         }
 
-        public BaseApiController()
+        public BaseApiAuthController()
         {
         }
 

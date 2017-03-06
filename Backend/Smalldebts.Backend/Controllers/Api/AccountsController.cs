@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
-using System.Web.Http.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.Azure.Mobile.Server.Config;
 using SendGrid;
@@ -15,10 +11,10 @@ using ApplicationUser = Smalldebts.Backend.DataObjects.ApplicationUser;
 
 //using Smalldebts.IntermediateObjects;
 
-namespace Smalldebts.Backend.Controllers
+namespace Smalldebts.Backend.Controllers.Api
 {
     [MobileAppController]
-    public class AccountsController : BaseApiController
+    public class AccountsController : BaseApiAuthController
     {
         //[HttpGet]
         //[Route("confirm")]

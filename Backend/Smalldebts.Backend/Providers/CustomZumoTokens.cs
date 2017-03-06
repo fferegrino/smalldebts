@@ -11,23 +11,16 @@ namespace Smalldebts.Backend.Providers
 {
     public class CustomZumoTokenFormat : ISecureDataFormat<AuthenticationTicket>
     {
-        private string _host = string.Format("https://{0}.azurewebsites.net/",
+        private string GetHost()
+        {
+#if DEBUG
+            return Constants.Host;
+#else
+            return string.Format("https://{0}.azurewebsites.net/",
             Environment.ExpandEnvironmentVariables("%WEBSITE_SITE_NAME%")
                 .ToLower());
-
-        //private string GetSiteUrl()
-        //{
-        //    var settings = this.Configuration.GetMobileAppSettingsProvider().GetMobileAppSettings();
-
-        //    if (string.IsNullOrEmpty(settings.HostName))
-        //    {
-        //        return "http://localhost";
-        //    }
-        //    else
-        //    {
-        //        return "https://" + settings.HostName + "/";
-        //    }
-        //}
+#endif
+        }
 
 
         public string Protect(AuthenticationTicket data)
@@ -40,8 +33,8 @@ namespace Smalldebts.Backend.Providers
             var tokenInfo = AppServiceLoginHandler.CreateToken(
                     data.Identity.Claims,
                     signingKey,
-                    _host,
-                    _host,
+                    GetHost(),
+                    GetHost(),
                     TimeSpan.FromHours(24));
 
             return tokenInfo.RawData;
@@ -52,13 +45,13 @@ namespace Smalldebts.Backend.Providers
             throw new NotImplementedException();
         }
 
-        private static string GetSigningKey()
+        private string GetSigningKey()
         {
             string key =
                 Environment.GetEnvironmentVariable("WEBSITE_AUTH_SIGNING_KEY");
 
             if (string.IsNullOrWhiteSpace(key))
-                key = "232d76722459344c7e654f45665d65412e546d4428744354632e787c2a";//ConfigurationManager.AppSettings["SigningKey"];
+                key = Constants.SigninKey;
 
             return key;
         }

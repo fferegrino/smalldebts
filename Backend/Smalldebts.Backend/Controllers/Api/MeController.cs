@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity;
 using Microsoft.Azure.Mobile.Server.Config;
 using Smalldebts.IntermediateObjects;
 
-namespace Smalldebts.Backend.Controllers
+namespace Smalldebts.Backend.Controllers.Api
 {
     [MobileAppController]
-    public class MeController : BaseApiController
+    public class MeController : BaseApiAuthController
     {
         [HttpGet]
         [Authorize]

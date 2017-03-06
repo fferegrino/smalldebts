@@ -8,6 +8,7 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using Smalldebts.IntermediateObjects;
 using ApplicationUser = Smalldebts.Backend.DataObjects.ApplicationUser;
+using System.Net;
 
 //using Smalldebts.IntermediateObjects;
 
@@ -78,13 +79,15 @@ namespace Smalldebts.Backend.Controllers.Api
             }
 
             var code = await AppUserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-            var callbackUrl = Url.Link("DefaultWeb", new
-            {
-                Controller = "Account",
-                Action = "ConfirmEmail",
-                userId = user.Id,
-                code = code
-            });
+            string site;
+#if DEBUG
+            site = Constants.Site;
+#else
+            site = String.Format("https://{0}.azurewebsites.net/",
+            Environment.ExpandEnvironmentVariables("%WEBSITE_SITE_NAME%")
+                .ToLower());
+#endif
+            var callbackUrl = site + $"account/confirmemail?userId={Uri.EscapeDataString(user.Id)}&code={Uri.EscapeDataString(code)}";
 
 
             var apiKey = System.Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
@@ -101,7 +104,7 @@ namespace Smalldebts.Backend.Controllers.Api
             var response = await client.SendEmailAsync(msg);
 
 
-            return Created("http://smalldebts", TheModelFactory.Create(user));
+            return Created(callbackUrl, TheModelFactory.Create(user));
         }
     }
 }

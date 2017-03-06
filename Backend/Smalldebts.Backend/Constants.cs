@@ -9,5 +9,6 @@ namespace Smalldebts.Backend
     {
         public const string SigninKey = "232d76722459344c7e654f45665d65412e546d4428744354632e787c2a";
         public const string Host = "http://localhost/";
+        public const string Site = "http://localhost/smalldebts/";
     }
 }

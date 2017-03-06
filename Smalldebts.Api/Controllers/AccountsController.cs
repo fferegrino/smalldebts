@@ -105,7 +105,7 @@ namespace Smalldebts.Backend.Controllers
             var response = await client.SendEmailAsync(msg);
 
 
-            return Created(callbackUrl, TheModelFactory.Create(user));
+            return Created("http://smalldebts", TheModelFactory.Create(user));
         }
     }
 }

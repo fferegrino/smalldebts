@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Azure.Mobile.Server;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Web;
 
 namespace Smalldebts.Backend.DataObjects
 {
-#if MOBILE_SERVICE
-    public class Debt : Microsoft.Azure.Mobile.Server.EntityData
-#else
-    public class Debt : HandmadeEntityData
-#endif
+    public class Debt : EntityData
     {
         public Debt()
         {

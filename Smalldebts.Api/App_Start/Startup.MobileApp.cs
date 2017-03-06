@@ -14,7 +14,6 @@ using Owin;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Smalldebts.Data;
 
 namespace Smalldebts.Backend
 {

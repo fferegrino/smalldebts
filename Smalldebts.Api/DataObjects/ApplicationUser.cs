@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -22,30 +23,15 @@ namespace Smalldebts.Backend.DataObjects
         public DateTimeOffset JoinDate { get; set; }
         public virtual ICollection<Debt> Debts { get; set; }
 
-
-#if MOBILE_SERVICE
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(
         UserManager<ApplicationUser> manager,
         string authenticationType)
         {
             var userIdentity = await manager.CreateIdentityAsync(this,
                                             authenticationType);
-            userIdentity.AddClaim(new Claim(System.IdentityModel.Tokens.JwtRegisteredClaimNames.Sub,
+            userIdentity.AddClaim(new Claim(JwtRegisteredClaimNames.Sub,
                                             this.UserName));
             return userIdentity;
         }
-#else
-        
-        public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
-        {
-            // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
-            var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
-            // Add custom user claims here
-            return userIdentity;
-        }
-#endif
-
-
-
     }
 }

@@ -1,10 +1,12 @@
-﻿using System.Data.Entity;
+using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Azure.Mobile.Server;
+using Microsoft.Azure.Mobile.Server.Tables;
 using Smalldebts.Backend.DataObjects;
 
-namespace Smalldebts.Data
+namespace Smalldebts.Backend.Models
 {
     public class MobileServiceContext : IdentityDbContext<ApplicationUser>
     {
@@ -41,11 +43,9 @@ namespace Smalldebts.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-#if MOBILE_SERVICE
             modelBuilder.Conventions.Add(
-                new AttributeToColumnAnnotationConvention<Microsoft.Azure.Mobile.Server.Tables.TableColumnAttribute, string>(
+                new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
-#endif
 
             modelBuilder.Entity<IdentityUserRole>()
             .HasKey(r => new { r.UserId, r.RoleId })

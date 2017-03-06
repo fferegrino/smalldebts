@@ -5,6 +5,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using Smalldebts.Backend.Models;
 using Smalldebts.Backend.Providers;
+using Smalldebts.Data;
 
 [assembly: OwinStartup(typeof(Smalldebts.Backend.Startup))]
 
@@ -14,7 +15,6 @@ namespace Smalldebts.Backend
     {
         public void Configuration(IAppBuilder app)
         {
-
             app.CreatePerOwinContext(MobileServiceContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             ConfigureMobileApp(app);

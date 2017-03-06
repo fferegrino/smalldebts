@@ -1,5 +1,4 @@
-﻿using Microsoft.Azure.Mobile.Server;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -7,7 +6,11 @@ using System.Web;
 
 namespace Smalldebts.Backend.DataObjects
 {
-    public class Movement : EntityData
+#if MOBILE_SERVICE
+    public class Movement : Microsoft.Azure.Mobile.Server.EntityData
+#else
+    public class Movement : HandmadeEntityData
+#endif
     {
         public string Reason { get; set; }
         public decimal Amount { get; set; }

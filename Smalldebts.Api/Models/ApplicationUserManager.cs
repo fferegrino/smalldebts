@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Smalldebts.Backend.DataObjects;
 using Microsoft.Owin.Security.DataProtection;
+using Smalldebts.Data;
 
 namespace Smalldebts.Backend.Models
 {

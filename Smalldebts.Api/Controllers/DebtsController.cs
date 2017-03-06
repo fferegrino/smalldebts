@@ -10,6 +10,7 @@ using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
+using Smalldebts.Data;
 
 namespace Smalldebts.Backend.Controllers
 {

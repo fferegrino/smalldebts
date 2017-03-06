@@ -9,6 +9,10 @@
     <Import_RootNamespace>Smalldebts.Data</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)DataObjects\" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataObjects\ApplicationUser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataObjects\Debt.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataObjects\HandmadeEntityData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataObjects\Movement.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MobileServiceContext.cs" />
   </ItemGroup>
 </Project>

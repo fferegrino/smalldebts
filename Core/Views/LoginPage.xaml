@@ -11,7 +11,7 @@
         <Image Source="add_debt_big"></Image>
         <StackLayout Grid.Row="1" Padding="20" x:Name="LoginPanel">
             <Label Text="Email" FontSize="Small" Margin="0,10,0,0"></Label>
-            <Entry x:Name="LoginEmailEntry" Text="demo@messier16.com"></Entry>
+            <Entry x:Name="LoginEmailEntry" Text="antonio.feregrino@gmail.com"></Entry>
             <Label Text="{i:Translate Password}" FontSize="Small" Margin="0,10,0,0"></Label>
             <Entry x:Name="LoginPassEntry" Text="9XN@p#=8yZdu?dg" IsPassword="true"></Entry>
             <Button x:Name="LoginButton" Text="{i:Translate SignIn}" MinimumHeightRequest="30" Clicked="LoginButtonClicked" />
@@ -21,11 +21,11 @@
 
         <StackLayout  Grid.Row="1" Padding="20" x:Name="SignupPanel">
             <Label Text="Email" FontSize="Small" Margin="0,10,0,0"></Label>
-            <Entry x:Name="SignupEmailEntry" Text="me@me.com"></Entry>
+            <Entry x:Name="SignupEmailEntry" Text="antonio.feregrino@gmail.com"></Entry>
             <Label Text="{i:Translate Password}" FontSize="Small" Margin="0,10,0,0"></Label>
-            <Entry x:Name="SignupPassEntry" Text="Abc-123@" IsPassword="true"></Entry>
+            <Entry x:Name="SignupPassEntry" Text="9XN@p#=8yZdu?dg" IsPassword="true"></Entry>
             <Label Text="{i:Translate PasswordConfirmation}" FontSize="Small" Margin="0,10,0,0"></Label>
-            <Entry x:Name="SignupPassConfirmationEntry" Text="Abc-123@" IsPassword="true"></Entry>
+            <Entry x:Name="SignupPassConfirmationEntry" Text="9XN@p#=8yZdu?dg" IsPassword="true"></Entry>
             <Button x:Name="SignUpButton" Text="{i:Translate SignUp}" MinimumHeightRequest="30" Clicked="SignUpButtonClicked"/>
             <Button x:Name="IHaveAnAccountButton" 
 			Text="{i:Translate YesAccButton}" Clicked="ActionButtonClicked" MinimumHeightRequest="30"/>

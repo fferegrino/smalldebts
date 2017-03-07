@@ -12,9 +12,9 @@ namespace Smalldebts.Core.UI
 
 #if DEBUG
         //public const string ApplicationUrl = "http://192.168.0.101/smalldebts";
-        public const string ApplicationUrl = "https://smalldebts-test.azurewebsites.net";
+        public const string ApplicationUrl = "https://test-smalldebts.azurewebsites.net";
 #else
-        public const string ApplicationUrl = "https://smalldebts-test.azurewebsites.net";
+        public const string ApplicationUrl = "https://test-smalldebts.azurewebsites.net";
 #endif
 
 		public const string UserId = "UserId";

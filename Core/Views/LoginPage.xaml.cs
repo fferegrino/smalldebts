@@ -61,8 +61,8 @@ namespace Smalldebts.Core.UI.Views
             {
                 UserDialogs.Instance.ShowLoading(AppStrings.LogginIn);
 				await App.RealCurrent.Auth(LoginEmailEntry.Text, LoginPassEntry.Text);
+				UserDialogs.Instance.HideLoading();
                 LoggedIn?.Invoke(this, new EventArgs());
-                UserDialogs.Instance.HideLoading();
                 await Navigation.PopModalAsync();
             }
             catch (Exception xe)
@@ -81,10 +81,16 @@ namespace Smalldebts.Core.UI.Views
         {
             try
             {
+
+                UserDialogs.Instance.ShowLoading("Registrando");
                 var newUser = await _serviceClient.RegisterUser(SignupEmailEntry.Text, SignupEmailEntry.Text,
                     SignupPassEntry.Text,
                     SignupPassConfirmationEntry.Text);
-				await UserDialogs.Instance.AlertAsync(AppStrings.SuccesfulSignUp);
+				UserDialogs.Instance.HideLoading();
+				if (newUser.EmailConfirmed)
+					await UserDialogs.Instance.AlertAsync(AppStrings.SuccesfulSignUp);
+				else
+					await UserDialogs.Instance.AlertAsync("We have sent you an email to confirm your account");
 				signUp = false;
 				LoginPanel.IsVisible = !signUp;
 				SignupPanel.IsVisible = signUp;
@@ -92,6 +98,7 @@ namespace Smalldebts.Core.UI.Views
             }
             catch (Exception xe)
             {
+				UserDialogs.Instance.HideLoading();
                 UserDialogs.Instance.ShowError(xe.Message);
             }
 

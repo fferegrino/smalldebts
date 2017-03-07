@@ -9,6 +9,7 @@ using SendGrid.Helpers.Mail;
 using Smalldebts.IntermediateObjects;
 using ApplicationUser = Smalldebts.Backend.DataObjects.ApplicationUser;
 using System.Net;
+using Smalldebts.Backend.Providers;
 
 //using Smalldebts.IntermediateObjects;
 
@@ -17,45 +18,12 @@ namespace Smalldebts.Backend.Controllers.Api
     [MobileAppController]
     public class AccountsController : BaseApiAuthController
     {
-        //[HttpGet]
-        //[Route("confirm")]
-        //[AllowAnonymous]
-        //public async Task<string> ConfirmEmail()
-        //{
-        //    var user = await AppUserManager.FindByEmailAsync("demo@messier16.com");
+        private IMailProvider _mailProvider;
 
-        //    
-        //    var callbackUrl = Url.Link("DefaultWeb", new
-        //    {
-        //        Controller = "Account",
-        //        Action = "ConfirmEmail",
-        //        userId = user.Id,
-        //        code = code
-        //    });
-
-        //    return callbackUrl;
-        //}
-
-
-        //[HttpGet]
-        //[Route("forgotten")]
-        //[AllowAnonymous]
-        //public async Task<string> ForgottenPassword()
-        //{
-        //    var user = await AppUserManager.FindByEmailAsync("demo@messier16.com");
-
-        //    var code = await AppUserManager.GeneratePasswordResetTokenAsync(user.Id);
-
-        //    var callbackUrl = Url.Link("DefaultWeb", new
-        //    {
-        //        Controller = "Account",
-        //        Action = "ResetPassword",
-        //        userId = user.Id,
-        //        code = code
-        //    });
-
-        //    return callbackUrl;
-        //}
+        public AccountsController(IMailProvider mailProvider)
+        {
+            _mailProvider = mailProvider;
+        }
 
         [AllowAnonymous]
         [ResponseType(typeof(SimpleUser))]
@@ -65,9 +33,6 @@ namespace Smalldebts.Backend.Controllers.Api
             {
                 UserName = createUserModel.Username,
                 Email = createUserModel.Email,
-                //FirstName = createUserModel.FirstName,
-                //LastName = createUserModel.LastName,
-                //Level = 3,
                 JoinDate = DateTime.Now.Date,
             };
 
@@ -88,21 +53,17 @@ namespace Smalldebts.Backend.Controllers.Api
                 .ToLower());
 #endif
             var callbackUrl = site + $"account/confirmemail?userId={Uri.EscapeDataString(user.Id)}&code={Uri.EscapeDataString(code)}";
+            var subject = "Welcome to Smalldebts!";
+            var plainTextContent = "Please confirm your account by clicking this link:" + callbackUrl;
+            var htmlContent = "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>";
 
 
-            var apiKey = System.Environment.GetEnvironmentVariable("SENDGRID_APIKEY");
-            var client = new SendGridClient(apiKey);
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("smalldebts@messier16.com", "The Smalldebts team"),
-                Subject = "Welcome to Smalldebts!",
-                PlainTextContent = "Please confirm your account by clicking this link:" + callbackUrl,
-                HtmlContent = "Please confirm your account by clicking this link: <a href=\""
-                                                   + callbackUrl + "\">link</a>"
-            };
-            msg.AddTo(new EmailAddress(createUserModel.Username, createUserModel.Username));
-            var response = await client.SendEmailAsync(msg);
-
+            var emailSent = _mailProvider.SendEmailAsync(
+                new Email() {Address = "smalldebts@messier16.com", Name = "Smalldebts team"},
+                "Welcome to Smalldebts!",
+                plainTextContent,
+                htmlContent,
+                new Email() {Address = user.Email, Name = user.UserName});
 
             return Created(callbackUrl, TheModelFactory.Create(user));
         }

@@ -22,7 +22,7 @@
            Grid.ColumnSpan="2" x:Name="BalanceLabel" />
     <Entry HorizontalTextAlignment="Center" 
              Placeholder="{i:Translate NewAmount}" Keyboard="Numeric"
-           FontSize="Large" Margin="10" HeightRequest="45" x:Name="AmountEntry" Grid.Row="1" Grid.ColumnSpan="2" />
+           FontSize="Large" Margin="10" HeightRequest="45" x:Name="AmountEntry" Grid.Row="1" Grid.ColumnSpan="2" ></Entry>
     <Button Grid.Row="2" Grid.Column="0" x:Name="PlusButton" Text="Le presté"
             Style="{StaticResource RectangleButton}"
             BackgroundColor="{StaticResource PositiveColor}" Clicked="ButtonClicked">

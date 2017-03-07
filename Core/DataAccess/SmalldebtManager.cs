@@ -142,7 +142,7 @@ namespace Smalldebts.Core.UI.DataAccess
 		public async Task<SimpleUser> Me()
 		{
 			
-				return await client.InvokeApiAsync<SimpleUser>("accounts/me", HttpMethod.Get, null);
+				return await client.InvokeApiAsync<SimpleUser>("me", HttpMethod.Get, null);
 		}
 
         public async Task<AuthenticationToken> GetAuthenticationToken(string email,
@@ -162,7 +162,7 @@ namespace Smalldebts.Core.UI.DataAccess
 
                 // invoke Api
                 HttpResponseMessage response 
-                    = await client.InvokeApiAsync("../oauth/token",
+                    = await client.InvokeApiAsync("oauth/token",
                                                    content,
                                                    HttpMethod.Post,
                                                    null,
@@ -175,10 +175,12 @@ namespace Smalldebts.Core.UI.DataAccess
             }
             catch (MobileServiceInvalidOperationException exception)
             {
-                if (string.Equals(exception.Message, "invalid_grant"))
-                    throw new InvalidGrantException("Wrong credentails",
-                                                    exception);
-                else
+				if (string.Equals(exception.Message, "invalid_grant"))
+					throw new InvalidGrantException("Wrong credentails",
+													exception);
+				else if (exception.Response.StatusCode == HttpStatusCode.InternalServerError)
+					throw new InternalServerException("Error en el servidor", exception);
+				else
                     throw;
             }
         }
@@ -291,11 +293,19 @@ namespace Smalldebts.Core.UI.DataAccess
         }
     }
 
-    public class InvalidGrantException : Exception
-    {
-        public InvalidGrantException(string message, MobileServiceInvalidOperationException exception)
-            : base(message, exception)
-        {
-        }
-    }
+	public class InvalidGrantException : Exception
+	{
+		public InvalidGrantException(string message, MobileServiceInvalidOperationException exception)
+			: base(message, exception)
+		{
+		}
+	}
+
+	public class InternalServerException : Exception
+	{
+		public InternalServerException(string message, MobileServiceInvalidOperationException exception)
+			: base(message, exception)
+		{
+		}
+	}
 }

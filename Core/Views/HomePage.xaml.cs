@@ -23,7 +23,7 @@ namespace Smalldebts.Core.UI.Views
         private readonly DebtDetailPage DebtDetailPage;
         private readonly ModifyDebtPage DebtModificationPage;
 
-        private FilterKind Filter = FilterKind.All;
+		private FilterKind Filter = FilterKind.IOweToTheyOweMe;
         private readonly FilterSettingsPage FilterSettingsPage;
 
         private List<Debt> OriginalDebts;
@@ -47,19 +47,15 @@ namespace Smalldebts.Core.UI.Views
             DebtDetailPage.DebtUpdated += DebtModificationPage_DebtUpdated;
 
 
-            FilterSettingsPage = new FilterSettingsPage();
+			FilterSettingsPage = new FilterSettingsPage(Filter);
             FilterSettingsPage.FilterChanged += FilterChanged;
 
             SortingSettingsPage = new SortingSettingsPage();
             SortingSettingsPage.SortingChanged += SortingChanged;
 
-            var tapFilter = new TapGestureRecognizer();
-            tapFilter.Tapped += async (sender, e) => await PopupNavigation.PushAsync(FilterSettingsPage);
-            FilterImage.GestureRecognizers.Add(tapFilter);
+			FilterImage.Clicked += async (sender, e) => await PopupNavigation.PushAsync(FilterSettingsPage);
 
-            var tapSort = new TapGestureRecognizer();
-            tapSort.Tapped += async (sender, e) => await PopupNavigation.PushAsync(SortingSettingsPage);
-            SortImage.GestureRecognizers.Add(tapSort);
+			SortImage.Clicked += async (sender, e) => await PopupNavigation.PushAsync(SortingSettingsPage);
 
 			DebtList.RefreshCommand = LoadDebtsCommand; 
 
@@ -109,7 +105,6 @@ namespace Smalldebts.Core.UI.Views
 
             OriginalDebts = debtList;
             ShownDebts = OriginalDebts;
-            SetNewItemSource();
             if (OriginalDebts.Count > 0)
             {
                 ApplyFilter();
@@ -125,6 +120,7 @@ namespace Smalldebts.Core.UI.Views
                 tap.Tapped += async (s, a) => await OpenDebtModificationPage();
                 AddNewDebtOptionPanel.GestureRecognizers.Add(tap);
             }
+			SetNewItemSource();
         }
 
 
@@ -221,7 +217,7 @@ namespace Smalldebts.Core.UI.Views
 
         private void SearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            ShownDebts = ShownDebts.Where(debt => debt.Name.Contains(e.NewTextValue));
+			ShownDebts = ShownDebts.Where(debt => debt.Name.IndexOf(e.NewTextValue, 0,System.StringComparison.OrdinalIgnoreCase) >= 0);
             SetNewItemSource();
         }
 

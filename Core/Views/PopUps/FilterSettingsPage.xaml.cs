@@ -24,7 +24,8 @@ namespace Smalldebts.Core.UI.Views.PopUps
             FilterPicker.Items.Add(AppStrings.FilterByPeopleIOweTo);
             FilterPicker.Items.Add(AppStrings.FilterByPeopleWhoOweMe);
             FilterPicker.Items.Add(AppStrings.FilterByPeopleImEvenWith);
-            //FilterPicker.SelectedIndex = (int) SelectedFilter;
+            FilterPicker.SelectedIndex = (int) SelectedFilter;
+			FilterPicker.SelectedIndexChanged += Handle_SelectedIndexChanged;
         }
 
         public event EventHandler<FilterKind> FilterChanged;

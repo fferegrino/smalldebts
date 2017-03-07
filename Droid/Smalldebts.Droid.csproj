@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Smalldebts.Droid</RootNamespace>
     <AssemblyName>Smalldebts.Core.Droid</AssemblyName>
-    <TargetFrameworkVersion>v7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -180,6 +180,9 @@
     <AndroidResource Include="Resources\drawable-xhdpi\edit.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\edit.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\edit.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\settings_small.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\settings_small.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\settings_small.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Smalldebts.Core.UI.csproj">

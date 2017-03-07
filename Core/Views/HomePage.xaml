@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Smalldebts.Core.UI.Views.HomePage"
-             xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
-             xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
-             Title="Smalldebts">
-    <Grid RowSpacing="0">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Grid BackgroundColor="#C0C0C5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="8*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-            </Grid.ColumnDefinitions>
-            <SearchBar TextChanged="SearchTextChanged" />
-            <Image HorizontalOptions="CenterAndExpand" Source="filter_small" Grid.Column="1" x:Name="FilterImage" />
-            <Image HorizontalOptions="CenterAndExpand" Source="sort_small" Grid.Column="2" x:Name="SortImage" />
-        </Grid>
-
-        <ListView Grid.Row="1" x:Name="DebtList" IsPullToRefreshEnabled="true" IsVisible="False">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <cells:DebtCell />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        <StackLayout Grid.Row="1" Margin="10" Padding="20" x:Name="AddNewDebtOptionPanel"  IsVisible="False" VerticalOptions="Center"
-                     HorizontalOptions="Center">
-            <Image HorizontalOptions="Center" Source="add_debt_big" />
-            <Label FontSize="Large" HorizontalTextAlignment="Center" Text="{i:Translate NadieTeDebe}" />
-        </StackLayout>
-    </Grid>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Smalldebts.Core.UI.Views.HomePage" xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects" xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells" xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions" Title="Smalldebts">
+	<Grid RowSpacing="0">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<Grid RowSpacing="0" ColumnSpacing="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="7*" />
+				<ColumnDefinition Width="1*" />
+				<ColumnDefinition Width="1*" />
+				<ColumnDefinition Width="1*" />
+			</Grid.ColumnDefinitions>
+			<SearchBar TextChanged="SearchTextChanged" BackgroundColor="{StaticResource BrandLightColor}"/>
+			<Button Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource BrandLightColor}"  Image="filter_small" HorizontalOptions="FillAndExpand" Grid.Column="1" x:Name="FilterImage">
+				<Button.Effects>
+					<effects:RectButtonEffect />
+				</Button.Effects>
+			</Button>
+			<Button Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource BrandLightColor}" Image="sort_small" HorizontalOptions="FillAndExpand" Grid.Column="2" x:Name="SortImage">
+				<Button.Effects>
+					<effects:RectButtonEffect />
+				</Button.Effects>
+			</Button>
+			<Button Style="{StaticResource RectangleButton}" BackgroundColor="{StaticResource BrandLightColor}" Image="settings_small" HorizontalOptions="FillAndExpand" Grid.Column="3" x:Name="SettingsImage">
+				<Button.Effects>
+					<effects:RectButtonEffect />
+				</Button.Effects>
+			</Button>
+		</Grid>
+		<ListView Grid.Row="1" x:Name="DebtList" IsPullToRefreshEnabled="true" IsVisible="False">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<cells:DebtCell />
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+		<StackLayout Grid.Row="1" Margin="10" Padding="20" x:Name="AddNewDebtOptionPanel" IsVisible="False" VerticalOptions="Center" HorizontalOptions="Center">
+			<Image HorizontalOptions="Center" Source="add_debt_big" />
+			<Label FontSize="Large" HorizontalTextAlignment="Center" Text="{i:Translate NadieTeDebe}" />
+		</StackLayout>
+	</Grid>
 </ContentPage>

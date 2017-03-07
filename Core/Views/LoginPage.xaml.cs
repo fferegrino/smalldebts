@@ -84,7 +84,11 @@ namespace Smalldebts.Core.UI.Views
                 var newUser = await _serviceClient.RegisterUser(SignupEmailEntry.Text, SignupEmailEntry.Text,
                     SignupPassEntry.Text,
                     SignupPassConfirmationEntry.Text);
-                await UserDialogs.Instance.AlertAsync($"{newUser.JoinDate}");
+				await UserDialogs.Instance.AlertAsync(AppStrings.SuccesfulSignUp);
+				signUp = false;
+				LoginPanel.IsVisible = !signUp;
+				SignupPanel.IsVisible = signUp;
+
             }
             catch (Exception xe)
             {

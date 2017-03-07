@@ -183,6 +183,9 @@
     <AndroidResource Include="Resources\drawable-xhdpi\settings_small.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\settings_small.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\settings_small.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\smalldebts_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\smalldebts_icon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\smalldebts_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Smalldebts.Core.UI.csproj">

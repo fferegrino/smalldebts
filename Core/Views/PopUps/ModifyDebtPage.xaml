@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -37,10 +37,10 @@
         <Label Margin="10,20,10,5" FontSize="Large" HorizontalTextAlignment="Center"
                Grid.Row="0" Grid.ColumnSpan="2" x:Name="DebtTitleLabel" Text="Modify debt" />
         <Entry Margin="10,20,10,5" FontSize="Large" HeightRequest="50"
-               x:Name="DebtNameEntry" Placeholder="Name" Grid.ColumnSpan="2" Keyboard="Default" />
-        <Entry Margin="10,5" FontSize="Large" HeightRequest="50" Placeholder="Amount"
+               x:Name="DebtNameEntry"  Placeholder="{i:Translate Name}" Grid.ColumnSpan="2" Keyboard="Default" />
+        <Entry Margin="10,5" FontSize="Large" HeightRequest="50"  Placeholder="{i:Translate Amount}"
                x:Name="DebtAmountEntry" Grid.Row="1" Grid.ColumnSpan="2" Keyboard="Numeric" />
-        <Entry Margin="10,5,10,20" Placeholder="Reason" Grid.Row="2"
+        <Entry Margin="10,5,10,20"  Placeholder="{i:Translate Reason}" Grid.Row="2"
                x:Name="DebtReasonEntry" Grid.ColumnSpan="2" Keyboard="Chat" />
 
         <Button Grid.Row="3" Grid.Column="0" Style="{StaticResource RectangleButton}"

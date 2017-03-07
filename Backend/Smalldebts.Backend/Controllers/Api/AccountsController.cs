@@ -18,12 +18,7 @@ namespace Smalldebts.Backend.Controllers.Api
     [MobileAppController]
     public class AccountsController : BaseApiAuthController
     {
-        private IMailProvider _mailProvider;
-
-        public AccountsController(IMailProvider mailProvider)
-        {
-            _mailProvider = mailProvider;
-        }
+        private IMailProvider _mailProvider = new SendGridMailProvider();
 
         [AllowAnonymous]
         [ResponseType(typeof(SimpleUser))]

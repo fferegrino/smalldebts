@@ -18,18 +18,17 @@ namespace Smalldebts.Backend.Controllers.Web
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IMailProvider _mailProvider;
+        private IMailProvider _mailProvider = new SendGridMailProvider();
 
         public AccountController()
         {
         }
 
         public AccountController(ApplicationUserManager userManager,
-            ApplicationSignInManager signInManager, IMailProvider mailProvider)
+            ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-            _mailProvider = mailProvider;
         }
 
         public ApplicationSignInManager SignInManager

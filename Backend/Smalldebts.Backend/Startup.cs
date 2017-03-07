@@ -18,7 +18,6 @@ namespace Smalldebts.Backend
             app.CreatePerOwinContext(MobileServiceContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
-            app.CreatePerOwinContext<IMailProvider>(SendGridMailProvider.Create);
 
             ConfigureMobileApp(app);
             ConfigureCustomAuth(app);

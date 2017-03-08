@@ -4,7 +4,7 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
-             xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
+             	 xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
                  xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects"
                  x:Class="Smalldebts.Core.UI.Views.PopUps.ModifyDebtPage">
   <!--Animations use example-->

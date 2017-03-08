@@ -8,7 +8,7 @@
     <OutputType>Library</OutputType>
     <RootNamespace>Smalldebts.Droid</RootNamespace>
     <AssemblyName>Smalldebts.Core.Droid</AssemblyName>
-    <TargetFrameworkVersion>v6.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidResgenClass>Resource</AndroidResgenClass>
@@ -186,6 +186,12 @@
     <AndroidResource Include="Resources\drawable-xhdpi\smalldebts_icon.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\smalldebts_icon.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\smalldebts_icon.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\disconnect.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\lightbulb.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\disconnect.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\lightbulb.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\disconnect.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\lightbulb.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Smalldebts.Core.UI.csproj">

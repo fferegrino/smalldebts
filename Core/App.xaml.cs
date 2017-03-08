@@ -27,7 +27,18 @@ namespace Smalldebts.Core.UI
 
 		public static App RealCurrent => Current as App;
 
-
+		public async Task LogOut()
+		{
+			var _secureStorage = DependencyService.Get<ISecureStorage>();
+			var _serviceClient = SmalldebtsManager.DefaultManager;
+			_secureStorage.Delete(Constants.UserId);
+			_secureStorage.Delete(Constants.Token);
+			_secureStorage.Delete(Constants.TokenExpirationDate);
+			_secureStorage.Delete(Constants.UserEmail);
+			_secureStorage.Delete(Constants.UserPassword);
+			_serviceClient.SetCredentials(null, null);
+			await _serviceClient.CurrentClient.LogoutAsync();
+		}
 
 		public async Task Auth(string email, string password)
 		{

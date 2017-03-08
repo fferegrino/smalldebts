@@ -21,7 +21,8 @@ namespace Smalldebts.Core.UI.Views
     {
         private readonly SmalldebtsManager _serviceClient;
         private readonly DebtDetailPage DebtDetailPage;
-        private readonly ModifyDebtPage DebtModificationPage;
+		private readonly ModifyDebtPage DebtModificationPage;
+		private readonly SettingsPage SettingsPage;
 
 		private FilterKind Filter = FilterKind.IOweToTheyOweMe;
         private readonly FilterSettingsPage FilterSettingsPage;
@@ -49,13 +50,15 @@ namespace Smalldebts.Core.UI.Views
 
 			FilterSettingsPage = new FilterSettingsPage(Filter);
             FilterSettingsPage.FilterChanged += FilterChanged;
+			FilterImage.Clicked += async (sender, e) => await PopupNavigation.PushAsync(FilterSettingsPage);
 
             SortingSettingsPage = new SortingSettingsPage();
             SortingSettingsPage.SortingChanged += SortingChanged;
-
-			FilterImage.Clicked += async (sender, e) => await PopupNavigation.PushAsync(FilterSettingsPage);
-
 			SortImage.Clicked += async (sender, e) => await PopupNavigation.PushAsync(SortingSettingsPage);
+
+			SettingsPage = new SettingsPage();
+			SettingsPage.LoggedOut += SettingsPageLoggedOut;
+			SettingsImage.Clicked += async (sender, e) => await Navigation.PushAsync(SettingsPage);
 
 			DebtList.RefreshCommand = LoadDebtsCommand; 
 
@@ -123,9 +126,14 @@ namespace Smalldebts.Core.UI.Views
 			SetNewItemSource();
         }
 
+		bool firstLoading = true;
 
         protected override async void OnAppearing()
         {
+			if (!firstLoading)
+				return;
+			firstLoading = false;
+
 			var authed = await App.RealCurrent.AutoAuthenticate();
 			if (!authed)
             {
@@ -198,6 +206,11 @@ namespace Smalldebts.Core.UI.Views
             }
         }
 
+		async void SettingsPageLoggedOut(object sender, System.EventArgs e)
+		{
+			firstLoading = true;
+			await App.RealCurrent.LogOut();
+		}
 
         private async void Delete(DebtCell cell, DebtManipulationViewModel vm)
         {

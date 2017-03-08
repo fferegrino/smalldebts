@@ -103,5 +103,10 @@ namespace Smalldebts.Core.UI.Views
             }
 
         }
+
+        private void ForgottenPassButtonClicked(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri("https://test-smalldebts.azurewebsites.net/account/forgotpassword"));
+        }
     }
 }

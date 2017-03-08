@@ -16,6 +16,7 @@ namespace Smalldebts.Core.UI
 #else
         public const string ApplicationUrl = "https://test-smalldebts.azurewebsites.net";
 #endif
+        public const string WebSiteUrl = ApplicationUrl;
 
 		public const string UserId = "UserId";
 		public const string Token = "Token";

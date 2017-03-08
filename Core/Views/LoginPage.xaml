@@ -17,7 +17,7 @@
             <Button x:Name="NoAccountButton" Text="{i:Translate NoAccButton}" 
 			    MinimumHeightRequest="30" Clicked="ActionButtonClicked"/>
             <Button x:Name="ForgottenPassButton" Text="Forgot passsword?" 
-			    MinimumHeightRequest="30" Clicked="ActionButtonClicked"/>
+			    MinimumHeightRequest="30" Clicked="ForgottenPassButtonClicked"/>
         </StackLayout>
 
         <StackLayout  Grid.Row="1" Padding="20" x:Name="SignupPanel">

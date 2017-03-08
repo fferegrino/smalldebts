@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
@@ -244,7 +245,16 @@ namespace Smalldebts.Core.UI.Views
 
         private void SearchTextChanged(object sender, TextChangedEventArgs e)
         {
-			ShownDebts = ShownDebts.Where(debt => debt.Name.IndexOf(e.NewTextValue, 0,System.StringComparison.OrdinalIgnoreCase) >= 0);
+            if (String.IsNullOrWhiteSpace(e.NewTextValue))
+            {
+                ShownDebts =
+                    ShownDebts.Where(
+                        debt => debt.Name.IndexOf(e.NewTextValue, 0, System.StringComparison.OrdinalIgnoreCase) >= 0);
+            }
+            else
+            {
+                ShownDebts = OriginalDebts;
+            }
             SetNewItemSource();
         }
 

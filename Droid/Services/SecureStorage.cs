@@ -33,10 +33,9 @@ namespace Smalldebts.Droid.Services
 		/// <param name="dataBytes">Data bytes to store.</param>
 		public void Store(string key, string value)
 		{
-			var dataBytes = value.GetBytes();
 			using (var editor = this.preferences.Edit())
 			{
-				editor.PutString(key, Encoding.UTF8.GetString(dataBytes));
+				editor.PutString(key, value);
 				editor.Commit();
 			}
 		}

@@ -18,10 +18,15 @@ namespace Smalldebts.Core.UI.Controls.Cells
         {
             InitializeComponent();
 
-            var deleteAction = new MenuItem { Text = "Delete", IsDestructive = true, Icon = "substract" };
+            var deleteAction = new MenuItem { Text = "Pay", IsDestructive = true, Icon = "substract" };
             deleteAction.Clicked += (s, a) =>
             {
-                var argument = new DebtManipulationViewModel { Id = Debt?.Id };
+                var argument = new DebtManipulationViewModel 
+				{ 
+					Id = Debt?.Id,
+                	Name = Debt?.Name,
+					Amount = Debt.Balance
+				};
                 MessagingCenter.Send(this, "deleted", argument);
             };
 

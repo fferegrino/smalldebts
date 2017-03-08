@@ -13,6 +13,7 @@ using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Smalldebts.Core.UI.DataAccess;
+using Smalldebts.Core.UI.Resources;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Smalldebts.Core.UI.Views
@@ -214,7 +215,20 @@ namespace Smalldebts.Core.UI.Views
 
         private async void Delete(DebtCell cell, DebtManipulationViewModel vm)
         {
-            var result = await UserDialogs.Instance.ConfirmAsync("Seguro");
+            var result = await UserDialogs.Instance.ConfirmAsync("Seguro que deseas pagar esta deuda");
+			if (result)
+			{
+				UserDialogs.Instance.ShowLoading(AppStrings.Wait);
+				var updated = new Debt
+				{
+					Id = vm.Id,
+					Reason = "Full payment",
+					Balance = -1 * vm.Amount
+				};
+				var debtResult = await _serviceClient.AddMovementToDebt(updated);
+				DebtModificationPage_DebtUpdated(this, debtResult);
+				UserDialogs.Instance.HideLoading();
+			}
         }
 
         private async void DebtList_ItemSelected(object sender, SelectedItemChangedEventArgs e)

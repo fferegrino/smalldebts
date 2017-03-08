@@ -18,7 +18,7 @@ namespace Smalldebts.Core.UI.Controls.Cells
         {
             InitializeComponent();
 
-            var deleteAction = new MenuItem { Text = "Pay", IsDestructive = true, Icon = "substract" };
+            var deleteAction = new MenuItem { Text = AppStrings.PayDebt, IsDestructive = true, Icon = "substract" };
             deleteAction.Clicked += (s, a) =>
             {
                 var argument = new DebtManipulationViewModel 

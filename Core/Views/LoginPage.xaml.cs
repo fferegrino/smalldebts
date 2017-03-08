@@ -82,7 +82,7 @@ namespace Smalldebts.Core.UI.Views
             try
             {
 
-                UserDialogs.Instance.ShowLoading("Registrando");
+                UserDialogs.Instance.ShowLoading( AppStrings.SigningUp);
                 var newUser = await _serviceClient.RegisterUser(SignupEmailEntry.Text, SignupEmailEntry.Text,
                     SignupPassEntry.Text,
                     SignupPassConfirmationEntry.Text);
@@ -90,7 +90,7 @@ namespace Smalldebts.Core.UI.Views
 				if (newUser.EmailConfirmed)
 					await UserDialogs.Instance.AlertAsync(AppStrings.SuccesfulSignUp);
 				else
-					await UserDialogs.Instance.AlertAsync("We have sent you an email to confirm your account");
+					await UserDialogs.Instance.AlertAsync(AppStrings.EmailConfirmationRequiredText);
 				signUp = false;
 				LoginPanel.IsVisible = !signUp;
 				SignupPanel.IsVisible = signUp;

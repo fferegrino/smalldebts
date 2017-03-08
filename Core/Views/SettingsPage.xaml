@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 
 	xmlns="http://xamarin.com/schemas/2014/forms" 
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
-	x:Class="Smalldebts.Core.UI.Views.SettingsPage">
+             xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
+	x:Class="Smalldebts.Core.UI.Views.SettingsPage"
+  Title="{i:Translate Settings}">
 	<TableView HasUnevenRows="true" HeightRequest="-1">
         <TableRoot>
-            <TableSection Title="Cuenta">
-                <cells:MenuCell Tapped="SettingCellTapped" x:Name="DisconnectCell" ImageSource="disconnect" Text="XXX"></cells:MenuCell>
+            <TableSection Title="{i:Translate Account}">
+                <cells:MenuCell Tapped="SettingCellTapped" x:Name="DisconnectCell" ImageSource="disconnect" Text="{i:Translate LogOut}"></cells:MenuCell>
             </TableSection>
-            <TableSection Title="About">
-                <cells:MenuCell Tapped="SettingCellTapped" x:Name="ReportBugCell"  ImageSource="lightbulb" Text="Acerca de"></cells:MenuCell>
-                <cells:MenuCell Tapped="SettingCellTapped" x:Name="IdeaCell" ImageSource="lightbulb" Text="Idea"></cells:MenuCell>
+            <TableSection Title="Smalldebts">
+                <cells:MenuCell Tapped="SettingCellTapped" x:Name="ReportBugCell"  ImageSource="lightbulb" Text="{i:Translate Feedback}"></cells:MenuCell>
+                <cells:MenuCell Tapped="SettingCellTapped" x:Name="IdeaCell" ImageSource="lightbulb" Text="{i:Translate Acknowledgements}"></cells:MenuCell>
             </TableSection>
         </TableRoot>
     </TableView>

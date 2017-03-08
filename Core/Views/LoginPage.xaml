@@ -17,7 +17,7 @@
 				Style="{StaticResource PrimaryButton}" Clicked="LoginButtonClicked" />
             <Button x:Name="NoAccountButton" Text="{i:Translate NoAccButton}"  
 				Style="{StaticResource SecondaryButton}" Clicked="ActionButtonClicked"/>
-            <Button x:Name="ForgottenPassButton" Text="Forgot passsword?" 
+            <Button x:Name="ForgottenPassButton" Text="{i:Translate ForgottenPasswordButton}" 
 				Style="{StaticResource SecondaryButton}" MinimumHeightRequest="30" Clicked="ForgottenPassButtonClicked"/>
         </StackLayout>
 

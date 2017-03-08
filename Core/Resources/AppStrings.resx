@@ -237,4 +237,34 @@
   <data name="Amount" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="ForgottenPasswordButton" xml:space="preserve">
+    <value>Recover password</value>
+  </data>
+  <data name="SigninIn" xml:space="preserve">
+    <value>Signin up</value>
+  </data>
+  <data name="SigningUp" xml:space="preserve">
+    <value>Signin up</value>
+  </data>
+  <data name="EmailConfirmationRequiredText" xml:space="preserve">
+    <value>We have sent you an email to confirm your account</value>
+  </data>
+  <data name="PayDebt" xml:space="preserve">
+    <value>Pay</value>
+  </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Acknowledgements" xml:space="preserve">
+    <value>Acknowledgements &amp; licenses</value>
+  </data>
+  <data name="Feedback" xml:space="preserve">
+    <value>Feedback</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

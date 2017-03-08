@@ -13,20 +13,22 @@
         <StackLayout Grid.Row="1" Padding="20" x:Name="LoginPanel">
             <Entry x:Name="LoginEmailEntry" Placeholder="Email" Text="antonio.feregrino@gmail.com"></Entry>
             <Entry x:Name="LoginPassEntry" Placeholder="{i:Translate Password}" Text="9XN@p#=8yZdu?dg" IsPassword="true"></Entry>
-            <Button x:Name="LoginButton" Text="{i:Translate SignIn}" MinimumHeightRequest="30" Clicked="LoginButtonClicked" />
-            <Button x:Name="NoAccountButton" Text="{i:Translate NoAccButton}" 
-			    MinimumHeightRequest="30" Clicked="ActionButtonClicked"/>
+            <Button x:Name="LoginButton" Text="{i:Translate SignIn}" 
+				Style="{StaticResource PrimaryButton}" Clicked="LoginButtonClicked" />
+            <Button x:Name="NoAccountButton" Text="{i:Translate NoAccButton}"  
+				Style="{StaticResource SecondaryButton}" Clicked="ActionButtonClicked"/>
             <Button x:Name="ForgottenPassButton" Text="Forgot passsword?" 
-			    MinimumHeightRequest="30" Clicked="ForgottenPassButtonClicked"/>
+				Style="{StaticResource SecondaryButton}" MinimumHeightRequest="30" Clicked="ForgottenPassButtonClicked"/>
         </StackLayout>
 
         <StackLayout  Grid.Row="1" Padding="20" x:Name="SignupPanel">
             <Entry x:Name="SignupEmailEntry" Placeholder="Email" Text="antonio.feregrino@gmail.com"></Entry>
             <Entry x:Name="SignupPassEntry" Placeholder="{i:Translate Password}" Text="9XN@p#=8yZdu?dg" IsPassword="true"></Entry>
             <Entry x:Name="SignupPassConfirmationEntry" Placeholder="{i:Translate PasswordConfirmation}" Text="9XN@p#=8yZdu?dg" IsPassword="true"></Entry>
-            <Button x:Name="SignUpButton" Text="{i:Translate SignUp}" MinimumHeightRequest="30" Clicked="SignUpButtonClicked"/>
-            <Button x:Name="IHaveAnAccountButton" 
-			Text="{i:Translate YesAccButton}" Clicked="ActionButtonClicked" MinimumHeightRequest="30"/>
+            <Button x:Name="SignUpButton" Text="{i:Translate SignUp}" 
+				Style="{StaticResource PrimaryButton}" Clicked="SignUpButtonClicked"/>
+            <Button x:Name="IHaveAnAccountButton" Text="{i:Translate YesAccButton}"
+				Style="{StaticResource SecondaryButton}" Clicked="ActionButtonClicked" />
         </StackLayout>
 
     </Grid>

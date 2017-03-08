@@ -102,7 +102,7 @@
       <DependentUpon>MovementDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\ColorConverter.cs" />
-    <Compile Include="App.Resources.xaml..cs">
+    <Compile Include="App.Resources.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Cells\DebtCell.xaml.cs">
@@ -124,6 +124,9 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Cells\MenuCell.cs" />
+    <Compile Include="App.Auth.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

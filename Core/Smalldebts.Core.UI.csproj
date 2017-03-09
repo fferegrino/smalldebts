@@ -127,6 +127,7 @@
     <Compile Include="App.Auth.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MyPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Acr.UserDialogs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">

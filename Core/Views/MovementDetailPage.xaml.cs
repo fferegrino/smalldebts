@@ -20,13 +20,11 @@ namespace Smalldebts.Core.UI.Views
             MovementAmountLabel.Text = String.Format(AppStrings.AmountFormat, Movement.Amount);
             if (Movement.Amount < 0)
             {
-				MovementReasonEntry.BackgroundColor = App.RealCurrent.NegativeWashedColor;
                 BackgroundColor = App.RealCurrent.NegativeWashedColor;
 				MovementAmountLabel.TextColor = App.RealCurrent.NegativeStrongColor;
             }
             else if (Movement.Amount > 0)
             {
-				MovementReasonEntry.BackgroundColor = App.RealCurrent.PositiveWashedColor;
                 BackgroundColor = App.RealCurrent.PositiveWashedColor;
 				MovementAmountLabel.TextColor = App.RealCurrent.PositiveStrongColor;
             }
@@ -34,7 +32,6 @@ namespace Smalldebts.Core.UI.Views
             {
                 BackgroundColor = App.RealCurrent.NeutralWashedColor;
                 MovementAmountLabel.TextColor = App.RealCurrent.NeutralColor;
-				MovementReasonEntry.BackgroundColor = App.RealCurrent.NeutralWashedColor;
             }
             MovementDateLabel.Text = Movement.CreatedAt.LocalDateTime.ToString();
 			MovementReasonLabel.Text = Movement.Reason;

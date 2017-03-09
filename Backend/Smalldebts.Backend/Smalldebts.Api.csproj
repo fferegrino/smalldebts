@@ -232,6 +232,7 @@
     <Compile Include="Controllers\Api\DebtsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\Web\AccountController.cs" />
+    <Compile Include="Controllers\Web\HomeController.cs" />
     <Compile Include="DataObjects\ApplicationUser.cs" />
     <Compile Include="DataObjects\Debt.cs" />
     <Compile Include="DataObjects\Movement.cs" />
@@ -365,6 +366,8 @@
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Account\SendCode.cshtml" />
     <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Home\Thanks.cshtml" />
+    <Content Include="Views\Home\Privacy.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

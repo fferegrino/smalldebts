@@ -267,4 +267,7 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="PrivacyWarning" xml:space="preserve">
+    <value>By signin up you agree to our privacy policy</value>
+  </data>
 </root>

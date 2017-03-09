@@ -267,4 +267,7 @@
   <data name="Settings" xml:space="preserve">
     <value>Configuración</value>
   </data>
+  <data name="PrivacyWarning" xml:space="preserve">
+    <value>Al resgistrarte estás aceptando nuestra política de privacidad</value>
+  </data>
 </root>

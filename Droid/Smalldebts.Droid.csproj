@@ -194,6 +194,9 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\lightbulb.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\disconnect.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\lightbulb.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\library.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\library.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\library.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Core\Smalldebts.Core.UI.csproj">

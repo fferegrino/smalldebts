@@ -8,28 +8,37 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="150"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
         <Image Source="smalldebts_icon"></Image>
-        <StackLayout Grid.Row="1" Padding="20" x:Name="LoginPanel">
-            <Entry x:Name="LoginEmailEntry" Placeholder="Email" Text="antonio.feregrino@gmail.com"></Entry>
-            <Entry x:Name="LoginPassEntry" Placeholder="{i:Translate Password}" Text="9XN@p#=8yZdu?dg" IsPassword="true"></Entry>
+        <StackLayout Grid.Row="1" Padding="20" x:Name="LoginPanel" Spacing="12">
+            <Entry x:Name="LoginEmailEntry" Placeholder="Email" Text=""></Entry>
+            <Entry x:Name="LoginPassEntry" Placeholder="{i:Translate Password}" Text="" IsPassword="true"></Entry>
             <Button x:Name="LoginButton" Text="{i:Translate SignIn}" 
 				Style="{StaticResource PrimaryButton}" Clicked="LoginButtonClicked" />
+        </StackLayout>
+
+        <StackLayout  Grid.Row="1" Padding="20" x:Name="SignupPanel" Spacing="10">
+            <Entry x:Name="SignupEmailEntry" Placeholder="Email" Text=""></Entry>
+            <Entry x:Name="SignupPassEntry" Placeholder="{i:Translate Password}" Text="" IsPassword="true"></Entry>
+            <Entry x:Name="SignupPassConfirmationEntry" Placeholder="{i:Translate PasswordConfirmation}" Text="" IsPassword="true"></Entry>
+			<Label Text="{i:Translate PrivacyWarning}" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
+            <Button x:Name="SignUpButton" Text="{i:Translate SignUp}" 
+				Style="{StaticResource PrimaryButton}" Clicked="SignUpButtonClicked"/>
+        </StackLayout>
+
+		<StackLayout Padding="20"  Grid.Row="2" x:Name="SignupPanel2" Spacing="10">
+            <Button x:Name="IHaveAnAccountButton" Text="{i:Translate YesAccButton}"
+				Style="{StaticResource SecondaryButton}" Clicked="ActionButtonClicked" />
+            <Button x:Name="PrivacyButton" Text="{i:Translate PrivacyPolicyText}" 
+				Style="{StaticResource SecondaryButton}" MinimumHeightRequest="30" Clicked="ViewPrivacyPolicyButton"/>
+		</StackLayout>
+
+		<StackLayout Padding="20"  Grid.Row="2" x:Name="LoginPanel2" Spacing="10">
             <Button x:Name="NoAccountButton" Text="{i:Translate NoAccButton}"  
 				Style="{StaticResource SecondaryButton}" Clicked="ActionButtonClicked"/>
             <Button x:Name="ForgottenPassButton" Text="{i:Translate ForgottenPasswordButton}" 
 				Style="{StaticResource SecondaryButton}" MinimumHeightRequest="30" Clicked="ForgottenPassButtonClicked"/>
-        </StackLayout>
-
-        <StackLayout  Grid.Row="1" Padding="20" x:Name="SignupPanel">
-            <Entry x:Name="SignupEmailEntry" Placeholder="Email" Text="antonio.feregrino@gmail.com"></Entry>
-            <Entry x:Name="SignupPassEntry" Placeholder="{i:Translate Password}" Text="9XN@p#=8yZdu?dg" IsPassword="true"></Entry>
-            <Entry x:Name="SignupPassConfirmationEntry" Placeholder="{i:Translate PasswordConfirmation}" Text="9XN@p#=8yZdu?dg" IsPassword="true"></Entry>
-            <Button x:Name="SignUpButton" Text="{i:Translate SignUp}" 
-				Style="{StaticResource PrimaryButton}" Clicked="SignUpButtonClicked"/>
-            <Button x:Name="IHaveAnAccountButton" Text="{i:Translate YesAccButton}"
-				Style="{StaticResource SecondaryButton}" Clicked="ActionButtonClicked" />
-        </StackLayout>
-
+		</StackLayout>
     </Grid>
 </ContentPage>

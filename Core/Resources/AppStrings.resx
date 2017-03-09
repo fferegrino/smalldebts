@@ -270,4 +270,7 @@
   <data name="PrivacyWarning" xml:space="preserve">
     <value>By signin up you agree to our privacy policy</value>
   </data>
+  <data name="PrivacyPolicyText" xml:space="preserve">
+    <value>Privacy policy</value>
+  </data>
 </root>

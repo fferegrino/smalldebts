@@ -51,6 +51,8 @@ namespace Smalldebts.Core.UI.Views
             signUp = !signUp;
             LoginPanel.IsVisible = !signUp;
             SignupPanel.IsVisible = signUp;
+			LoginPanel2.IsVisible = !signUp;
+			SignupPanel2.IsVisible = signUp;
         }
 
         private async void LoginButtonClicked(object sender, EventArgs e)
@@ -94,6 +96,8 @@ namespace Smalldebts.Core.UI.Views
 				signUp = false;
 				LoginPanel.IsVisible = !signUp;
 				SignupPanel.IsVisible = signUp;
+				LoginPanel2.IsVisible = !signUp;
+				SignupPanel2.IsVisible = signUp;
 
             }
             catch (Exception xe)
@@ -103,6 +107,11 @@ namespace Smalldebts.Core.UI.Views
             }
 
         }
+
+		private void ViewPrivacyPolicyButton(object sender, EventArgs e)
+		{
+			Device.OpenUri(new Uri("https://test-smalldebts.azurewebsites.net/home/privacy"));
+		}
 
         private void ForgottenPassButtonClicked(object sender, EventArgs e)
         {

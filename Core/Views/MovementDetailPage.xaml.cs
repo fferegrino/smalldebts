@@ -16,8 +16,9 @@ namespace Smalldebts.Core.UI.Views
 
         protected override void OnAppearing()
         {
-			Title = String.Format(AppStrings.AmountFormat, Movement.Amount);
-            MovementAmountLabel.Text = String.Format(AppStrings.AmountFormat, Movement.Amount);
+			Title = String.Format(AppStrings.AmountFormat, Math.Abs(Movement.Amount));
+			var time = Movement.Date.LocalDateTime;
+            MovementAmountLabel.Text = String.Format(AppStrings.AmountFormat, Math.Abs(Movement.Amount));
             if (Movement.Amount < 0)
             {
                 BackgroundColor = App.RealCurrent.NegativeWashedColor;
@@ -33,7 +34,8 @@ namespace Smalldebts.Core.UI.Views
                 BackgroundColor = App.RealCurrent.NeutralWashedColor;
                 MovementAmountLabel.TextColor = App.RealCurrent.NeutralColor;
             }
-            MovementDateLabel.Text = Movement.CreatedAt.LocalDateTime.ToString();
+			MovementDateLabel.Text = time.ToString("MMMM yyyy\ndddd dd");
+			MovementTimeLabel.Text = time.ToString("hh:mm tt");
 			MovementReasonLabel.Text = Movement.Reason;
 
         }

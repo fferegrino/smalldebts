@@ -270,4 +270,9 @@
   <data name="PrivacyWarning" xml:space="preserve">
     <value>Al resgistrarte estás aceptando nuestra política de privacidad</value>
   </data>
+  <data name="PrivacyPolicyText" xml:space="preserve">
+    <value>Póliza de privacidad</value>
+  </data>
+
+	
 </root>

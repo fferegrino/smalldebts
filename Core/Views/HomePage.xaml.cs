@@ -245,10 +245,10 @@ namespace Smalldebts.Core.UI.Views
 
         private void SearchTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (String.IsNullOrWhiteSpace(e.NewTextValue))
+            if (!String.IsNullOrWhiteSpace(e.NewTextValue))
             {
                 ShownDebts =
-                    ShownDebts.Where(
+					OriginalDebts.Where(
                         debt => debt.Name.IndexOf(e.NewTextValue, 0, System.StringComparison.OrdinalIgnoreCase) >= 0);
             }
             else

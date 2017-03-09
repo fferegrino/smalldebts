@@ -9,8 +9,10 @@ namespace Smalldebts.Core.UI
     {
         public Color NegativeColor => (Color)Resources["NegativeColor"];
         public Color PositiveColor => (Color)Resources["PositiveColor"];
-        public Color NegativeWashedColor => (Color)Resources["NegativeWashedColor"];
-        public Color PositiveWashedColor => (Color)Resources["PositiveWashedColor"];
+		public Color NegativeWashedColor => (Color)Resources["NegativeWashedColor"];
+		public Color PositiveWashedColor => (Color)Resources["PositiveWashedColor"];
+		public Color NegativeStrongColor => (Color)Resources["NegativeStrongColor"];
+		public Color PositiveStrongColor => (Color)Resources["PositiveStrongColor"];
         public Color NeutralColor => (Color)Resources["NeutralColor"];
         public Color NeutralWashedColor => (Color)Resources["NeutralWashedColor"];
         public Color BrandColor => (Color)Resources["BrandColor"];

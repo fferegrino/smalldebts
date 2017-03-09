@@ -136,7 +136,7 @@
     <value>Me prestó</value>
   </data>
   <data name="TeDebe" xml:space="preserve">
-    <value> te debe </value>
+    <value> te debe</value>
   </data>
   <data name="NadieTeDebe" xml:space="preserve">
     <value>Nadie te debe, presiona aquí para agregar a alguien</value>

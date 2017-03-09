@@ -42,7 +42,7 @@ namespace Smalldebts.Core.UI.Controls.Cells
             {
                 var fs = new FormattedString();
                 var nameSpan = new Span { Text = Debt.Name, FontSize = FontSizeBig, FontAttributes = FontAttributes.Bold };
-				var moneySpan = new Span { Text = String.Format(AppStrings.AmountFormat, Math.Abs(Debt.Balance)), FontSize = FontSizeBig };
+				var moneySpan = new Span { Text = String.Format(" " + AppStrings.AmountFormat, Math.Abs(Debt.Balance)), FontSize = FontSizeBig };
                 if (Debt.Balance < 0) // you owe money
                 {
                     moneySpan.ForegroundColor = App.RealCurrent.NegativeColor;

@@ -136,7 +136,7 @@
     <value>(s)he lent me</value>
   </data>
   <data name="TeDebe" xml:space="preserve">
-    <value> owes you </value>
+    <value> owes you</value>
   </data>
   <data name="NadieTeDebe" xml:space="preserve">
     <value>No one owes you, tap here to add someone</value>

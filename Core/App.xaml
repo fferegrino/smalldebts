@@ -6,9 +6,12 @@
              x:Class="Smalldebts.Core.UI.App">
     <Application.Resources>
         <ResourceDictionary>
+			
+            <Color x:Key="NegativeStrongColor">#540917</Color>
             <Color x:Key="NegativeColor">#DD173C</Color>
             <Color x:Key="NegativeWashedColor">#FFA3A6</Color>
 
+            <Color x:Key="PositiveStrongColor">#082900</Color>
             <Color x:Key="PositiveColor">#23B000</Color>
             <Color x:Key="PositiveWashedColor">#A2F5AF</Color>
 

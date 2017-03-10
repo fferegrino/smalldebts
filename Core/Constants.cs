@@ -9,12 +9,11 @@ namespace Smalldebts.Core.UI
     public class Constants
     {
 
-
 #if DEBUG
         //public const string ApplicationUrl = "http://192.168.0.101/smalldebts";
-        public const string ApplicationUrl = "https://test-smalldebts.azurewebsites.net";
+        public const string ApplicationUrl = "https://testapp-smalldebts.azurewebsites.net";
 #else
-        public const string ApplicationUrl = "https://test-smalldebts.azurewebsites.net";
+        public const string ApplicationUrl = "https://testapp-smalldebts.azurewebsites.net";
 #endif
         public const string WebSiteUrl = ApplicationUrl;
 

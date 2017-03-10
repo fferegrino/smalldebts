@@ -6,14 +6,14 @@
 				Padding="0,50,0,0">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="150"></RowDefinition>
+            <RowDefinition x:Name="HeaderRow"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition x:Name="FooterRow" ></RowDefinition>
         </Grid.RowDefinitions>
         <Image Source="smalldebts_icon"></Image>
         <StackLayout Grid.Row="1" Padding="20" x:Name="LoginPanel" Spacing="12">
-            <Entry x:Name="LoginEmailEntry" Placeholder="Email" Text=""></Entry>
-            <Entry x:Name="LoginPassEntry" Placeholder="{i:Translate Password}" Text="" IsPassword="true"></Entry>
+            <Entry x:Name="LoginEmailEntry" Placeholder="Email" Text="demo@messier16.com"></Entry>
+            <Entry x:Name="LoginPassEntry" Placeholder="{i:Translate Password}" Text="9XN@p#=8yZdu?dg" IsPassword="true"></Entry>
             <Button x:Name="LoginButton" Text="{i:Translate SignIn}" 
 				Style="{StaticResource PrimaryButton}" Clicked="LoginButtonClicked" />
         </StackLayout>

@@ -23,7 +23,7 @@ namespace Smalldebts.Core.UI.Views
 			}
 			else if (sender == ThanksCell)
 			{
-				Device.OpenUri(new Uri("https://test-smalldebts.azurewebsites.net/home/thanks"));
+				Device.OpenUri(new Uri(Constants.ApplicationUrl + "/home/thanks"));
 			}
 			else if (sender == ReportBugCell)
 			{

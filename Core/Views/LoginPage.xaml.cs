@@ -26,6 +26,8 @@ namespace Smalldebts.Core.UI.Views
         {
             _serviceClient = serviceClient;
             InitializeComponent();
+            HeaderRow.Height = Device.OnPlatform<double>(150, 110, 0);
+            FooterRow.Height = Device.OnPlatform<double>(100, 140, 0);
             LoginPanel.IsVisible = !signUp;
             SignupPanel.IsVisible = signUp;
         }
@@ -51,6 +53,8 @@ namespace Smalldebts.Core.UI.Views
             signUp = !signUp;
             LoginPanel.IsVisible = !signUp;
             SignupPanel.IsVisible = signUp;
+			LoginPanel2.IsVisible = !signUp;
+			SignupPanel2.IsVisible = signUp;
         }
 
         private async void LoginButtonClicked(object sender, EventArgs e)
@@ -94,6 +98,8 @@ namespace Smalldebts.Core.UI.Views
 				signUp = false;
 				LoginPanel.IsVisible = !signUp;
 				SignupPanel.IsVisible = signUp;
+				LoginPanel2.IsVisible = !signUp;
+				SignupPanel2.IsVisible = signUp;
 
             }
             catch (Exception xe)
@@ -104,9 +110,19 @@ namespace Smalldebts.Core.UI.Views
 
         }
 
+		private void ViewPrivacyPolicyButton(object sender, EventArgs e)
+		{
+			Device.OpenUri(new Uri(Constants.ApplicationUrl + "/home/privacy"));
+		}
+
         private void ForgottenPassButtonClicked(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri("https://test-smalldebts.azurewebsites.net/account/forgotpassword"));
+            Device.OpenUri(new Uri(Constants.ApplicationUrl + "/account/forgotpassword"));
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            return false;
         }
     }
 }

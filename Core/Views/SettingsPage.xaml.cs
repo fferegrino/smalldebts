@@ -21,6 +21,14 @@ namespace Smalldebts.Core.UI.Views
 				LoggedOut?.Invoke(this, new EventArgs());
 				Navigation.PopAsync();
 			}
+			else if (sender == ThanksCell)
+			{
+				Device.OpenUri(new Uri(Constants.ApplicationUrl + "/home/thanks"));
+			}
+			else if (sender == ReportBugCell)
+			{
+				Device.OpenUri(new Uri("http://messier16.com/support.html"));
+			}
 		}
 	}
 }

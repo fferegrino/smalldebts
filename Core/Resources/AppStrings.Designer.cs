@@ -346,5 +346,17 @@ namespace Smalldebts.Core.UI.Resources {
                 return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
+        
+        internal static string PrivacyWarning {
+            get {
+                return ResourceManager.GetString("PrivacyWarning", resourceCulture);
+            }
+        }
+        
+        internal static string PrivacyPolicyText {
+            get {
+                return ResourceManager.GetString("PrivacyPolicyText", resourceCulture);
+            }
+        }
     }
 }

@@ -24,6 +24,7 @@
             <converters:ColorConverter x:Key="ColorConverter" />
 
           <OnPlatform x:TypeArguments="x:Double" Android="44" iOS="30" x:Key="ButtonSize" />
+          <OnPlatform x:TypeArguments="x:Double" Android="5" iOS="12" x:Key="LoginSpacing" />
 
 
           <Style x:Key="PrimaryButton" TargetType="Button">

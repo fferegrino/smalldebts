@@ -8,7 +8,7 @@
     <StackLayout x:Name="Stack">
         <Label x:Name="MovementAmountLabel" Style="{StaticResource YugeLabel}" />
         <Label x:Name="MovementDateLabel" Style="{StaticResource NotSoYugeLabel}" />
+        <Label x:Name="MovementTimeLabel" Style="{StaticResource NotSoYugeLabel}" />
         <Label x:Name="MovementReasonLabel" Margin="20" HorizontalTextAlignment="Center" />
-
     </StackLayout>
 </ContentPage>

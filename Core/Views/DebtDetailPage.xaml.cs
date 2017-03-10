@@ -93,7 +93,7 @@ namespace Smalldebts.Core.UI.Views
             };
             Debt = await _serviceClient.AddMovementToDebt(updated);
             DebtUpdated?.Invoke(sender, Debt);
-            Movements.Insert(0, new Movement { Amount = amount, CreatedAt = Debt.UpdatedAt.Value, Reason = Debt.Reason });
+			Movements.Insert(0, new Movement { Amount = amount, Date = Debt.UpdatedAt.Value, Reason = Debt.Reason });
             AmountEntry.Text = null;
             UpdateAmounts();
 

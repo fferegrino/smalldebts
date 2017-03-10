@@ -13,7 +13,7 @@
             </TableSection>
             <TableSection Title="Smalldebts">
                 <cells:MenuCell Tapped="SettingCellTapped" x:Name="ReportBugCell"  ImageSource="lightbulb" Text="{i:Translate Feedback}"></cells:MenuCell>
-                <cells:MenuCell Tapped="SettingCellTapped" x:Name="IdeaCell" ImageSource="lightbulb" Text="{i:Translate Acknowledgements}"></cells:MenuCell>
+                <cells:MenuCell Tapped="SettingCellTapped" x:Name="ThanksCell" ImageSource="lightbulb" Text="{i:Translate Acknowledgements}"></cells:MenuCell>
             </TableSection>
         </TableRoot>
     </TableView>

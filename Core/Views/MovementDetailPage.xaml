@@ -3,6 +3,7 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects"
     x:Class="Smalldebts.Core.UI.Views.MovementDetailPage"
 	Padding="20">
     <StackLayout x:Name="Stack">
@@ -10,5 +11,10 @@
         <Label x:Name="MovementDateLabel" Style="{StaticResource NotSoYugeLabel}" />
         <Label x:Name="MovementTimeLabel" Style="{StaticResource NotSoYugeLabel}" />
         <Label x:Name="MovementReasonLabel" Margin="20" HorizontalTextAlignment="Center" />
+		<Entry x:Name="ReasonEntry" FontSize="Large" HorizontalTextAlignment="Center">
+	      <Entry.Effects>
+	        <effects:RemoveBorderEffect />
+	      </Entry.Effects>
+		</Entry>
     </StackLayout>
 </ContentPage>

@@ -4,6 +4,7 @@
              xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
              x:Class="Smalldebts.Core.UI.Views.LoginPage"
 				Padding="0,50,0,0">
+	<StackLayout>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition x:Name="HeaderRow"></RowDefinition>
@@ -12,14 +13,14 @@
         </Grid.RowDefinitions>
         <Image Source="smalldebts_icon"></Image>
         <StackLayout Grid.Row="1" Padding="20" x:Name="LoginPanel" Spacing="12">
-            <Entry x:Name="LoginEmailEntry" Placeholder="Email" Text=""></Entry>
+            <Entry x:Name="LoginEmailEntry" Keyboard="Email" Placeholder="Email" Text=""></Entry>
             <Entry x:Name="LoginPassEntry" Placeholder="{i:Translate Password}" Text="" IsPassword="true"></Entry>
             <Button x:Name="LoginButton" Text="{i:Translate SignIn}" 
 				Style="{StaticResource PrimaryButton}" Clicked="LoginButtonClicked" />
         </StackLayout>
 
         <StackLayout  Grid.Row="1" Padding="20" x:Name="SignupPanel" Spacing="10">
-            <Entry x:Name="SignupEmailEntry" Placeholder="Email" Text=""></Entry>
+            <Entry x:Name="SignupEmailEntry"  Keyboard="Email" Placeholder="Email" Text=""></Entry>
             <Entry x:Name="SignupPassEntry" Placeholder="{i:Translate Password}" Text="" IsPassword="true"></Entry>
             <Entry x:Name="SignupPassConfirmationEntry" Placeholder="{i:Translate PasswordConfirmation}" Text="" IsPassword="true"></Entry>
 			<Label Text="{i:Translate PrivacyWarning}" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
@@ -41,4 +42,5 @@
 				Style="{StaticResource SecondaryButton}" MinimumHeightRequest="30" Clicked="ForgottenPassButtonClicked"/>
 		</StackLayout>
     </Grid>
+		</StackLayout>
 </ContentPage>

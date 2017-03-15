@@ -37,6 +37,8 @@ namespace Smalldebts.Core.UI
 
             Resources.Add("YugeLabel", yugeLabelStyle);
             Resources.Add("NotSoYugeLabel", notSoYugeLabel);
+
+
         }
 
         private void SetupLanguage()

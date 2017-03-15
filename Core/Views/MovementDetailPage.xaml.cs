@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Smalldebts.Core.UI.Resources;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
@@ -10,15 +11,30 @@ namespace Smalldebts.Core.UI.Views
         public MovementDetailPage()
         {
             InitializeComponent();
+			ReasonEntry.TextChanged += ReasonEntry_TextChanged;
+			ReasonEntry.Unfocused += ReasonEntry_Unfocused;
         }
 
-        public Movement Movement { get; set; }
+		void ReasonEntry_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			MovementReasonLabel.Text = ReasonEntry.Text;
+		}
+
+		async void ReasonEntry_Unfocused(object sender, FocusEventArgs e)
+		{
+			IsBusy = true;
+			await Task.Delay(1000);
+			IsBusy = false;
+		}
+
+		public Movement Movement { get; set; }
 
         protected override void OnAppearing()
         {
 			Title = String.Format(AppStrings.AmountFormat, Math.Abs(Movement.Amount));
 			var time = Movement.Date.LocalDateTime;
             MovementAmountLabel.Text = String.Format(AppStrings.AmountFormat, Math.Abs(Movement.Amount));
+			MovementAmountLabel.FontSize = Movement.Amount.SizeForDigit();
             if (Movement.Amount < 0)
             {
                 BackgroundColor = App.RealCurrent.NegativeWashedColor;
@@ -36,8 +52,16 @@ namespace Smalldebts.Core.UI.Views
             }
 			MovementDateLabel.Text = time.ToString("MMMM yyyy\ndddd dd");
 			MovementTimeLabel.Text = time.ToString("hh:mm tt");
-			MovementReasonLabel.Text = Movement.Reason;
-
+			if (String.IsNullOrEmpty(Movement.Reason))
+			{
+				ReasonEntry.Placeholder = "No reason, write one here";
+				ReasonEntry.Text = "";
+			}
+			else
+			{
+				ReasonEntry.Text = Movement.Reason;
+				MovementReasonLabel.Text = Movement.Reason;
+			}
         }
     }
 }

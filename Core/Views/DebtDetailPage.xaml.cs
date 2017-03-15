@@ -30,7 +30,7 @@ namespace Smalldebts.Core.UI.Views
         {
             base.OnAppearing();
             UpdateAmounts();
-
+			NavigationPage.SetBackButtonTitle(this, Debt.Name);
             var movements = await _serviceClient.GetMovementsForDebt(Debt.Id);
             Movements = new ObservableCollection<Movement>(movements);
             MovementDetailList.ItemsSource = Movements;
@@ -39,6 +39,7 @@ namespace Smalldebts.Core.UI.Views
         void UpdateAmounts()
         {
             BalanceLabel.Text = String.Format(AppStrings.AmountFormat, Math.Abs(Debt.Balance));
+			BalanceLabel.FontSize = Debt.Balance.SizeForDigit();
 
             if (Debt.Balance < 0)
             {

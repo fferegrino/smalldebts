@@ -18,10 +18,12 @@ namespace Smalldebts.Backend.Controllers.Api
             Context = new MobileServiceContext();
         }
 
+        [Authorize]
         [Route("{id}")]
         public ItermediateObjects.Debt Get(string id)
         {
-            var debt = Context.Debts.FirstOrDefault(d => d.Id == id);
+            var userId = User.Identity.GetUserId();
+            var debt = Context.Debts.FirstOrDefault(d => d.Id == id && d.UserId == userId);
             return AutoMapper.Mapper.Map<ItermediateObjects.Debt>(debt);
         }
 

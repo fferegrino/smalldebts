@@ -2,7 +2,6 @@
 
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cells="clr-namespace:Smalldebts.Core.UI.Controls.Cells"
-             
              xmlns:i="clr-namespace:Smalldebts.Core.UI.MarkupExtensions"
              xmlns:effects="clr-namespace:Smalldebts.Core.UI.Effects" x:Class="Smalldebts.Core.UI.Views.DebtDetailPage">
   <Grid RowSpacing="0" ColumnSpacing="0">

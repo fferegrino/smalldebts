@@ -232,7 +232,7 @@
     <value>Nombre</value>
   </data>
   <data name="Reason" xml:space="preserve">
-    <value>Razón</value>
+    <value>Motivo</value>
   </data>
   <data name="Amount" xml:space="preserve">
     <value>Monto</value>
@@ -273,6 +273,10 @@
   <data name="PrivacyPolicyText" xml:space="preserve">
     <value>Póliza de privacidad</value>
   </data>
-
-	
+  <data name="WriteAReasonHere" xml:space="preserve">
+    <value>Escribe un motivo aquí</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Guardar</value>
+  </data>
 </root>

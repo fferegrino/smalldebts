@@ -85,6 +85,12 @@ namespace Smalldebts.Core.UI.DataAccess
 			client.CurrentUser = user;
 		}
 
+        internal async Task<Movement> UpdateMovement(Movement updatedMovement)
+        {
+            return await client.InvokeApiAsync<Movement, Movement>("movements", updatedMovement, HttpMethod.Put, null);
+
+        }
+
         public async Task<Debt> AddMovementToDebt(Debt debt)
         {
             return await client.InvokeApiAsync<Debt, Debt>("debts", debt, HttpMethod.Put, null);

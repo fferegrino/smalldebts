@@ -273,4 +273,10 @@
   <data name="PrivacyPolicyText" xml:space="preserve">
     <value>Privacy policy</value>
   </data>
+  <data name="WriteAReasonHere" xml:space="preserve">
+    <value>No reason, write one here</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

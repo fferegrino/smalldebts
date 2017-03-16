@@ -3,65 +3,78 @@ using System.Threading.Tasks;
 using Smalldebts.Core.UI.Resources;
 using Smalldebts.ItermediateObjects;
 using Xamarin.Forms;
+using Smalldebts.Core.UI.DataAccess;
 
 namespace Smalldebts.Core.UI.Views
 {
     public partial class MovementDetailPage : ContentPage
     {
-        public MovementDetailPage()
+        private readonly SmalldebtsManager _serviceClient;
+        public MovementDetailPage(SmalldebtsManager serviceClient)
         {
             InitializeComponent();
-			ReasonEntry.TextChanged += ReasonEntry_TextChanged;
-			ReasonEntry.Unfocused += ReasonEntry_Unfocused;
+            _serviceClient = serviceClient;
         }
 
-		void ReasonEntry_TextChanged(object sender, TextChangedEventArgs e)
-		{
-			MovementReasonLabel.Text = ReasonEntry.Text;
-		}
-
-		async void ReasonEntry_Unfocused(object sender, FocusEventArgs e)
-		{
-			IsBusy = true;
-			await Task.Delay(1000);
-			IsBusy = false;
-		}
-
-		public Movement Movement { get; set; }
+        public Movement Movement { get; set; }
 
         protected override void OnAppearing()
         {
-			Title = String.Format(AppStrings.AmountFormat, Math.Abs(Movement.Amount));
-			var time = Movement.Date.LocalDateTime;
+            Title = String.Format(AppStrings.AmountFormat, Math.Abs(Movement.Amount));
+            var time = Movement.Date.LocalDateTime;
             MovementAmountLabel.Text = String.Format(AppStrings.AmountFormat, Math.Abs(Movement.Amount));
-			MovementAmountLabel.FontSize = Movement.Amount.SizeForDigit();
+            MovementAmountLabel.FontSize = Movement.Amount.SizeForDigit();
+
+            Color color;
+            Color washedColor;
+            Color strongColor;
+
             if (Movement.Amount < 0)
             {
-                BackgroundColor = App.RealCurrent.NegativeWashedColor;
-				MovementAmountLabel.TextColor = App.RealCurrent.NegativeStrongColor;
+                color = App.RealCurrent.NegativeColor;
+                washedColor = App.RealCurrent.NegativeWashedColor;
+                strongColor = App.RealCurrent.NegativeStrongColor;
             }
             else if (Movement.Amount > 0)
             {
-                BackgroundColor = App.RealCurrent.PositiveWashedColor;
-				MovementAmountLabel.TextColor = App.RealCurrent.PositiveStrongColor;
+                color = App.RealCurrent.PositiveColor;
+                washedColor = App.RealCurrent.PositiveWashedColor;
+                strongColor = App.RealCurrent.PositiveStrongColor;
             }
             else
             {
-                BackgroundColor = App.RealCurrent.NeutralWashedColor;
-                MovementAmountLabel.TextColor = App.RealCurrent.NeutralColor;
+                color = App.RealCurrent.NeutralColor;
+                washedColor = App.RealCurrent.NeutralWashedColor;
+                strongColor = App.RealCurrent.NeutralColor;
             }
-			MovementDateLabel.Text = time.ToString("MMMM yyyy\ndddd dd");
-			MovementTimeLabel.Text = time.ToString("hh:mm tt");
-			if (String.IsNullOrEmpty(Movement.Reason))
-			{
-				ReasonEntry.Placeholder = "No reason, write one here";
-				ReasonEntry.Text = "";
-			}
-			else
-			{
-				ReasonEntry.Text = Movement.Reason;
-				MovementReasonLabel.Text = Movement.Reason;
-			}
+
+            UpdateButton.BackgroundColor = color;
+            BackgroundColor = washedColor;
+            ReasonLabel.TextColor = strongColor;
+            MovementAmountLabel.TextColor = strongColor;
+
+            MovementDateLabel.Text = time.ToString("MMMM yyyy\ndddd dd");
+            MovementTimeLabel.Text = time.ToString("hh:mm tt");
+            if (String.IsNullOrEmpty(Movement.Reason))
+            {
+                ReasonEntry.Placeholder = AppStrings.WriteAReasonHere;
+                ReasonEntry.Text = "";
+            }
+            else
+            {
+                ReasonEntry.Text = Movement.Reason;
+            }
+        }
+
+        private async void SaveClicked(object sender, EventArgs e)
+        {
+            var updatedMovement = new ItermediateObjects.Movement
+            {
+                DebtId = Movement.DebtId,
+                Id = Movement.Id,
+                Reason = ReasonEntry.Text
+            };
+            await _serviceClient.UpdateMovement(updatedMovement);
         }
     }
 }

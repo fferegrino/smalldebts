@@ -19,6 +19,7 @@ namespace Smalldebts.Core.UI.Views
         {
             InitializeComponent();
             _serviceClient = serviceClient;
+            _movementDetailPage = new MovementDetailPage(serviceClient);
             MovementDetailList.ItemSelected += DetailList_ItemSelected;
         }
 
@@ -67,13 +68,13 @@ namespace Smalldebts.Core.UI.Views
             }
         }
 
-        private MovementDetailPage m = new MovementDetailPage();
+        private MovementDetailPage _movementDetailPage;
         private async void DetailList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             if (MovementDetailList.SelectedItem != null)
             {
-                m.Movement = MovementDetailList.SelectedItem as Movement;
-                await Navigation.PushAsync(m);
+                _movementDetailPage.Movement = MovementDetailList.SelectedItem as Movement;
+                await Navigation.PushAsync(_movementDetailPage);
                 MovementDetailList.SelectedItem = null;
             }
         }
